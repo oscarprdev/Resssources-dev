@@ -1,11 +1,11 @@
 import prisma from '../../db';
-import { GetUserByIdInput, GetUserByResourceCreatedInput } from './types';
+import { GetUserByCredentialsInput, GetUserByIdInput, GetUserByResourceCreatedInput } from './types';
 
 export const getUserById = async ({ userId }: GetUserByIdInput) => {
 	return prisma.user.findUnique({ where: { id: userId } });
 };
 
-export const GetUserByResourceCreated = async ({ resourceId }: GetUserByResourceCreatedInput) => {
+export const getUserByResourceCreated = async ({ resourceId }: GetUserByResourceCreatedInput) => {
 	return await prisma.user.findFirst({
 		where: {
 			resourcesCreated: {
@@ -13,6 +13,15 @@ export const GetUserByResourceCreated = async ({ resourceId }: GetUserByResource
 					resourceId,
 				},
 			},
+		},
+	});
+};
+
+export const getUserByCredentials = async ({ username, password }: GetUserByCredentialsInput) => {
+	return await prisma.user.findUnique({
+		where: {
+			username,
+			password,
 		},
 	});
 };
