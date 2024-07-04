@@ -1,0 +1,74 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  DEFAULT
+  ADMIN
+}
+
+enum Kind {
+  FRONTEND
+  BACKEND
+  UI
+  DATABASES
+  STYLES
+  ALGORITHMS
+  ARCHITECTURE
+  TOOLS
+  FRAMEWORKS
+  TESTING
+  DEVOPS
+  SECURITY
+}
+
+model Resource {
+  id                String              @id @default(uuid())
+  title             String              @unique
+  description       String
+  imgUrl            String
+  faviconUrl        String
+  resourceUrl       String              @unique
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  kind              Kind
+  favouritedBy      FavouriteResource[]
+  resourceCreatedBy ResourceCreated[]
+}
+
+model User {
+  id                  String              @id @default(uuid())
+  username            String              @unique
+  password            String
+  email               String              @unique
+  role                Role                @default(DEFAULT)
+  resourcesCreated    ResourceCreated[]
+  favouritesResources FavouriteResource[]
+}
+
+model FavouriteResource {
+  userId              String
+  resourceId          String
+  user                User                @relation(fields: [userId], references: [id])
+  resource            Resource            @relation(fields: [resourceId], references: [id])
+  favouritedAt        DateTime            @default(now())
+
+  @@id([userId, resourceId])
+}
+
+model ResourceCreated {
+  userId              String
+  resourceId          String
+  user                User                @relation(fields: [userId], references: [id])
+  resource            Resource            @relation(fields: [resourceId], references: [id])
+  createdAt           DateTime            @default(now())
+
+  @@id([userId, resourceId])
+}
