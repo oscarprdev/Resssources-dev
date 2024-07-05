@@ -1,4 +1,4 @@
-import prisma from '@/services/db';
+import prisma from '@/services/prisma/db';
 import { CreateResourceInput } from './types';
 
 export const createResource = async ({ title, description, faviconUrl, imgUrl, resourceUrl, kind, ownerId }: CreateResourceInput) => {

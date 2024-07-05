@@ -1,4 +1,4 @@
-import prisma from '@/services/db';
+import prisma from '@/services/prisma/db';
 import { CreateUserInput } from './types';
 
 export const createUser = async ({ username, password, email, role }: CreateUserInput) => {

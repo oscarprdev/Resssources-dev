@@ -1,4 +1,4 @@
-import prisma from '@/services/db';
+import prisma from '@/services/prisma/db';
 import { GetUsersListByResourceFavInput } from './types';
 
 /**

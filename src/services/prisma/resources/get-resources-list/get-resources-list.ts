@@ -5,6 +5,16 @@ export const getResourcesList = async () => {
 	return await prisma.resource.findMany();
 };
 
+export const getHeroResourcesList = async () => {
+	return await prisma.resource.findMany({
+		select: {
+			id: true,
+			title: true,
+			imgUrl: true,
+		},
+	});
+};
+
 export const getResourcesListByOwner = async ({ userId }: GetResourcesListByOwnerInput) => {
 	return prisma.resource.findMany({
 		where: {
