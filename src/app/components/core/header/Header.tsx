@@ -1,7 +1,9 @@
 'use server';
 
 import { auth } from '@/auth';
-import AuthModal from './modals/AuthModal';
+import AuthModal from '../modals/AuthModal';
+import UserConfigDropdown from './UserConfigDropdown';
+import UserBadge from './UserBadge';
 
 const Header = async () => {
 	const session = await auth();
@@ -11,7 +13,15 @@ const Header = async () => {
 			<div className='flex items-center gap-10'>
 				<h1>Resources</h1>
 			</div>
-			<AuthModal user={session?.user} />
+			{session?.user ? (
+				<UserConfigDropdown>
+					<UserBadge user={session.user} />
+				</UserConfigDropdown>
+			) : (
+				<AuthModal>
+					<UserBadge user={session?.user} />
+				</AuthModal>
+			)}
 		</header>
 	);
 };
