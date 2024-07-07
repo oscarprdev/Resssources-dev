@@ -2,11 +2,11 @@ import prisma from '../../db';
 import { GetResourcesListByFavInput, GetResourcesListByKindInput, GetResourcesListByOwnerInput } from './types';
 
 export const getResourcesList = async () => {
-	return await prisma.resource.findMany();
+	return await prisma.resources.findMany();
 };
 
 export const getHeroResourcesList = async () => {
-	return await prisma.resource.findMany({
+	return await prisma.resources.findMany({
 		select: {
 			id: true,
 			title: true,
@@ -16,7 +16,7 @@ export const getHeroResourcesList = async () => {
 };
 
 export const getResourcesListByOwner = async ({ userId }: GetResourcesListByOwnerInput) => {
-	return prisma.resource.findMany({
+	return prisma.resources.findMany({
 		where: {
 			resourceCreatedBy: {
 				some: { userId },
@@ -29,7 +29,7 @@ export const getResourcesListByOwner = async ({ userId }: GetResourcesListByOwne
 };
 
 export const getResourcesListByFav = async ({ userId }: GetResourcesListByFavInput) => {
-	return await prisma.resource.findMany({
+	return await prisma.resources.findMany({
 		where: {
 			favouritedBy: {
 				some: { userId },
@@ -42,7 +42,7 @@ export const getResourcesListByFav = async ({ userId }: GetResourcesListByFavInp
 };
 
 export const getResourcesListByKind = async ({ kind }: GetResourcesListByKindInput) => {
-	return await prisma.resource.findMany({
+	return await prisma.resources.findMany({
 		where: {
 			kind,
 		},

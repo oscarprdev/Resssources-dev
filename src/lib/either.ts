@@ -5,7 +5,7 @@ export interface Error<E> {
 	readonly error: E;
 }
 
-export const error = <E, A = never>(e: E): Either<E, A> => ({
+export const errorResponse = <E, A = never>(e: E): Either<E, A> => ({
 	_tag: 'Error',
 	error: e,
 });
@@ -15,7 +15,7 @@ export interface Success<A> {
 	readonly success: A;
 }
 
-export const success = <A, E = never>(a: A): Either<E, A> => ({
+export const successResponse = <A, E = never>(a: A): Either<E, A> => ({
 	_tag: 'Success',
 	success: a,
 });

@@ -30,7 +30,7 @@ enum Kind {
   SECURITY
 }
 
-model Resource {
+model Resources {
   id                String              @id @default(uuid())
   title             String              @unique
   description       String
@@ -41,34 +41,34 @@ model Resource {
   updatedAt         DateTime            @updatedAt
   kind              Kind
   favouritedBy      FavouriteResource[]
-  resourceCreatedBy ResourceCreated[]
+  resourceCreatedBy ResourcesCreated[]
 }
 
-model User {
+model Users {
   id                  String              @id @default(uuid())
   username            String              @unique
   password            String
   email               String              @unique
   role                Role                @default(DEFAULT)
-  resourcesCreated    ResourceCreated[]
+  resourcesCreated    ResourcesCreated[]
   favouritesResources FavouriteResource[]
 }
 
 model FavouriteResource {
   userId              String
   resourceId          String
-  user                User                @relation(fields: [userId], references: [id])
-  resource            Resource            @relation(fields: [resourceId], references: [id])
+  user                Users                @relation(fields: [userId], references: [id])
+  resource            Resources            @relation(fields: [resourceId], references: [id])
   favouritedAt        DateTime            @default(now())
 
   @@id([userId, resourceId])
 }
 
-model ResourceCreated {
+model ResourcesCreated {
   userId              String
   resourceId          String
-  user                User                @relation(fields: [userId], references: [id])
-  resource            Resource            @relation(fields: [resourceId], references: [id])
+  user                Users                @relation(fields: [userId], references: [id])
+  resource            Resources            @relation(fields: [resourceId], references: [id])
   createdAt           DateTime            @default(now())
 
   @@id([userId, resourceId])

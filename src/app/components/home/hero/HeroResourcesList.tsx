@@ -1,7 +1,7 @@
-import { getHeroResourcesList } from '@/app/actions';
 import { provideHeroResourceUsecase } from '@/features/hero-resources';
 import { isError } from '@/lib/either';
 import HeroResourceItem from './HeroResourceItem';
+import { getHeroResourcesList } from '@/app/actions/resources/get-resources-list';
 
 const HeroResourcesList = async () => {
 	const heroResourcesUsecase = provideHeroResourceUsecase();
@@ -12,7 +12,7 @@ const HeroResourcesList = async () => {
 	}
 
 	return (
-		<section className='relative mt-20 flex w-fit items-center'>
+		<section className='relative mt-16 flex w-fit items-center'>
 			<ul className='marquee1-animation flex w-full items-center gap-4 overflow-hidden'>
 				{getHeroResourcesListResponse.success.map(({ resourceId, title, imgUrl }) => (
 					<HeroResourceItem

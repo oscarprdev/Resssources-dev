@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	webpack: (config, context) => {
+		config.experiments = {
+			...config.experiments,
+			asyncWebAssembly: true,
+		};
+		return config;
+	},
 	images: {
 		remotePatterns: [
 			{

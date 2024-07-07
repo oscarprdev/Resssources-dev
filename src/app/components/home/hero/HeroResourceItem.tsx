@@ -12,12 +12,13 @@ const HeroResourceItem = ({ resourceId, title, imgUrl }: HeroResourceItemProps) 
 		<li>
 			<Dialog>
 				<DialogTrigger>
-					<picture className='relative block w-[220px] h-[220px] rounded-md overflow-hidden shadow-md'>
+					<picture className='relative block w-[220px] h-[220px] rounded-3xl overflow-hidden shadow-md'>
 						<Image
 							src={imgUrl}
 							alt={title}
 							layout='fill'
 							objectFit='cover'
+							sizes='(max-width: 220px) 100vw'
 						/>
 					</picture>
 				</DialogTrigger>

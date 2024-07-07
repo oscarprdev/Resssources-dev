@@ -1,6 +1,6 @@
 import { GetHeroResourcesOutput } from './hero-resources.types';
 import { HeroResourcesPorts } from './hero-resources.ports';
-import { Either, success, error } from '@/lib/either';
+import { Either, successResponse, errorResponse } from '@/lib/either';
 
 interface IHeroResourcesUsecase {
 	getHeroResources(): Promise<Either<string, GetHeroResourcesOutput[]>>;
@@ -56,9 +56,9 @@ export class HeroResourcesUsecase implements IHeroResourcesUsecase {
 		try {
 			const response = await this.ports.getResourcesData();
 
-			return success(mockData);
+			return successResponse(mockData);
 		} catch (e: unknown) {
-			return error(e instanceof Error ? e.message : 'Error listing hero resources');
+			return errorResponse(e instanceof Error ? e.message : 'Error listing hero resources');
 		}
 	}
 }
