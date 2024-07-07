@@ -1,5 +1,4 @@
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog';
 import Image from 'next/image';
 
 type HeroResourceItemProps = {
@@ -13,23 +12,14 @@ const HeroResourceItem = ({ resourceId, title, imgUrl }: HeroResourceItemProps) 
 		<li>
 			<Dialog>
 				<DialogTrigger>
-					<TooltipProvider>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<picture className='relative block w-[220px] h-[220px] rounded-md overflow-hidden shadow-md'>
-									<Image
-										src={imgUrl}
-										alt={title}
-										layout='fill'
-										objectFit='cover'
-									/>
-								</picture>
-							</TooltipTrigger>
-							<TooltipContent>
-								<p>{title}</p>
-							</TooltipContent>
-						</Tooltip>
-					</TooltipProvider>
+					<picture className='relative block w-[220px] h-[220px] rounded-md overflow-hidden shadow-md'>
+						<Image
+							src={imgUrl}
+							alt={title}
+							layout='fill'
+							objectFit='cover'
+						/>
+					</picture>
 				</DialogTrigger>
 				<DialogContent>
 					<DialogHeader>
