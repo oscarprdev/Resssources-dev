@@ -5,6 +5,10 @@
 @layer base {
 }
 
+body {
+	overflow-x: hidden;
+}
+
 @keyframes marquee1 {
 	0% {
 		transform: translateX(0%);
