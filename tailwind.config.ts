@@ -18,9 +18,17 @@ const config = {
 					from: { opacity: '0', transform: 'translateY(15px)' },
 					to: { opacity: '1', transform: 'translateY(0)' },
 				},
+				'fade-up-light': {
+					from: { opacity: '0', transform: 'translateY(5px)' },
+					to: { opacity: '1', transform: 'translateY(0)' },
+				},
 				'fade-down': {
 					from: { opacity: '0', transform: 'translateY(-15px)' },
 					to: { opacity: '1', transform: 'translateY(0px)' },
+				},
+				'fade-down-light': {
+					from: { opacity: '1', transform: 'translateY(0px)' },
+					to: { opacity: '0', transform: 'translateY(5px)' },
 				},
 				'fade-right': {
 					from: { opacity: '0', transform: 'translateX(-15px)' },
@@ -33,7 +41,9 @@ const config = {
 			},
 			animation: {
 				'fade-up': 'fade-up 0.3s ease-in-out forwards',
+				'fade-up-light': 'fade-up-light 0.3s ease-in-out forwards',
 				'fade-down': 'fade-down 0.3s ease-in-out',
+				'fade-down-light': 'fade-down-light 0.3s ease-in-out forwards',
 				'fade-right': 'fade-right 0.3s ease-in-out',
 				'fade-left': 'fade-left 0.3s ease-in-out forwards',
 			},
