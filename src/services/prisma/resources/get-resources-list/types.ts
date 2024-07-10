@@ -9,5 +9,5 @@ export type GetResourcesListByFavInput = {
 };
 
 export type GetResourcesListByKindInput = {
-	kind: $Enums.Kind;
+	kind: $Enums.Kind[];
 };

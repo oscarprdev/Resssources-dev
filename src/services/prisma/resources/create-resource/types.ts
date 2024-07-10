@@ -6,6 +6,6 @@ export type CreateResourceInput = {
 	faviconUrl: string;
 	imgUrl: string;
 	resourceUrl: string;
-	kind: $Enums.Kind;
+	kind: $Enums.Kind[];
 	ownerId: string;
 };

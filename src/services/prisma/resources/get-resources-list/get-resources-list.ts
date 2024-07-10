@@ -44,7 +44,9 @@ export const getResourcesListByFav = async ({ userId }: GetResourcesListByFavInp
 export const getResourcesListByKind = async ({ kind }: GetResourcesListByKindInput) => {
 	return await prisma.resources.findMany({
 		where: {
-			kind,
+			kind: {
+				hasSome: kind,
+			},
 		},
 		orderBy: {
 			createdAt: 'desc',
