@@ -17,11 +17,12 @@ export type GetResourcesListByKindInput = {
 };
 
 export type CreateResourceInput = {
+	resourceId: string;
 	title: string;
 	description: string;
 	faviconUrl: string;
 	imgUrl: string;
 	resourceUrl: string;
-	kind: $Enums.Kind[];
+	kinds: $Enums.Kind[];
 	ownerId: string;
 };

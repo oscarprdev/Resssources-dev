@@ -20,5 +20,5 @@ export const RESOURCE_KIND_VALUES = [
 export const createResourceInputSchema = z.object({
 	username: z.string(),
 	resourceUrl: z.string().url(),
-	kind: z.nativeEnum($Enums.Kind),
+	kinds: z.array(z.nativeEnum($Enums.Kind)),
 });

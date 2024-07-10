@@ -1,9 +1,5 @@
-import { $Enums, Users as UserStored } from '@prisma/client';
-
-export interface CreateResourcesPorts {
-	getUserByUsername(input: GetUserByUsernameInput): Promise<UserStored>;
-	storeResource(input: StoreResourceInput): Promise<void>;
-}
+import { SCREENSHOT_TYPE } from '@/services/puppeteer/puppeteer.client.types';
+import { $Enums } from '@prisma/client';
 
 export type GetUserByUsernameInput = {
 	username: string;

@@ -73,15 +73,16 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async createResource({ title, description, faviconUrl, imgUrl, resourceUrl, kind, ownerId }: CreateResourceInput) {
+	async createResource({ resourceId, title, description, faviconUrl, imgUrl, resourceUrl, kinds, ownerId }: CreateResourceInput) {
 		return await prisma.resources.create({
 			data: {
+				id: resourceId,
 				title,
 				description,
 				faviconUrl,
 				imgUrl,
 				resourceUrl,
-				kind,
+				kind: kinds,
 				resourceCreatedBy: {
 					create: {
 						user: {

@@ -11,15 +11,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { $Enums } from '@prisma/client';
 import { RESOURCE_KIND_VALUES } from '@/features/create-resource/application/create-resources.schemas';
 import { Badge } from '../../ui/badge';
-import { IconX } from '@tabler/icons-react';
 import { XIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export type AddResourceFormValues = { url: string; kinds: $Enums.Kind[]; error: string | null };
 type AddResourceFormProps = {
-	// handleSubmit(values: AddResourceFormValues): Promise<Either<string, string> | undefined>;
-	handleSubmit(values: AddResourceFormValues): Promise<void>;
-	afterAddResourceFormSubmit(): void;
+	handleSubmit(values: AddResourceFormValues): Promise<Either<string, string>>;
+	afterAddResourceSubmit(successMessage: string): void;
 };
 
 const AddresourceFormSchema = z.object({
@@ -37,20 +35,19 @@ const defaultValues: AddResourceFormValues = {
 
 const MAX_KINDS = 3;
 
-const AddResourceForm = ({ handleSubmit, afterAddResourceFormSubmit }: AddResourceFormProps) => {
+const AddResourceForm = ({ handleSubmit, afterAddResourceSubmit }: AddResourceFormProps) => {
 	const form = useForm<AddResourceFormValues>({
 		resolver: zodResolver(AddresourceFormSchema),
 		defaultValues,
 	});
 
-	// TODO: Call handle submit
 	const onSubmit = async (values: AddResourceFormValues) => {
-		// const response = await handleSubmit(values);
-		// if (response && isError(response)) {
-		// 	return form.setValue('error', response.error);
-		// }
+		const response = await handleSubmit(values);
+		if (response && isError(response)) {
+			return form.setValue('error', response.error);
+		}
 
-		afterAddResourceFormSubmit();
+		afterAddResourceSubmit(response ? response.success : 'Resource created successfully');
 	};
 
 	const handleSelectKindChange = (currentKinds: $Enums.Kind[], kindSelected: $Enums.Kind) => {
@@ -86,6 +83,7 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceFormSubmit }: AddResour
 								<Input
 									type='url'
 									placeholder='Resource URL'
+									disabled={form.formState.isSubmitting}
 									required
 									{...field}
 								/>
@@ -116,6 +114,7 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceFormSubmit }: AddResour
 											{kind}
 											<button
 												type='button'
+												disabled={form.formState.isSubmitting}
 												onClick={() => handleRemoveKind(field.value, kind)}
 												className='text-blue-100 p-1 rounded-full bg-transparent hover:bg-blue-200 hover:text-blue-500 duration-300'>
 												<XIcon size={14} />
@@ -130,7 +129,7 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceFormSubmit }: AddResour
 								<FormControl>
 									<SelectTrigger
 										className='capitalize'
-										disabled={field.value.length === MAX_KINDS}>
+										disabled={field.value.length === MAX_KINDS || form.formState.isSubmitting}>
 										<SelectValue placeholder='Select resource kind' />
 									</SelectTrigger>
 								</FormControl>
