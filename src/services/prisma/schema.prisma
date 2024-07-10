@@ -41,7 +41,7 @@ model Resources {
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   published         Boolean             @default(false)
-  kind              Kind
+  kind              Kind[]
   favouritedBy      FavouriteResource[]
   resourceCreatedBy ResourcesCreated[]
 }
