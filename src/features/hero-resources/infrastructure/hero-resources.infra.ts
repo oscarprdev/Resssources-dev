@@ -1,14 +1,14 @@
-import { getHeroResourcesList } from '@/services/prisma/resources';
-import { ListOutput } from './hero-resources.infra.types';
+import { Resources as Resource } from '@prisma/client';
+import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-resources.client';
 
 export interface IHeroResourcesInfra {
-	list(): Promise<ListOutput[]>;
+	list(): Promise<Resource[]>;
 }
 
 export class HeroResourcesInfra implements IHeroResourcesInfra {
-	constructor() {}
+	constructor(private readonly client: ResourcesClient) {}
 
-	async list(): Promise<ListOutput[]> {
-		return await getHeroResourcesList();
+	async list() {
+		return await this.client.getResourcesList();
 	}
 }

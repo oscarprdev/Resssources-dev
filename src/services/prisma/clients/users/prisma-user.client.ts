@@ -1,5 +1,4 @@
 import { Users as User } from '@prisma/client';
-import prisma from '../db';
 import {
 	CreateUserInput,
 	GetUserByCredentialsInput,
@@ -8,6 +7,7 @@ import {
 	GetUserByUsernameInput,
 	GetUsersListByResourceFavInput,
 } from './prisma-user.client.types';
+import prisma from '@/services/prisma/db';
 
 export interface UserClient {
 	getUserById(input: GetUserByIdInput): Promise<User | null>;

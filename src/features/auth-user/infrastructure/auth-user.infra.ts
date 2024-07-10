@@ -1,6 +1,6 @@
 import { Users as User } from '@prisma/client';
 import { CreateUserInfraInput, GetUserByCredentialsInfraInput, GetUserByUsername } from './auth-user.infra.types';
-import { UserClient } from '@/services/prisma/users/prisma-user.client';
+import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 
 export interface IAuthUserInfra {
 	getUserByUsername(input: GetUserByUsername): Promise<User | null>;
