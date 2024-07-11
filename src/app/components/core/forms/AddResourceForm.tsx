@@ -48,8 +48,6 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceSubmit }: AddResourceFo
 			return form.setValue('error', response.error);
 		}
 
-		console.log(response);
-
 		afterAddResourceSubmit(response ? response.success : CREATE_RESOURCES_SUCCESS.DEFAULT);
 	};
 

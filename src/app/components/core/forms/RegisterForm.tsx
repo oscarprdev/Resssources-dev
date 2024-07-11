@@ -43,7 +43,7 @@ const RegisterForm = ({ handleSubmit, afterRegisterFormSubmit }: RegisterFormPro
 	const onSubmit = async (values: RegisterFormValues) => {
 		const response = await handleSubmit(values);
 		if (isError(response)) {
-			console.log(response.error);
+			return form.setValue('error', response.error);
 		}
 
 		afterRegisterFormSubmit();
