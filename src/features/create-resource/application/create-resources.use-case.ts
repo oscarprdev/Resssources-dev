@@ -21,8 +21,11 @@ export class CreateResourceUsecase extends UseCase implements ICreateResourcesUs
 
 			const resourceId = crypto.randomUUID().toString();
 
-			const { id: ownerId } = await this.ports.getUserByUsername({ username: input.username });
+			const { ownerId } = await this.getUserByUsername(input.username);
+
 			const { title, description, faviconUrl } = await this.generateResourceData(input.resourceUrl);
+
+			await this.validateResourceInputData(title, input.resourceUrl);
 
 			await this.ports.storeResource({
 				ownerId,
@@ -38,6 +41,29 @@ export class CreateResourceUsecase extends UseCase implements ICreateResourcesUs
 			return successResponse(CREATE_RESOURCES_SUCCESS.DEFAULT);
 		} catch (error) {
 			return errorResponse(error instanceof Error ? error.message : CREATE_RESOURCES_ERRORS.DEFAULT);
+		}
+	}
+
+	private async getUserByUsername(username: string) {
+		const byUsernameResponse = await this.ports.getUserByUsername({ username });
+		if (!byUsernameResponse?.id) {
+			throw new Error(CREATE_RESOURCES_ERRORS.RETRIEVING_RESOURCE_BY_TITLE);
+		}
+
+		return {
+			ownerId: byUsernameResponse.id,
+		};
+	}
+
+	private async validateResourceInputData(title: string, resourceUrl: string) {
+		const [byTitle, byUrl] = await Promise.all([this.ports.getResourceByTitle({ title }), this.ports.getResourceByUrl({ resourceUrl })]);
+
+		if (byUrl?.id) {
+			throw new Error(CREATE_RESOURCES_ERRORS.RETRIEVING_RESOURCE_BY_URL);
+		}
+
+		if (byTitle?.id) {
+			throw new Error(CREATE_RESOURCES_ERRORS.RETRIEVING_RESOURCE_BY_TITLE);
 		}
 	}
 
@@ -70,7 +96,8 @@ export class CreateResourceUsecase extends UseCase implements ICreateResourcesUs
 
 			return { title, description, faviconUrl };
 		} catch (error: unknown) {
-			throw new Error(error instanceof Error ? `generateResourceData: ${error.message}` : CREATE_RESOURCES_ERRORS.GENERATING_DATA);
+			console.log(error);
+			throw new Error(CREATE_RESOURCES_ERRORS.GENERATING_DATA);
 		}
 	}
 }

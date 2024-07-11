@@ -1,3 +1,5 @@
+import { API_URL } from '@/constants';
+import { CREATE_RESOURCES_ERRORS } from '@/features/create-resource/application/create-resources.constants';
 import { Either, errorResponse, successResponse } from '@/lib/either';
 import { $Enums } from '@prisma/client';
 
@@ -11,7 +13,7 @@ export const useAddResource = () => {
 	const addResource = async ({ url, kinds, username }: AddResourceInput): Promise<Either<string, string>> => {
 		try {
 			const body = JSON.stringify({ username, url, kinds });
-			const response = await fetch('http://localhost:3000/api/resources/create', {
+			const response = await fetch(`${API_URL}/api/resources/create`, {
 				method: 'POST',
 				body,
 			});
@@ -20,9 +22,12 @@ export const useAddResource = () => {
 				throw new Error(response.statusText);
 			}
 
-			return successResponse('Resource created successfully');
+			const jsonResponse = await response.json();
+
+			return successResponse(jsonResponse);
 		} catch (error) {
-			return errorResponse(error instanceof Error ? `Error creating resource: ${error.message}` : 'Error creating resource');
+			console.error(error);
+			return errorResponse(error instanceof Error ? error.message : CREATE_RESOURCES_ERRORS.DEFAULT);
 		}
 	};
 

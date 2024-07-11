@@ -13,6 +13,7 @@ import { RESOURCE_KIND_VALUES } from '@/features/create-resource/application/cre
 import { Badge } from '../../ui/badge';
 import { XIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { CREATE_RESOURCES_SUCCESS } from '@/features/create-resource/application/create-resources.constants';
 
 export type AddResourceFormValues = { url: string; kinds: $Enums.Kind[]; error: string | null };
 type AddResourceFormProps = {
@@ -47,7 +48,9 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceSubmit }: AddResourceFo
 			return form.setValue('error', response.error);
 		}
 
-		afterAddResourceSubmit(response ? response.success : 'Resource created successfully');
+		console.log(response);
+
+		afterAddResourceSubmit(response ? response.success : CREATE_RESOURCES_SUCCESS.DEFAULT);
 	};
 
 	const handleSelectKindChange = (currentKinds: $Enums.Kind[], kindSelected: $Enums.Kind) => {

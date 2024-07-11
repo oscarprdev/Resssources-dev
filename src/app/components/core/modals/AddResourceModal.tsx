@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { useAddResource } from '@/app/hooks/useAddResource';
 import { useRef } from 'react';
 import { toast } from '../../ui/use-toast';
+import { successResponse } from '@/lib/either';
 
 type AddResourceModalProps = {
 	username: string;
@@ -17,7 +18,7 @@ const AddResourceModal = ({ username, children }: AddResourceModalProps) => {
 	const triggerDialog = useRef<HTMLButtonElement>(null);
 
 	const handleAddResourceSubmit = async ({ url, kinds }: AddResourceFormValues) => {
-		return addResource({ username, url, kinds });
+		return await addResource({ username, url, kinds });
 	};
 
 	const afterAddResourceSubmit = (successMessage: string) => {

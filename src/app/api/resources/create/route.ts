@@ -20,8 +20,8 @@ export async function POST(request: NextRequest) {
 			throw new Error(response.error);
 		}
 
-		return NextResponse.json({ ok: true, response }, { status: 201 });
+		return NextResponse.json(response.success, { status: 201 });
 	} catch (error) {
-		return NextResponse.json({ error }, { status: 500 });
+		return NextResponse.json({ error }, { status: 500, statusText: error instanceof Error ? error.message : 'Internal server error' });
 	}
 }

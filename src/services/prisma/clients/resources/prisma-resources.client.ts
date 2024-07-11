@@ -2,6 +2,8 @@ import prisma from '@/services/prisma/db';
 import {
 	CreateResourceInput,
 	GetResourceByIdInput,
+	GetResourceByTitleInput,
+	GetResourceByUrlInput,
 	GetResourcesListByFavInput,
 	GetResourcesListByKindInput,
 	GetResourcesListByOwnerInput,
@@ -10,6 +12,8 @@ import { Resources as Resource } from '@prisma/client';
 
 export interface ResourcesClient {
 	getResourceById(input: GetResourceByIdInput): Promise<Resource | null>;
+	getResourceByTitle(input: GetResourceByTitleInput): Promise<Resource | null>;
+	getResourceByUrl(input: GetResourceByUrlInput): Promise<Resource | null>;
 
 	getResourcesList(): Promise<Resource[]>;
 	getResourcesListByOwner(input: GetResourcesListByOwnerInput): Promise<Resource[]>;
@@ -26,6 +30,22 @@ export class PrismaResourcesClient implements ResourcesClient {
 		return await prisma.resources.findUnique({
 			where: {
 				id: resourceId,
+			},
+		});
+	}
+
+	async getResourceByTitle({ title }: GetResourceByTitleInput) {
+		return await prisma.resources.findUnique({
+			where: {
+				title,
+			},
+		});
+	}
+
+	async getResourceByUrl({ resourceUrl }: GetResourceByUrlInput) {
+		return await prisma.resources.findUnique({
+			where: {
+				resourceUrl,
 			},
 		});
 	}

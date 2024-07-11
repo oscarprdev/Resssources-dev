@@ -1,8 +1,15 @@
-import { SCREENSHOT_TYPE } from '@/services/puppeteer/puppeteer.client.types';
 import { $Enums } from '@prisma/client';
 
 export type GetUserByUsernameInput = {
 	username: string;
+};
+
+export type GetResourceByTitleInput = {
+	title: string;
+};
+
+export type GetResourceByUrlInput = {
+	resourceUrl: string;
 };
 
 export type GenerateResourceDataInput = {

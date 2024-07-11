@@ -1,12 +1,24 @@
-import { $Enums, Users as UserStored } from '@prisma/client';
+import { $Enums, Users as UserStored, Resources as ResourceStored } from '@prisma/client';
 
 export interface CreateResourcesPorts {
-	getUserByUsername(input: GetUserByUsernameInput): Promise<UserStored>;
+	getUserByUsername(input: GetUserByUsernameInput): Promise<UserStored | null>;
+
+	getResourceByTitle(input: GetResourceByTitleInput): Promise<ResourceStored | null>;
+	getResourceByUrl(input: GetResourceByUrlInput): Promise<ResourceStored | null>;
+
 	storeResource(input: StoreResourceInput): Promise<void>;
 }
 
 export type GetUserByUsernameInput = {
 	username: string;
+};
+
+export type GetResourceByTitleInput = {
+	title: string;
+};
+
+export type GetResourceByUrlInput = {
+	resourceUrl: string;
 };
 
 export type GenerateResourceDataInput = {

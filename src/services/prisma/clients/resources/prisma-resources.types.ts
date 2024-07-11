@@ -4,6 +4,14 @@ export type GetResourceByIdInput = {
 	resourceId: string;
 };
 
+export type GetResourceByTitleInput = {
+	title: string;
+};
+
+export type GetResourceByUrlInput = {
+	resourceUrl: string;
+};
+
 export type GetResourcesListByOwnerInput = {
 	userId: string;
 };
