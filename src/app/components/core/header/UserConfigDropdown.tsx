@@ -6,7 +6,6 @@ import {
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
-	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/app/components/ui/dropdown-menu';
@@ -29,8 +28,6 @@ const UserConfigDropdown = ({ children }: UserConfigDropdownProps) => {
 				{children}
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='w-48'>
-				<DropdownMenuLabel>User config</DropdownMenuLabel>
-				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
 					<DropdownMenuItem>
 						<IconUser

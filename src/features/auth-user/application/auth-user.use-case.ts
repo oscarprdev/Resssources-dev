@@ -5,6 +5,7 @@ import { $Enums } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { SALT } from '@/constants';
 import { loginInputSchema, registerUserSchema } from './auth-user.schemas';
+import { AUTH_USER_ERRORS } from './auth-user.use-case.constants';
 
 export interface IAuthUserUsecase {
 	login(input: LoginUserInput): Promise<Either<string, LoginUserOutput>>;
@@ -16,36 +17,36 @@ export class AuthUserUsecase implements IAuthUserUsecase {
 
 	async login({ username, password }: LoginUserInput) {
 		try {
-			if (!username || !password) return errorResponse('Missing user credentials');
+			if (!username || !password) return errorResponse(AUTH_USER_ERRORS.MISSING_CREDENTIALS);
 
 			const validInput = loginInputSchema.safeParse({ username, password });
 			if (validInput.error) {
-				return errorResponse('Invalid credentials');
+				return errorResponse(AUTH_USER_ERRORS.INVALID_CREDENTIALS);
 			}
 
 			const userExist = await this.ports.getUserByUsername({ username });
-			if (!userExist) return errorResponse('User does not exist');
+			if (!userExist) return errorResponse(AUTH_USER_ERRORS.USER_NO_EXIST);
 
 			const passwordMatch = await bcrypt.compare(password, userExist.password);
-			if (!passwordMatch) return errorResponse('Credentials are not correct');
+			if (!passwordMatch) return errorResponse(AUTH_USER_ERRORS.INVALID_CREDENTIALS);
 
-			return successResponse({ username: userExist.username });
+			return successResponse({ username: userExist.username, role: userExist.role });
 		} catch (e) {
-			return errorResponse(e instanceof Error ? e.message : 'Error logging user');
+			return errorResponse(e instanceof Error ? e.message : AUTH_USER_ERRORS.DEFAULT_LOGIN_ERROR);
 		}
 	}
 
 	async register({ username, password, email }: RegisterUserInput) {
 		try {
-			if (!username || !password || !email) return errorResponse('Missing user credentials');
+			if (!username || !password || !email) return errorResponse(AUTH_USER_ERRORS.MISSING_CREDENTIALS);
 
 			const validInput = registerUserSchema.safeParse({ username, password, email });
 			if (validInput.error) {
-				return errorResponse('Invalid credentials');
+				return errorResponse(AUTH_USER_ERRORS.INVALID_CREDENTIALS);
 			}
 
 			const userAlreadyCreated = await this.ports.getUserByCredentials({ username, password });
-			if (userAlreadyCreated) return errorResponse('User already registered');
+			if (userAlreadyCreated) return errorResponse(AUTH_USER_ERRORS.ALREADY_EXIST);
 
 			const passwordCrypted = await bcrypt.hash(password, SALT);
 
@@ -53,7 +54,7 @@ export class AuthUserUsecase implements IAuthUserUsecase {
 
 			return successResponse(userCreatedResponse.id);
 		} catch (e) {
-			return errorResponse(e instanceof Error ? e.message : 'Error registering user');
+			return errorResponse(e instanceof Error ? e.message : AUTH_USER_ERRORS.DEFAULT_REGISTER_ERROR);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 import { Users as User } from '@prisma/client';
 import { CreateUserInfraInput, GetUserByCredentialsInfraInput, GetUserByUsername } from './auth-user.infra.types';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
+import { AUTH_USER_INFRA_ERRORS } from './auth-user.infra.constants';
 
 export interface IAuthUserInfra {
 	getUserByUsername(input: GetUserByUsername): Promise<User | null>;
@@ -12,14 +13,26 @@ export class AuthUserInfra implements IAuthUserInfra {
 	constructor(private readonly client: UserClient) {}
 
 	async getUserByUsername({ username }: GetUserByUsername) {
-		return await this.client.getUserByUsername({ username });
+		try {
+			return await this.client.getUserByUsername({ username });
+		} catch (error) {
+			throw new Error(AUTH_USER_INFRA_ERRORS.RETRIEVING_USER_BY_USERNAME);
+		}
 	}
 
 	async getUserByCredentials({ username, password }: GetUserByCredentialsInfraInput) {
-		return await this.client.getUserByCredentials({ username, password });
+		try {
+			return await this.client.getUserByCredentials({ username, password });
+		} catch (error) {
+			throw new Error(AUTH_USER_INFRA_ERRORS.RETRIEVING_USER_BY_CREDENTIALS);
+		}
 	}
 
 	async createUser({ username, password, email, role }: CreateUserInfraInput) {
-		return await this.client.createUser({ username, password, email, role });
+		try {
+			return await this.client.createUser({ username, password, email, role });
+		} catch (error) {
+			throw new Error(AUTH_USER_INFRA_ERRORS.CREATING_USER);
+		}
 	}
 }
