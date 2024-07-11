@@ -9,6 +9,13 @@ export const {
 	signOut,
 } = NextAuth({
 	callbacks: {
+		async jwt({ token, user }) {
+			if (user) {
+				token.role = user.role;
+			}
+
+			return token;
+		},
 		session({ session, token }) {
 			if (token && session.user) {
 				session.user.role = token.role as $Enums.Role;

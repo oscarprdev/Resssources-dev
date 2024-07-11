@@ -2,7 +2,6 @@ import Credentials from 'next-auth/providers/credentials';
 import { NextAuthConfig } from 'next-auth';
 import { provideAuthUserUseCase } from './features/auth-user';
 import { isError } from './lib/either';
-import { $Enums } from '@prisma/client';
 
 export default {
 	providers: [
@@ -17,6 +16,8 @@ export default {
 				if (isError(response)) {
 					throw new Error(response.error);
 				}
+
+				console.log(response.success);
 
 				return {
 					name: response.success.username,
