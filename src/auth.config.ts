@@ -17,8 +17,6 @@ export default {
 					throw new Error(response.error);
 				}
 
-				console.log(response.success);
-
 				return {
 					name: response.success.username,
 					role: response.success.role,

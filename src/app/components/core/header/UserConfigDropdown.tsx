@@ -13,6 +13,7 @@ import { IconLogout, IconUser, IconNotebook } from '@tabler/icons-react';
 import { User } from 'next-auth';
 import { IconBrandDatabricks } from '@tabler/icons-react';
 import { ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 
 type UserConfigDropdownProps = {
 	user: User;
@@ -27,6 +28,8 @@ type DropdownItem = {
 };
 
 const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
+	const router = useRouter();
+
 	const handleLogoutOption = async () => {
 		await logoutUser();
 	};
@@ -35,6 +38,7 @@ const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
 		{
 			label: 'Your profile',
 			isAllowed: true,
+			action: async () => router.push('/profile'),
 			icon: (
 				<IconUser
 					size={20}
@@ -45,6 +49,7 @@ const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
 		{
 			label: 'Your resources',
 			isAllowed: true,
+			action: async () => router.push('/resources'),
 			icon: (
 				<IconNotebook
 					size={20}
@@ -55,6 +60,7 @@ const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
 		{
 			label: 'Dashboard',
 			isAllowed: user.role && user.role === $Enums.Role.ADMIN,
+			action: async () => router.push('/dashboard'),
 			icon: (
 				<IconBrandDatabricks
 					size={20}
@@ -65,13 +71,13 @@ const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
 		{
 			label: 'Sign out',
 			isAllowed: true,
+			action: async () => await handleLogoutOption(),
 			icon: (
 				<IconLogout
 					size={20}
 					className='text-zinc-500 mr-2'
 				/>
 			),
-			action: () => handleLogoutOption(),
 		},
 	];
 
