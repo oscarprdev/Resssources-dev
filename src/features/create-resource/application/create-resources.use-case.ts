@@ -96,7 +96,6 @@ export class CreateResourceUsecase extends UseCase implements ICreateResourcesUs
 
 			return { title, description, faviconUrl };
 		} catch (error: unknown) {
-			console.log(error);
 			throw new Error(CREATE_RESOURCES_ERRORS.GENERATING_DATA);
 		}
 	}

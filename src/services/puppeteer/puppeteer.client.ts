@@ -19,24 +19,18 @@ export class PuppeteerClient implements IPuppeteerClient {
 				headless: chromium.headless,
 			});
 
-			console.log('a');
 			const page = await browser.newPage();
 			page.setDefaultNavigationTimeout(0);
 
 			await page.setViewport({ width: 1200, height: 800 });
 			await page.goto(url, { waitUntil: 'networkidle0' });
 
-			console.log('b');
-
 			const screenshot = await page.screenshot({ quality: 100, type });
-
-			console.log('c');
 
 			await browser.close();
 
 			return { screenshot };
 		} catch (error) {
-			console.log(error);
 			throw new Error(error instanceof Error ? `takeScreenshotClient: ${error.message}` : '');
 		}
 	}
