@@ -1,8 +1,8 @@
 import { provideHeroResourceUsecase } from '@/features/hero-resources';
 import { isError } from '@/lib/either';
 import HeroResourceItem from './HeroResourceItem';
-import { getHeroResourcesList } from '@/app/actions/resources/get-resources-list';
 import { toast } from '../../ui/use-toast';
+import { getHeroResourcesList } from '@/app/actions/resources/get-hero-resources-list';
 
 const HeroResourcesList = async () => {
 	const heroResourcesUsecase = provideHeroResourceUsecase();

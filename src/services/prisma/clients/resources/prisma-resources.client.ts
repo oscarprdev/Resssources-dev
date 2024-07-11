@@ -7,6 +7,7 @@ import {
 	GetResourcesListByFavInput,
 	GetResourcesListByKindInput,
 	GetResourcesListByOwnerInput,
+	GetResourcesListInput,
 } from './prisma-resources.types';
 import { Resources as Resource } from '@prisma/client';
 
@@ -15,7 +16,7 @@ export interface ResourcesClient {
 	getResourceByTitle(input: GetResourceByTitleInput): Promise<Resource | null>;
 	getResourceByUrl(input: GetResourceByUrlInput): Promise<Resource | null>;
 
-	getResourcesList(): Promise<Resource[]>;
+	getResourcesList(input: GetResourcesListInput): Promise<Resource[]>;
 	getResourcesListByOwner(input: GetResourcesListByOwnerInput): Promise<Resource[]>;
 	getResourcesListByFav(input: GetResourcesListByFavInput): Promise<Resource[]>;
 	getResourcesListByKind(input: GetResourcesListByKindInput): Promise<Resource[]>;
@@ -50,8 +51,30 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async getResourcesList() {
-		return await prisma.resources.findMany();
+	async getResourcesList({ cursor, pageSize, withUserData }: GetResourcesListInput) {
+		if (!cursor || !pageSize) {
+			return await prisma.resources.findMany({
+				orderBy: {
+					createdAt: 'asc',
+				},
+				include: {
+					favouritedBy: withUserData,
+					resourceCreatedBy: withUserData,
+				},
+			});
+		}
+
+		return await prisma.resources.findMany({
+			take: pageSize,
+			cursor: cursor ? { id: cursor } : undefined,
+			include: {
+				favouritedBy: true,
+				resourceCreatedBy: true,
+			},
+			orderBy: {
+				createdAt: 'asc',
+			},
+		});
 	}
 
 	async getResourcesListByOwner({ userId }: GetResourcesListByOwnerInput) {

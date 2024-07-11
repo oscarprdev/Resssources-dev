@@ -12,6 +12,12 @@ export type GetResourceByUrlInput = {
 	resourceUrl: string;
 };
 
+export type GetResourcesListInput = {
+	cursor?: string;
+	pageSize?: number;
+	withUserData?: boolean;
+};
+
 export type GetResourcesListByOwnerInput = {
 	userId: string;
 };
