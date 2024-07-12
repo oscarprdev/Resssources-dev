@@ -89,8 +89,7 @@ const ResourceTable = <TData, TValue>({ columns, data }: DataTableProps<TData, T
 					)}
 				</TableBody>
 			</Table>
-
-			<div className='mr-2 flex items-center justify-end space-x-2 py-2 bg-white'>
+			<div className='mr-2 flex items-center justify-end space-x-2 py-2 bg-white ml-auto w-[100px]'>
 				<Button
 					variant='outline'
 					size='sm'
