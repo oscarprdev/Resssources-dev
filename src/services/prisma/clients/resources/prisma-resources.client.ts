@@ -8,6 +8,7 @@ import {
 	GetResourcesListByKindInput,
 	GetResourcesListByOwnerInput,
 	GetResourcesListInput,
+	ResourceWithRelations,
 } from './prisma-resources.types';
 import { Resources as Resource } from '@prisma/client';
 
@@ -16,7 +17,7 @@ export interface ResourcesClient {
 	getResourceByTitle(input: GetResourceByTitleInput): Promise<Resource | null>;
 	getResourceByUrl(input: GetResourceByUrlInput): Promise<Resource | null>;
 
-	getResourcesList(input: GetResourcesListInput): Promise<Resource[]>;
+	getResourcesList(input: GetResourcesListInput): Promise<ResourceWithRelations[]>;
 	getResourcesListByOwner(input: GetResourcesListByOwnerInput): Promise<Resource[]>;
 	getResourcesListByFav(input: GetResourcesListByFavInput): Promise<Resource[]>;
 	getResourcesListByKind(input: GetResourcesListByKindInput): Promise<Resource[]>;

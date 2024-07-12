@@ -3,3 +3,7 @@ export type GetResourcesListInput = {
 	pageSize: number;
 	withUserData: boolean;
 };
+
+export type GetUserByIdInput = {
+	userId: string;
+};

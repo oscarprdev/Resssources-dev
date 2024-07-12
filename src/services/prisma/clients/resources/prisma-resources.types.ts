@@ -1,4 +1,4 @@
-import { $Enums } from '@prisma/client';
+import { $Enums, Prisma, Users as User } from '@prisma/client';
 
 export type GetResourceByIdInput = {
 	resourceId: string;
@@ -40,3 +40,10 @@ export type CreateResourceInput = {
 	kinds: $Enums.Kind[];
 	ownerId: string;
 };
+
+export type ResourceWithRelations = Prisma.ResourcesGetPayload<{
+	include: {
+		favouritedBy: true;
+		resourceCreatedBy: true;
+	};
+}>;

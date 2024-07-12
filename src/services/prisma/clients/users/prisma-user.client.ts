@@ -24,7 +24,7 @@ export class PrismaUserClient implements UserClient {
 	constructor() {}
 
 	async getUserById({ userId }: GetUserByIdInput) {
-		return prisma.users.findUnique({ where: { id: userId } });
+		return prisma.users.findFirst({ where: { id: userId } });
 	}
 
 	async getUserByResourceCreated({ resourceId }: GetUserByResourceCreatedInput) {
