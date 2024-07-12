@@ -49,13 +49,13 @@ const ResourceTable = <TData, TValue>({ columns, data }: DataTableProps<TData, T
 	});
 
 	return (
-		<div className='rounded-md border'>
+		<div className='rounded-md border border-zinc-100 border-x-transparent'>
 			<Table className='bg-white shadow-md'>
 				<TableHeader>
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow
 							key={headerGroup.id}
-							className='bg-zinc-100 text-zinc-500 text-sm font-medium'>
+							className='text-zinc-500 text-xs bg-zinc-50'>
 							{headerGroup.headers.map((header) => {
 								return (
 									<TableHead key={header.id}>
@@ -71,7 +71,7 @@ const ResourceTable = <TData, TValue>({ columns, data }: DataTableProps<TData, T
 						table.getRowModel().rows.map((row) => (
 							<TableRow
 								key={row.id}
-								className='hover:bg-zinc-100'
+								className='hover:bg-zinc-50 border-zinc-100'
 								data-state={row.getIsSelected() && 'selected'}>
 								{row.getVisibleCells().map((cell) => (
 									<TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>

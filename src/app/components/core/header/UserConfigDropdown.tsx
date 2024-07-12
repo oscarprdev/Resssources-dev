@@ -1,30 +1,16 @@
 'use client';
 
 import { logoutUser } from '@/app/actions/auth/logout-user';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '@/app/components/ui/dropdown-menu';
 import { $Enums } from '@prisma/client';
 import { IconLogout, IconUser, IconNotebook } from '@tabler/icons-react';
 import { User } from 'next-auth';
 import { IconBrandDatabricks } from '@tabler/icons-react';
-import { ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
+import Dropdown, { DropdownOption } from '../Dropdown';
 
 type UserConfigDropdownProps = {
 	user: User;
 	children: React.ReactNode;
-};
-
-type DropdownItem = {
-	label: string;
-	icon: ReactNode;
-	isAllowed?: boolean;
-	action?: () => Promise<void>;
 };
 
 const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
@@ -34,7 +20,7 @@ const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
 		await logoutUser();
 	};
 
-	const DROPDOWN_MAP: DropdownItem[] = [
+	const dropdownOptions: DropdownOption[] = [
 		{
 			label: 'Your profile',
 			isAllowed: true,
@@ -82,28 +68,11 @@ const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
 	];
 
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger
-				asChild
-				className='cursor-pointer'>
-				{children}
-			</DropdownMenuTrigger>
-			<DropdownMenuContent className='w-48'>
-				<DropdownMenuGroup>
-					{DROPDOWN_MAP.map(
-						(item) =>
-							item.isAllowed && (
-								<DropdownMenuItem
-									key={item.label}
-									onClick={item.action}>
-									{item.icon}
-									{item.label}
-								</DropdownMenuItem>
-							)
-					)}
-				</DropdownMenuGroup>
-			</DropdownMenuContent>
-		</DropdownMenu>
+		<Dropdown
+			dropdownOptions={dropdownOptions}
+			size='md'>
+			{children}
+		</Dropdown>
 	);
 };
 

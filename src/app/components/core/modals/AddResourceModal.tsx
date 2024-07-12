@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { useAddResource } from '@/app/hooks/useAddResource';
 import { useRef } from 'react';
 import { toast } from '../../ui/use-toast';
-import { successResponse } from '@/lib/either';
 
 type AddResourceModalProps = {
 	username: string;

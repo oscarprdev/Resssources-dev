@@ -8,6 +8,7 @@ import KindsCell from './KindsCell';
 import DateCell from './DateCell';
 import PublishedCell from './PublishedCell';
 import OwnerCell from './OwnerCell';
+import ActionsCell from './ActionsCell';
 
 export const columns: ColumnDef<ResourceWithUserInfo>[] = [
 	{
@@ -58,5 +59,10 @@ export const columns: ColumnDef<ResourceWithUserInfo>[] = [
 		accessorKey: 'published',
 		header: 'Status',
 		cell: ({ row }) => <PublishedCell published={row.original.published} />,
+	},
+	{
+		id: 'actions',
+		header: 'Actions',
+		cell: ({ row }) => <ActionsCell resource={row.original} />,
 	},
 ];
