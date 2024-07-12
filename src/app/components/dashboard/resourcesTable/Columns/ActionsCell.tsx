@@ -80,7 +80,7 @@ const ActionsCell = ({ resource }: ActionsCellProps) => {
 				toggleModal={togglePublishModal}
 			/>
 			<EditResourceModal
-				resourceId={resource.id}
+				resource={resource}
 				isOpened={modalOpened.edit}
 				toggleModal={toggleEditModal}
 			/>
