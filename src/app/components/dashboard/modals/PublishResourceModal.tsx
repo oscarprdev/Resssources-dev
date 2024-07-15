@@ -45,7 +45,7 @@ const PublishResourceModal = ({ resourceId, published, resourceTitle, isOpened, 
 			size='md'
 			title='Publish resource'>
 			<article className='flex flex-col items-center space-y-8 w-full'>
-				<p className='text-zinc-600 text-sm max-w-[80%] text-center'>
+				<p className='text-zinc-600 text-sm max-w-[90%] text-center'>
 					Do you really want to {published ? 'unpublish' : 'publish'} the resource{' '}
 					<span className='font-bold max-w-[10ch]'>{resourceTitle}</span>?
 				</p>

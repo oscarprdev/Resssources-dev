@@ -25,7 +25,7 @@ const DashboardModalActions = ({ modalState, submitLabel, handleSubmitClick, han
 				{modalState.loading ? <IconDots className='animate-pulse text-zinc-300' /> : submitLabel}
 			</Button>
 			<Button
-				variant={'outline'}
+				variant={'secondary'}
 				onClick={() => handleToggleModal(false)}>
 				Cancel
 			</Button>
