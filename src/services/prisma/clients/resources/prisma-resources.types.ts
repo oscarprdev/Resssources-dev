@@ -60,3 +60,7 @@ export type UpdateResourcePublishedInput = {
 	resourceId: string;
 	published: boolean;
 };
+
+export type RemoveResourceInput = {
+	resourceId: string;
+};

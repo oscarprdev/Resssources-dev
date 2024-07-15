@@ -6,10 +6,6 @@ export type UpdateImageClientInput = {
 	type: IMAGE_TYPE;
 };
 
-export type GetUserByUsernameClientInput = {
-	username: string;
-};
-
 export type UpdateResourceClientInput = {
 	resourceId: string;
 	title: string;

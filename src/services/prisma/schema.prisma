@@ -59,9 +59,9 @@ model Users {
 model FavouriteResource {
   userId              String
   resourceId          String
-  user                Users                @relation(fields: [userId], references: [id])
-  resource            Resources            @relation(fields: [resourceId], references: [id])
-  favouritedAt        DateTime            @default(now())
+  user                Users                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resource            Resources            @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  favouritedAt        DateTime             @default(now())
 
   @@id([userId, resourceId])
 }
@@ -69,9 +69,9 @@ model FavouriteResource {
 model ResourcesCreated {
   userId              String
   resourceId          String
-  user                Users                @relation(fields: [userId], references: [id])
-  resource            Resources            @relation(fields: [resourceId], references: [id])
-  createdAt           DateTime            @default(now())
+  user                Users                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resource            Resources            @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  createdAt           DateTime             @default(now())
 
   @@id([userId, resourceId])
 }

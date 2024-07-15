@@ -1,9 +1,10 @@
-import { UseCase } from '@/features/shared/useCase';
 import { Either, errorResponse, successResponse } from '@/lib/either';
 import { UpdateImageInput, UpdateImageOutput, UpdateResourceInfoInput, UpdateResourcePublishedInput } from './edit-resource.types';
 import { EditResourcePorts } from './edit-resource.ports';
 import { EDIT_RESOURCES_ERRORS, EDIT_RESOURCES_SUCCESS } from './edit-resource.constants';
 import { editResourceInputSchema, editResourcePublishedInputSchema } from './edit-resource.schemas';
+import { AuthorizedUsecase } from '@/features/shared/authorizedUsecase';
+import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 
 export interface IEditResourceUsecase {
 	updateImage(input: UpdateImageInput): Promise<Either<string, UpdateImageOutput>>;
@@ -13,16 +14,15 @@ export interface IEditResourceUsecase {
 
 export const MAX_FILE_SIZE_MB = 2;
 
-export default class EditResourceUsecase extends UseCase implements IEditResourceUsecase {
-	constructor(private readonly ports: EditResourcePorts) {
-		super();
+export class EditResourceUsecase extends AuthorizedUsecase implements IEditResourceUsecase {
+	constructor(private readonly ports: EditResourcePorts, private readonly userClient: UserClient) {
+		super(userClient);
 	}
 
 	async updateResourcePublished(input: UpdateResourcePublishedInput): Promise<Either<string, string>> {
 		try {
 			this.validateInput(input, editResourcePublishedInputSchema, EDIT_RESOURCES_ERRORS.INVALID_INPUT);
-			const isUserValid = await this.checkIfUserIsValid(input.username);
-			if (!isUserValid) return errorResponse(EDIT_RESOURCES_ERRORS.INVALID_USERNAME);
+			await this.isUserAuthorized(input.username);
 
 			await this.ports.updateResourcePublished({
 				resourceId: input.resourceId,
@@ -38,8 +38,7 @@ export default class EditResourceUsecase extends UseCase implements IEditResourc
 	async updateResourceInfo(input: UpdateResourceInfoInput) {
 		try {
 			this.validateInput(input, editResourceInputSchema, EDIT_RESOURCES_ERRORS.INVALID_INPUT);
-			const isUserValid = await this.checkIfUserIsValid(input.username);
-			if (!isUserValid) return errorResponse(EDIT_RESOURCES_ERRORS.INVALID_USERNAME);
+			await this.isUserAuthorized(input.username);
 
 			await this.ports.updateResourceInfo({
 				resourceId: input.resourceId,
@@ -61,9 +60,8 @@ export default class EditResourceUsecase extends UseCase implements IEditResourc
 			const username = formData.get('username') as string;
 			const resourceId = formData.get('resourceId') as string;
 
-			const isUserValid = await this.checkIfUserIsValid(username);
+			await this.isUserAuthorized(username);
 
-			if (!isUserValid) return errorResponse(EDIT_RESOURCES_ERRORS.INVALID_USERNAME);
 			if (!image) return errorResponse(EDIT_RESOURCES_ERRORS.INVALID_IMAGE);
 			if (this.isImageSizeTooBig(image)) return errorResponse(EDIT_RESOURCES_ERRORS.IMAGE_SIZE);
 			if (!resourceId) return errorResponse(EDIT_RESOURCES_ERRORS.RESOURCE_NOT_VALID);
@@ -76,12 +74,6 @@ export default class EditResourceUsecase extends UseCase implements IEditResourc
 		} catch (error) {
 			return errorResponse(error instanceof Error ? error.message : EDIT_RESOURCES_ERRORS.DEFAULT);
 		}
-	}
-
-	private async checkIfUserIsValid(username: string): Promise<boolean> {
-		const user = await this.ports.getUserByUsername({ username });
-
-		return Boolean(user);
 	}
 
 	private isImageSizeTooBig(image: File) {

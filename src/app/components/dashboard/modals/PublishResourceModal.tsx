@@ -4,6 +4,7 @@ import DashboardModal from './DashboardModal';
 import { useState } from 'react';
 import { isError } from '@/lib/either';
 import { IconDots } from '@tabler/icons-react';
+import { toast } from '../../ui/use-toast';
 
 type PublishResourceModal = {
 	resourceId: string;
@@ -29,7 +30,11 @@ const PublishResourceModal = ({ resourceId, published, resourceTitle, isOpened, 
 			return setModalState({ error: response.error, loading: false });
 		}
 
-		setModalState({ error: null, loading: false });
+		toast({
+			description: response.success,
+		});
+
+		setModalState((prev) => ({ error: null, loading: false }));
 
 		toggleModal(false);
 	};

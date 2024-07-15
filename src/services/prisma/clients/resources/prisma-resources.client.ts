@@ -8,6 +8,7 @@ import {
 	GetResourcesListByKindInput,
 	GetResourcesListByOwnerInput,
 	GetResourcesListInput,
+	RemoveResourceInput,
 	ResourceWithRelations,
 	UpdateResourceInput,
 	UpdateResourcePublishedInput,
@@ -28,6 +29,8 @@ export interface ResourcesClient {
 
 	updateResource(input: UpdateResourceInput): Promise<Resource>;
 	updateResourcePublished(input: UpdateResourcePublishedInput): Promise<Resource>;
+
+	removeResource(input: RemoveResourceInput): Promise<void>;
 }
 
 export class PrismaResourcesClient implements ResourcesClient {
@@ -162,6 +165,14 @@ export class PrismaResourcesClient implements ResourcesClient {
 			where: { id: resourceId },
 			data: {
 				published,
+			},
+		});
+	}
+
+	async removeResource({ resourceId }: RemoveResourceInput): Promise<void> {
+		await prisma.resources.delete({
+			where: {
+				id: resourceId,
 			},
 		});
 	}

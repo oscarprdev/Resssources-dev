@@ -1,7 +1,6 @@
 import { IMAGE_TYPE } from '@/services/bucket/bucket.client.types';
 import {
 	EditResourcePorts,
-	GetUserByUsernameInput,
 	UpdateImagePortInput,
 	UpdateResourceInfoPortsInput,
 	UpdateResourcePublishedPortsInput,
@@ -22,9 +21,5 @@ export class EditResourceAdapter implements EditResourcePorts {
 	async updateImage({ id, imageFile }: UpdateImagePortInput) {
 		const imageData = (await imageFile.arrayBuffer()) as Buffer;
 		return await this.client.updateImage({ id, imageData, type: imageFile.type as IMAGE_TYPE });
-	}
-
-	async getUserByUsername({ username }: GetUserByUsernameInput) {
-		return await this.client.getUserByUsername({ username });
 	}
 }
