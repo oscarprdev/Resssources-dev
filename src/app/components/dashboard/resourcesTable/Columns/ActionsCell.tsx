@@ -32,7 +32,7 @@ const ActionsCell = ({ resource }: ActionsCellProps) => {
 		{
 			label: 'Unpublish',
 			isAllowed: resource.published,
-			action: async () => {},
+			action: async () => togglePublishModal(true),
 			icon: (
 				<IconForbid
 					size={20}

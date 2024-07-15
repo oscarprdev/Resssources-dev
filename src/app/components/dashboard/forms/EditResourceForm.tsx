@@ -155,7 +155,8 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 					</Button>
 					<Button
 						type='button'
-						variant={'secondary'}>
+						variant={'secondary'}
+						onClick={() => toggleModal(false)}>
 						Cancel
 					</Button>
 				</div>
