@@ -20,6 +20,11 @@ export class RemoveResourceUsecase extends AuthorizedUsecase implements IRemoveR
 			this.validateInput(input, removeResourceInputSchema, REMOVE_RESOURCE_USECASE_ERRORS.INVALID_INPUT);
 			await this.isUserAuthorized(input.username);
 
+			const resourceResponse = await this.ports.getResourceById({ resourceId: input.resourceId });
+			
+            if (!resourceResponse) return errorResponse(REMOVE_RESOURCE_USECASE_ERRORS.RESOURCE_NOT_FOUND);
+			if (resourceResponse.published) return errorResponse(REMOVE_RESOURCE_USECASE_ERRORS.REMOVE_NOT_ALLOWED);
+
 			await this.ports.removeResource({ resourceId: input.resourceId });
 
 			return successResponse(REMOVE_RESOURCE_USECASE_SUCCESS.DEFAULT);

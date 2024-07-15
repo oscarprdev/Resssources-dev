@@ -29,7 +29,7 @@ export class EditResourceUsecase extends AuthorizedUsecase implements IEditResou
 				published: input.published,
 			});
 
-			return successResponse(EDIT_RESOURCES_SUCCESS.DEFAULT);
+			return successResponse(EDIT_RESOURCES_SUCCESS.VISIBILITY);
 		} catch (error) {
 			return errorResponse(error instanceof Error ? error.message : EDIT_RESOURCES_ERRORS.DEFAULT);
 		}
