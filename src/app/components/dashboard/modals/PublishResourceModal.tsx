@@ -13,6 +13,7 @@ const PublishResourceModal = ({ resourceId, resourceTitle, isOpened, toggleModal
 		<DashboardModal
 			isOpened={isOpened}
 			toggleModal={toggleModal}
+			size='md'
 			title='Publish resource'>
 			<article className='flex flex-col items-center space-y-8 w-full'>
 				<p className='text-zinc-600 text-sm max-w-[80%] text-center'>

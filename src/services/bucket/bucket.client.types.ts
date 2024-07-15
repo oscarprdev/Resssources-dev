@@ -1,9 +1,13 @@
-import { SCREENSHOT_TYPE } from '../puppeteer/puppeteer.client.types';
+export enum IMAGE_TYPE {
+	png = 'png',
+	jpeg = 'jpeg',
+	webp = 'webp',
+}
 
 export type UploadImageInput = {
 	id: string;
 	imageData: Buffer;
-	type: SCREENSHOT_TYPE;
+	type: IMAGE_TYPE;
 };
 
 export type UploadImageOutput = {

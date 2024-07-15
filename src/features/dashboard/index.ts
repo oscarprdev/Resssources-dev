@@ -3,12 +3,25 @@ import { ListResourcesClient } from './infrastructure/list-resources/list-resour
 import { ListResourcesAdapters } from './adapters/list-resources.adapters';
 import { ListResourcesUsecase } from './application/list-resources/list-resources.use-case';
 import { PrismaUserClient } from '@/services/prisma/clients/users/prisma-user.client';
+import { BucketClient } from '@/services/bucket/bucket.client';
+import { EditResourceClient } from './infrastructure/edit-resource/edit-resource.client';
+import { EditResourceAdapter } from './adapters/edit-resource.adapters';
+import EditResourceUsecase from './application/edit-resource/edit-resource.use-case';
 
-export const provideDashboardListResourcesUsecase = () => {
+export const provideDashboardListResourcesUsecase = (): ListResourcesUsecase => {
 	const resourcesClient = new PrismaResourcesClient();
 	const userClient = new PrismaUserClient();
 	const listResourcesClient = new ListResourcesClient(resourcesClient, userClient);
 	const listResourcesAdapters = new ListResourcesAdapters(listResourcesClient);
 
 	return new ListResourcesUsecase(listResourcesAdapters);
+};
+
+export const provideDashboardEditResourceUsecase = (): EditResourceUsecase => {
+	const bucketClient = new BucketClient();
+	const userClient = new PrismaUserClient();
+	const editResourceClient = new EditResourceClient(userClient, bucketClient);
+	const editResourceAdapter = new EditResourceAdapter(editResourceClient);
+
+	return new EditResourceUsecase(editResourceAdapter);
 };

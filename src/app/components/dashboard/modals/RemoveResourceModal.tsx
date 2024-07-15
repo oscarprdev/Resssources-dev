@@ -13,6 +13,7 @@ const RemoveResourceModal = ({ resourceId, resourceTitle, isOpened, toggleModal 
 		<DashboardModal
 			isOpened={isOpened}
 			toggleModal={toggleModal}
+			size='md'
 			title='Remove resource'>
 			<article className='flex flex-col items-center space-y-8 w-full'>
 				<p className='text-zinc-600 text-sm max-w-[80%] text-center'>

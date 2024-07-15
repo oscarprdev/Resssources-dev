@@ -10,6 +10,8 @@ export interface ICreateResourcesUsecase {
 	createResource(input: CreateResourceInput): Promise<Either<string, string>>;
 }
 
+export const DEFAULT_IMAGE = 'https://pub-dd6ab2097287461d82afdef8be7ad9a4.r2.dev/default.webp';
+
 export class CreateResourceUsecase extends UseCase implements ICreateResourcesUsecase {
 	constructor(private readonly ports: CreateResourcesPorts) {
 		super();
@@ -33,7 +35,7 @@ export class CreateResourceUsecase extends UseCase implements ICreateResourcesUs
 				title,
 				description,
 				faviconUrl,
-				imgUrl: '',
+				imgUrl: DEFAULT_IMAGE,
 				resourceUrl: input.resourceUrl,
 				kinds: input.kinds,
 			});
