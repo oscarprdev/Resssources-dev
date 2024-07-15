@@ -1,6 +1,5 @@
 'use server';
 
-import { getDashboardResourcesList } from '@/app/actions/resources/get-dashboard-resources-list';
 import { columns } from './resourcesTable/Columns/columns';
 import ResourceTable from './resourcesTable/ResourceTable';
 import { provideDashboardListResourcesUsecase } from '@/features/dashboard';
@@ -8,7 +7,7 @@ import { Badge } from '../ui/badge';
 
 const Dashboard = async () => {
 	const listDashboardUsecase = provideDashboardListResourcesUsecase();
-	const response = await getDashboardResourcesList({ usecase: listDashboardUsecase, payload: { lastResourceId: '', pageSize: 10 } });
+	const response = await listDashboardUsecase.getResources({ lastResourceId: '', pageSize: 10 });
 
 	return (
 		<section className='container mx-auto -mt-14 flex flex-col space-y-5'>

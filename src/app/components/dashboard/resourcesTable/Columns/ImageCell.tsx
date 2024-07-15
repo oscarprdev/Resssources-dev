@@ -6,7 +6,7 @@ type ImageCellProps = {
 
 const ImageCell = ({ imgUrl }: ImageCellProps) => {
 	return (
-		<picture className='rounded-2xl size-[60px] grid place-items-center'>
+		<picture className='rounded-2xl size-[60px] grid place-items-center shadow-sm'>
 			<Image
 				src={imgUrl}
 				alt='Resource image'

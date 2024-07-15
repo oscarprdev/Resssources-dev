@@ -1,12 +1,18 @@
 import { BucketClient } from '@/services/bucket/bucket.client';
 import { EDIT_RESOURCE_ERRORS } from './edit-resource.client.constants';
-import { GetUserByUsernameClientInput, UpdateImageClientInput, UpdateResourceClientInput } from './edit-resource.client.types';
+import {
+	GetUserByUsernameClientInput,
+	UpdateImageClientInput,
+	UpdateResourceClientInput,
+	UpdateResourcePublishedClientInput,
+} from './edit-resource.client.types';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 import { Users as UserStored } from '@prisma/client';
 import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-resources.client';
 
 export interface IEditResourceClient {
 	updateResource(input: UpdateResourceClientInput): Promise<void>;
+	updateResourcePublished(input: UpdateResourcePublishedClientInput): Promise<void>;
 	updateImage(input: UpdateImageClientInput): Promise<string>;
 	getUserByUsername(input: GetUserByUsernameClientInput): Promise<UserStored | null>;
 }
@@ -17,6 +23,14 @@ export class EditResourceClient implements IEditResourceClient {
 		private readonly resourcesClient: ResourcesClient,
 		private readonly bucket: BucketClient
 	) {}
+
+	async updateResourcePublished({ resourceId, published }: UpdateResourcePublishedClientInput): Promise<void> {
+		try {
+			await this.resourcesClient.updateResourcePublished({ resourceId, published });
+		} catch (error) {
+			throw new Error(EDIT_RESOURCE_ERRORS.UPDATTING_RESOURCE);
+		}
+	}
 
 	async updateResource({ resourceId, resourceUrl, title, description, imgUrl }: UpdateResourceClientInput): Promise<void> {
 		try {

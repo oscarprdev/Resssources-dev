@@ -8,3 +8,9 @@ export const editResourceInputSchema = z.object({
 	imgUrl: z.string().url(),
 	resourceUrl: z.string().url(),
 });
+
+export const editResourcePublishedInputSchema = z.object({
+	resourceId: z.string(),
+	username: z.string(),
+	published: z.boolean(),
+});

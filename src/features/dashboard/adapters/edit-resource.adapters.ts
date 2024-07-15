@@ -4,11 +4,16 @@ import {
 	GetUserByUsernameInput,
 	UpdateImagePortInput,
 	UpdateResourceInfoPortsInput,
+	UpdateResourcePublishedPortsInput,
 } from '../application/edit-resource/edit-resource.ports';
 import { EditResourceClient } from '../infrastructure/edit-resource/edit-resource.client';
 
 export class EditResourceAdapter implements EditResourcePorts {
 	constructor(private readonly client: EditResourceClient) {}
+
+	async updateResourcePublished({ resourceId, published }: UpdateResourcePublishedPortsInput): Promise<void> {
+		await this.client.updateResourcePublished({ resourceId, published });
+	}
 
 	async updateResourceInfo({ resourceId, resourceUrl, title, description, imgUrl }: UpdateResourceInfoPortsInput): Promise<void> {
 		await this.client.updateResource({ resourceId, resourceUrl, title, description, imgUrl });

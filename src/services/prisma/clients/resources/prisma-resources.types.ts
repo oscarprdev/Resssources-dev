@@ -55,3 +55,8 @@ export type UpdateResourceInput = {
 	imgUrl: string;
 	resourceUrl: string;
 };
+
+export type UpdateResourcePublishedInput = {
+	resourceId: string;
+	published: boolean;
+};

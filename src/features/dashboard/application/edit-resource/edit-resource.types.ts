@@ -14,3 +14,9 @@ export type UpdateResourceInfoInput = {
 	resourceUrl: string;
 	imgUrl: string;
 };
+
+export type UpdateResourcePublishedInput = {
+	username: string;
+	resourceId: string;
+	published: boolean;
+};

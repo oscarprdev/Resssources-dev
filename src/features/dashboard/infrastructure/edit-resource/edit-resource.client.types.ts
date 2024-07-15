@@ -17,3 +17,5 @@ export type UpdateResourceClientInput = {
 	imgUrl: string;
 	resourceUrl: string;
 };
+
+export type UpdateResourcePublishedClientInput = { resourceId: string; published: boolean };

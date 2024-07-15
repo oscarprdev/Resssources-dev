@@ -75,6 +75,7 @@ const ActionsCell = ({ resource }: ActionsCellProps) => {
 			</Dropdown>
 			<PublishResourceModal
 				resourceId={resource.id}
+				published={resource.published}
 				resourceTitle={resource.title}
 				isOpened={modalOpened.publish}
 				toggleModal={togglePublishModal}
