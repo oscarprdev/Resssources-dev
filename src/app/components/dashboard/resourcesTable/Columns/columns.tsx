@@ -9,11 +9,13 @@ import DateCell from './DateCell';
 import PublishedCell from './PublishedCell';
 import OwnerCell from './OwnerCell';
 import ActionsCell from './ActionsCell';
+import ImageCell from './ImageCell';
 
 export const columns: ColumnDef<ResourceWithUserInfo>[] = [
 	{
 		accessorKey: 'imgUrl',
 		header: '',
+		cell: ({ row }) => <ImageCell imgUrl={row.original.imgUrl} />,
 	},
 	{
 		accessorKey: 'title',

@@ -15,7 +15,10 @@ const EditResourceModal = ({ resource, isOpened, toggleModal }: EditResourceModa
 			toggleModal={toggleModal}
 			title='Edit resource'
 			size='xl'>
-			<EditResourceForm resource={resource} />
+			<EditResourceForm
+				resource={resource}
+				toggleModal={toggleModal}
+			/>
 		</DashboardModal>
 	);
 };

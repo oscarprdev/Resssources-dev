@@ -10,6 +10,8 @@ import { uploadImageAction } from '@/app/actions/images/upload-image';
 import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
 import { Button } from '../../ui/button';
+import { updateResourceInfoAction, UpdateResourceInfoActionInput } from '@/app/actions/resources/update-resource-info';
+import { IconDots } from '@tabler/icons-react';
 
 const editResourceFormSchema = z.object({
 	title: z.string(),
@@ -32,9 +34,10 @@ export type EditResourceFormValues = {
 
 export type EditResourceFormProps = {
 	resource: ResourceWithUserInfo;
+	toggleModal: (opened: boolean) => void;
 };
 
-const EditResourceForm = ({ resource }: EditResourceFormProps) => {
+const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 	const form = useForm<EditResourceFormValues>({
 		resolver: zodResolver(editResourceFormSchema),
 		defaultValues: {
@@ -46,14 +49,20 @@ const EditResourceForm = ({ resource }: EditResourceFormProps) => {
 	});
 
 	const onSubmit = async (values: EditResourceFormValues) => {
-		// const response = await handleSubmit(values);
-		// if (response && isError(response)) {
-		// 	return form.setValue('error', response.error);
-		// }
+		const payload = {
+			title: values.title,
+			description: values.description,
+			imgUrl: values.imgUrl,
+			resourceUrl: values.url,
+			resourceId: resource.id,
+		} satisfies UpdateResourceInfoActionInput;
 
-		// afterAddResourceSubmit(response ? response.success : CREATE_RESOURCES_SUCCESS.DEFAULT);
+		const response = await updateResourceInfoAction(payload);
+		if (response && isError(response)) {
+			return form.setValue('error', response.error);
+		}
 
-		console.log(values);
+		toggleModal(false);
 	};
 
 	const updateFormImageValue = async (e: ChangeEvent) => {
@@ -137,9 +146,18 @@ const EditResourceForm = ({ resource }: EditResourceFormProps) => {
 						</FormItem>
 					)}
 				/>
-				<div className='flex items-center space-x-2 w-full mt-4'>
-					<Button>Update</Button>
-					<Button variant={'outline'}>Cancel</Button>
+				<div className='relative flex items-center space-x-2 w-full mt-6'>
+					{form.getValues('error') && (
+						<FormMessage className='absolute -top-6 w-full flex items-center justify-center'>{form.getValues('error')}</FormMessage>
+					)}
+					<Button disabled={form.formState.isSubmitting || !form.formState.isDirty}>
+						{form.formState.isSubmitting ? <IconDots className='animate-pulse text-zinc-300' /> : 'Update'}
+					</Button>
+					<Button
+						type='button'
+						variant={'secondary'}>
+						Cancel
+					</Button>
 				</div>
 			</form>
 		</Form>

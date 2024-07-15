@@ -9,3 +9,11 @@ export type UpdateImageClientInput = {
 export type GetUserByUsernameClientInput = {
 	username: string;
 };
+
+export type UpdateResourceClientInput = {
+	resourceId: string;
+	title: string;
+	description: string;
+	imgUrl: string;
+	resourceUrl: string;
+};

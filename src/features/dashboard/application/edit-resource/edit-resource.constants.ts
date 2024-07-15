@@ -4,6 +4,7 @@ export const EDIT_RESOURCES_ERRORS = {
 	INVALID_USERNAME: 'Username not valid.',
 	RESOURCE_NOT_VALID: 'Resource not valid',
 	DEFAULT: 'Error editting resource.',
+	INVALID_INPUT: 'Invalid edit resource input',
 };
 
 export const EDIT_RESOURCES_SUCCESS = {

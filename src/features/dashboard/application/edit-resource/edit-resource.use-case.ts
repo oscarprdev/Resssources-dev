@@ -1,11 +1,13 @@
 import { UseCase } from '@/features/shared/useCase';
 import { Either, errorResponse, successResponse } from '@/lib/either';
-import { UpdateImageInput, UpdateImageOutput } from './edit-resource.types';
+import { UpdateImageInput, UpdateImageOutput, UpdateResourceInfoInput } from './edit-resource.types';
 import { EditResourcePorts } from './edit-resource.ports';
-import { EDIT_RESOURCES_ERRORS } from './edit-resource.constants';
+import { EDIT_RESOURCES_ERRORS, EDIT_RESOURCES_SUCCESS } from './edit-resource.constants';
+import { editResourceInputSchema } from './edit-resource.schemas';
 
 export interface IEditResourceUsecase {
 	updateImage(input: UpdateImageInput): Promise<Either<string, UpdateImageOutput>>;
+	updateResourceInfo(input: UpdateResourceInfoInput): Promise<Either<string, string>>;
 }
 
 export const MAX_FILE_SIZE_MB = 2;
@@ -13,6 +15,26 @@ export const MAX_FILE_SIZE_MB = 2;
 export default class EditResourceUsecase extends UseCase implements IEditResourceUsecase {
 	constructor(private readonly ports: EditResourcePorts) {
 		super();
+	}
+
+	async updateResourceInfo(input: UpdateResourceInfoInput) {
+		try {
+			this.validateInput(input, editResourceInputSchema, EDIT_RESOURCES_ERRORS.INVALID_INPUT);
+			const isUserValid = await this.checkIfUserIsValid(input.username);
+			if (!isUserValid) return errorResponse(EDIT_RESOURCES_ERRORS.INVALID_USERNAME);
+
+			await this.ports.updateResourceInfo({
+				resourceId: input.resourceId,
+				title: input.title,
+				description: input.description,
+				imgUrl: input.imgUrl,
+				resourceUrl: input.resourceUrl,
+			});
+
+			return successResponse(EDIT_RESOURCES_SUCCESS.DEFAULT);
+		} catch (error) {
+			return errorResponse(error instanceof Error ? error.message : EDIT_RESOURCES_ERRORS.DEFAULT);
+		}
 	}
 
 	async updateImage({ formData }: UpdateImageInput) {

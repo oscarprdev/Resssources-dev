@@ -20,7 +20,8 @@ export const provideDashboardListResourcesUsecase = (): ListResourcesUsecase => 
 export const provideDashboardEditResourceUsecase = (): EditResourceUsecase => {
 	const bucketClient = new BucketClient();
 	const userClient = new PrismaUserClient();
-	const editResourceClient = new EditResourceClient(userClient, bucketClient);
+	const resourcesClient = new PrismaResourcesClient();
+	const editResourceClient = new EditResourceClient(userClient, resourcesClient, bucketClient);
 	const editResourceAdapter = new EditResourceAdapter(editResourceClient);
 
 	return new EditResourceUsecase(editResourceAdapter);

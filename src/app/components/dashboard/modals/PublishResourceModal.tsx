@@ -21,7 +21,11 @@ const PublishResourceModal = ({ resourceId, resourceTitle, isOpened, toggleModal
 				</p>
 				<div className='flex items-center space-x-2 w-full'>
 					<Button>Publish</Button>
-					<Button variant={'outline'}>Cancel</Button>
+					<Button
+						variant={'outline'}
+						onClick={() => toggleModal(false)}>
+						Cancel
+					</Button>
 				</div>
 			</article>
 		</DashboardModal>

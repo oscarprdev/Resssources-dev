@@ -9,6 +9,7 @@ import {
 	GetResourcesListByOwnerInput,
 	GetResourcesListInput,
 	ResourceWithRelations,
+	UpdateResourceInput,
 } from './prisma-resources.types';
 import { Resources as Resource } from '@prisma/client';
 
@@ -23,6 +24,8 @@ export interface ResourcesClient {
 	getResourcesListByKind(input: GetResourcesListByKindInput): Promise<Resource[]>;
 
 	createResource(input: CreateResourceInput): Promise<Resource>;
+
+	updateResource(input: UpdateResourceInput): Promise<Resource>;
 }
 
 export class PrismaResourcesClient implements ResourcesClient {
@@ -136,6 +139,18 @@ export class PrismaResourcesClient implements ResourcesClient {
 						},
 					},
 				},
+			},
+		});
+	}
+
+	async updateResource({ resourceId, title, description, imgUrl, resourceUrl }: UpdateResourceInput) {
+		return await prisma.resources.update({
+			where: { id: resourceId },
+			data: {
+				title,
+				description,
+				imgUrl,
+				resourceUrl,
 			},
 		});
 	}

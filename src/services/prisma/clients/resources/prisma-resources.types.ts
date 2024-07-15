@@ -47,3 +47,11 @@ export type ResourceWithRelations = Prisma.ResourcesGetPayload<{
 		resourceCreatedBy: true;
 	};
 }>;
+
+export type UpdateResourceInput = {
+	resourceId: string;
+	title: string;
+	description: string;
+	imgUrl: string;
+	resourceUrl: string;
+};
