@@ -1,4 +1,4 @@
-import { provideCreateResourceUsecase } from '@/features/core/create-resource';
+import { provideCreateResourceUsecase } from '@/features/resources/create';
 import { isError } from '@/lib/either';
 import { $Enums } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';

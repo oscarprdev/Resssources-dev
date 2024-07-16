@@ -9,11 +9,11 @@ import { Either, isError } from '@/lib/either';
 import FormAction from './FormAction';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import { $Enums } from '@prisma/client';
-import { RESOURCE_KIND_VALUES } from '@/features/core/create-resource/application/create-resources.schemas';
 import { Badge } from '../../ui/badge';
 import { XIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { CREATE_RESOURCES_SUCCESS } from '@/features/core/create-resource/application/create-resources.constants';
+import { CREATE_RESOURCES_SUCCESS } from '@/features/resources/create/application/create-resources.constants';
+import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
 
 export type AddResourceFormValues = { url: string; kinds: $Enums.Kind[]; error: string | null };
 type AddResourceFormProps = {

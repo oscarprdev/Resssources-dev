@@ -1,5 +1,5 @@
 import { API_URL } from '@/constants';
-import { CREATE_RESOURCES_ERRORS } from '@/features/core/create-resource/application/create-resources.constants';
+import { CREATE_RESOURCES_ERRORS } from '@/features/resources/create/application/create-resources.constants';
 import { Either, errorResponse, successResponse } from '@/lib/either';
 import { $Enums } from '@prisma/client';
 
