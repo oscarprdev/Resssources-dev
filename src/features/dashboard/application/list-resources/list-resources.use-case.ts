@@ -1,7 +1,8 @@
 import { Either, errorResponse, successResponse } from '@/lib/either';
 import { ListResourcesPorts } from './list-resources.ports';
 import { LIST_RESOURCES_ERRORS } from './list-resources.use-case.constants';
-import { GetResourcesListInput, ResourceApplication, ResourceWithUserInfo } from './list-resources.use-case.types';
+import { GetResourcesListInput } from './list-resources.use-case.types';
+import { ResourceApplication, ResourceWithUserInfo } from '@/features/shared/global.types';
 
 export interface IListResourcesUsecase {
 	getResources(input: GetResourcesListInput): Promise<Either<string, ResourceWithUserInfo[]>>;
@@ -27,11 +28,9 @@ export class ListResourcesUsecase implements IListResourcesUsecase {
 		const userResponse = await this.ports.getUserById({ userId: resourceCreatedBy.userId });
 
 		const resourceCreatedByWithUserInfo = [{ ...resourceCreatedBy, username: userResponse ? userResponse.username : null }];
-		const resourceWithUserInfo = {
+		return {
 			...resource,
 			resourceCreatedBy: resourceCreatedByWithUserInfo,
-		} satisfies ResourceApplication;
-
-		return resourceWithUserInfo;
+		} satisfies ResourceWithUserInfo;
 	}
 }

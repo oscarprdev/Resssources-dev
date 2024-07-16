@@ -1,4 +1,4 @@
-import { Resources } from '@prisma/client';
+import { ResourceStored } from '@/features/shared/global.types';
 import {
 	CreateResourcesPorts,
 	GetResourceByTitleInput,
@@ -15,11 +15,11 @@ export class CreateResourceAdapters implements CreateResourcesPorts {
 		return await this.createResourcesInfra.getUserByUsername({ username });
 	}
 
-	async getResourceByTitle({ title }: GetResourceByTitleInput): Promise<Resources | null> {
+	async getResourceByTitle({ title }: GetResourceByTitleInput): Promise<ResourceStored | null> {
 		return this.createResourcesInfra.getResourceByTitle({ title });
 	}
 
-	async getResourceByUrl({ resourceUrl }: GetResourceByUrlInput): Promise<Resources | null> {
+	async getResourceByUrl({ resourceUrl }: GetResourceByUrlInput): Promise<ResourceStored | null> {
 		return this.createResourcesInfra.getResourceByUrl({ resourceUrl });
 	}
 

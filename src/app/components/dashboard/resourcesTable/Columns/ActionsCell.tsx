@@ -1,10 +1,10 @@
 import Dropdown, { DropdownOption } from '@/app/components/core/Dropdown';
-import { ResourceWithUserInfo } from '@/features/dashboard/application/list-resources/list-resources.use-case.types';
 import { IconDots, IconShare2, IconEdit, IconEraser, IconForbid } from '@tabler/icons-react';
 import RemoveResourceModal from '../../modals/RemoveResourceModal';
 import { useState } from 'react';
 import EditResourceModal from '../../modals/EditResourceModal';
 import PublishResourceModal from '../../modals/PublishResourceModal';
+import { ResourceWithUserInfo } from '@/features/shared/global.types';
 
 type ActionsCellProps = {
 	resource: ResourceWithUserInfo;

@@ -1,14 +1,14 @@
 import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-resources.client';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 import { GetResourceByTitleInput, GetResourceByUrlInput, GetUserByUsernameInput, StoreResourceInput } from './create-resource.infra.types';
-import { Resources as Resource, Users as UserStored } from '@prisma/client';
 import { CREATE_RESOURCE_INFRA_ERRORS } from './create-resource.infra.constants';
+import { ResourceStored, UserStored } from '@/features/shared/global.types';
 
 export interface ICreateResourceInfra {
 	getUserByUsername(input: GetUserByUsernameInput): Promise<UserStored | null>;
 
-	getResourceByTitle(input: GetResourceByTitleInput): Promise<Resource | null>;
-	getResourceByUrl(input: GetResourceByUrlInput): Promise<Resource | null>;
+	getResourceByTitle(input: GetResourceByTitleInput): Promise<ResourceStored | null>;
+	getResourceByUrl(input: GetResourceByUrlInput): Promise<ResourceStored | null>;
 
 	storeResource(input: StoreResourceInput): Promise<void>;
 }

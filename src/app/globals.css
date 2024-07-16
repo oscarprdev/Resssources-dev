@@ -5,6 +5,11 @@
 @layer base {
 }
 
+:root {
+	--bg-dots: #e0e1e4;
+	--card-dots: #4f81ee;
+}
+
 body {
 	overflow-x: hidden;
 }

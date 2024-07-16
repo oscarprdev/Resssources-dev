@@ -1,11 +1,11 @@
-import { provideHeroResourceUsecase } from '@/features/hero-resources';
 import { isError } from '@/lib/either';
 import HeroResourceItem from './HeroResourceItem';
 import { toast } from '../../ui/use-toast';
+import { provideListHeroResourceUsecase } from '@/features/home';
 
 const HeroResourcesList = async () => {
-	const heroResourcesUsecase = provideHeroResourceUsecase();
-	const getHeroResourcesListResponse = await heroResourcesUsecase.getHeroResources();
+	const heroResourcesUsecase = provideListHeroResourceUsecase();
+	const getHeroResourcesListResponse = await heroResourcesUsecase.listHeroResources();
 	if (isError(getHeroResourcesListResponse)) {
 		toast({
 			variant: 'destructive',

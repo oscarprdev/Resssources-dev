@@ -11,7 +11,7 @@ const Header = async () => {
 	const session = await auth();
 
 	return (
-		<header className='flex items-center justify-between py-4 px-10 w-full bg-white border border-b border-b-zinc-100'>
+		<header className='sticky top-0 z-50 flex items-center justify-between py-4 px-10 w-full bg-white border border-b border-b-zinc-100'>
 			<Link
 				href={'/'}
 				className='flex items-center gap-3'>

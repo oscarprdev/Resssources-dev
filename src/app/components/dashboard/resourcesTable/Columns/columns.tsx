@@ -1,6 +1,5 @@
 'use client';
 
-import { ResourceWithUserInfo } from '@/features/dashboard/application/list-resources/list-resources.use-case.types';
 import { ColumnDef } from '@tanstack/react-table';
 import InfoCell from './InfoCell';
 import UrlCell from './UrlCell';
@@ -10,6 +9,7 @@ import PublishedCell from './PublishedCell';
 import OwnerCell from './OwnerCell';
 import ActionsCell from './ActionsCell';
 import ImageCell from './ImageCell';
+import { ResourceWithUserInfo } from '@/features/shared/global.types';
 
 export const columns: ColumnDef<ResourceWithUserInfo>[] = [
 	{

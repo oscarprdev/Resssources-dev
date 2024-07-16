@@ -3,7 +3,7 @@ import { UpdateImageInput, UpdateImageOutput, UpdateResourceInfoInput, UpdateRes
 import { EditResourcePorts } from './edit-resource.ports';
 import { EDIT_RESOURCES_ERRORS, EDIT_RESOURCES_SUCCESS } from './edit-resource.constants';
 import { editResourceInputSchema, editResourcePublishedInputSchema } from './edit-resource.schemas';
-import { AuthorizedUsecase } from '@/features/shared/authorizedUsecase';
+import { AuthorizedUsecase } from '@/features/shared/authorized.use-case';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 
 export interface IEditResourceUsecase {

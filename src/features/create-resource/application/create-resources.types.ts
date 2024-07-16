@@ -1,7 +1,7 @@
-import { $Enums } from '@prisma/client';
+import { Kinds } from '@/features/shared/global.types';
 
 export type CreateResourceInput = {
 	username: string;
 	resourceUrl: string;
-	kinds: $Enums.Kind[];
+	kinds: Kinds;
 };

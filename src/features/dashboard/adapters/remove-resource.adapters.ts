@@ -1,11 +1,11 @@
-import { Resources } from '@prisma/client';
+import { ResourceStored } from '@/features/shared/global.types';
 import { RemoveResourcePorts, RemoveResourcePortsInput } from '../application/remove-resource/remove-resource.ports';
 import { RemoveResourceClient } from '../infrastructure/remove-resources/remove-resources.client';
 
 export class RemoveResourceAdapters implements RemoveResourcePorts {
 	constructor(private readonly client: RemoveResourceClient) {}
 
-	async getResourceById({ resourceId }: RemoveResourcePortsInput): Promise<Resources | null> {
+	async getResourceById({ resourceId }: RemoveResourcePortsInput): Promise<ResourceStored | null> {
 		return await this.client.getResourceById({ resourceId });
 	}
 

@@ -1,4 +1,3 @@
-import { ResourceWithUserInfo } from '@/features/dashboard/application/list-resources/list-resources.use-case.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -12,6 +11,7 @@ import { Textarea } from '../../ui/textarea';
 import { Button } from '../../ui/button';
 import { updateResourceInfoAction, UpdateResourceInfoActionInput } from '@/app/actions/resources/update-resource-info';
 import { IconDots } from '@tabler/icons-react';
+import { ResourceWithUserInfo } from '@/features/shared/global.types';
 
 const editResourceFormSchema = z.object({
 	title: z.string(),

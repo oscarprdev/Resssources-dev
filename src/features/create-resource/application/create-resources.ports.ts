@@ -1,4 +1,4 @@
-import { $Enums, Users as UserStored, Resources as ResourceStored } from '@prisma/client';
+import { Kinds, ResourceStored, UserStored } from '@/features/shared/global.types';
 
 export interface CreateResourcesPorts {
 	getUserByUsername(input: GetUserByUsernameInput): Promise<UserStored | null>;
@@ -39,5 +39,5 @@ export type StoreResourceInput = {
 	faviconUrl: string;
 	imgUrl: string;
 	resourceUrl: string;
-	kinds: $Enums.Kind[];
+	kinds: Kinds;
 };

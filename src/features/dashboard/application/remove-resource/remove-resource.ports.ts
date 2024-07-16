@@ -1,7 +1,7 @@
-import { Resources as Resource } from '@prisma/client';
+import { ResourceStored } from '@/features/shared/global.types';
 
 export interface RemoveResourcePorts {
-	getResourceById(input: GetResourceByIdInput): Promise<Resource | null>;
+	getResourceById(input: GetResourceByIdInput): Promise<ResourceStored | null>;
 	removeResource(input: RemoveResourcePortsInput): Promise<void>;
 }
 

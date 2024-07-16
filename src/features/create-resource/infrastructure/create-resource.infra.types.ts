@@ -1,4 +1,4 @@
-import { $Enums } from '@prisma/client';
+import { Kinds } from '@/features/shared/global.types';
 
 export type GetUserByUsernameInput = {
 	username: string;
@@ -30,5 +30,5 @@ export type StoreResourceInput = {
 	faviconUrl: string;
 	imgUrl: string;
 	resourceUrl: string;
-	kinds: $Enums.Kind[];
+	kinds: Kinds;
 };

@@ -2,9 +2,9 @@ import { Either, errorResponse, successResponse } from '@/lib/either';
 import { CreateResourceInput } from './create-resources.types';
 import { CreateResourcesPorts } from './create-resources.ports';
 import { createResourceInputSchema } from './create-resources.schemas';
-import { UseCase } from '@/features/shared/useCase';
 import { CREATE_RESOURCES_ERRORS, CREATE_RESOURCES_SUCCESS } from './create-resources.constants';
 import { JSDOM } from 'jsdom';
+import { UseCase } from '@/features/shared/use-case';
 
 export interface ICreateResourcesUsecase {
 	createResource(input: CreateResourceInput): Promise<Either<string, string>>;

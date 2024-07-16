@@ -1,5 +1,4 @@
-import { $Enums, Users as UserStored } from '@prisma/client';
-import { ResourceApplication } from './list-resources.use-case.types';
+import { ResourceApplication, UserStored } from '@/features/shared/global.types';
 
 export interface ListResourcesPorts {
 	getResources(input: GetResourcesListPortsInput): Promise<ResourceApplication[]>;
