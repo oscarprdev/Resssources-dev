@@ -3,7 +3,7 @@ import { Input } from '@/app/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { LoginUserInput } from '@/features/auth-user/application/auth-user.types';
+import { LoginUserInput } from '@/features/core/auth-user/application/auth-user.types';
 import { Either, isError } from '@/lib/either';
 import FormAction from './FormAction';
 

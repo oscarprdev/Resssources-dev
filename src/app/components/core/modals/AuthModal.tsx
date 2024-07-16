@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogT
 import { useRef, useState } from 'react';
 import LoginForm from '../forms/LoginForm';
 import RegisterForm from '../forms/RegisterForm';
-import { LoginUserInput, RegisterUserInput } from '@/features/auth-user/application/auth-user.types';
+import { LoginUserInput, RegisterUserInput } from '@/features/core/auth-user/application/auth-user.types';
 import { logInUser } from '@/app/actions/auth/login-user';
 import { registerUser } from '@/app/actions/auth/register-user';
 import { useRouter } from 'next/navigation';

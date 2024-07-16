@@ -1,6 +1,6 @@
 import Credentials from 'next-auth/providers/credentials';
 import { NextAuthConfig } from 'next-auth';
-import { provideAuthUserUseCase } from './features/auth-user';
+import { provideAuthUserUseCase } from './features/core/auth-user';
 import { isError } from './lib/either';
 
 export default {

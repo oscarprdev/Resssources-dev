@@ -1,7 +1,7 @@
 'use server';
 
 import { signIn } from '@/auth';
-import { LoginUserInput } from '@/features/auth-user/application/auth-user.types';
+import { LoginUserInput } from '@/features/core/auth-user/application/auth-user.types';
 import { errorResponse, successResponse } from '@/lib/either';
 import { AuthError } from 'next-auth';
 
