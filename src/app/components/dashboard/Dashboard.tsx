@@ -2,12 +2,12 @@
 
 import { columns } from './resourcesTable/Columns/columns';
 import ResourceTable from './resourcesTable/ResourceTable';
-import { provideDashboardListResourcesUsecase } from '@/features/dashboard';
 import { Badge } from '../ui/badge';
+import { provideListResourceUsecase } from '@/features/resources/list';
 
 const Dashboard = async () => {
-	const listDashboardUsecase = provideDashboardListResourcesUsecase();
-	const response = await listDashboardUsecase.getResources({ lastResourceId: '', pageSize: 10 });
+	const listResourcesUsecase = provideListResourceUsecase();
+	const response = await listResourcesUsecase.listResources({ withUserData: true, itemsPerRequest: 10 });
 
 	return (
 		<section className='container mx-auto -mt-14 flex flex-col space-y-5'>

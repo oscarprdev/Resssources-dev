@@ -1,38 +1,36 @@
 import { isError } from '@/lib/either';
 import HeroResourceItem from './HeroResourceItem';
 import { toast } from '../../ui/use-toast';
-import { provideListHeroResourceUsecase } from '@/features/home';
+import { provideListResourceUsecase } from '@/features/resources/list';
 
 const HeroResourcesList = async () => {
-	const heroResourcesUsecase = provideListHeroResourceUsecase();
-	const getHeroResourcesListResponse = await heroResourcesUsecase.listHeroResources();
-	if (isError(getHeroResourcesListResponse)) {
+	const listResourcesUsecase = provideListResourceUsecase();
+	const resourcesResponse = await listResourcesUsecase.listResourcesImages();
+	if (isError(resourcesResponse)) {
 		toast({
 			variant: 'destructive',
-			description: getHeroResourcesListResponse.error,
+			description: resourcesResponse.error,
 		});
 	}
 
 	return (
 		<section className='relative mt-16 flex w-fit items-center'>
-			{!isError(getHeroResourcesListResponse) && getHeroResourcesListResponse.success.length > 0 && (
+			{!isError(resourcesResponse) && resourcesResponse.success.length > 0 && (
 				<>
 					<ul className='marquee1-animation flex w-full items-center gap-4 overflow-hidden'>
-						{getHeroResourcesListResponse.success.map(({ resourceId, title, imgUrl }) => (
+						{resourcesResponse.success.map(({ id, imgUrl }) => (
 							<HeroResourceItem
-								key={resourceId}
-								resourceId={resourceId}
-								title={title}
+								key={id}
+								resourceId={id}
 								imgUrl={imgUrl}
 							/>
 						))}
 					</ul>
 					<ul className='marquee2-animation absolute top-0 ml-4 flex w-full items-center gap-4 overflow-hidden'>
-						{getHeroResourcesListResponse.success.map(({ resourceId, title, imgUrl }) => (
+						{resourcesResponse.success.map(({ id, imgUrl }) => (
 							<HeroResourceItem
-								key={resourceId}
-								resourceId={resourceId}
-								title={title}
+								key={id}
+								resourceId={id}
 								imgUrl={imgUrl}
 							/>
 						))}

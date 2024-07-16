@@ -15,9 +15,9 @@ export type GetResourceByUrlInput = {
 export type GetResourcesListInput = {
 	withUserData: boolean;
 	published?: boolean;
-	pagination?: {
-		cursor: string | null;
-		pageSize: number;
+	pagination: {
+		cursor?: string;
+		pageSize?: number;
 	};
 };
 

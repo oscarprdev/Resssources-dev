@@ -3,8 +3,8 @@ import { removeResourceInputSchema } from './remove-resource.schemas';
 import { REMOVE_RESOURCE_USECASE_ERRORS, REMOVE_RESOURCE_USECASE_SUCCESS } from './remove-resource.constants';
 import { Either, errorResponse, successResponse } from '@/lib/either';
 import { RemoveResourcePorts } from './remove-resource.ports';
-import { AuthorizedUsecase } from '@/features/shared/authorized.use-case';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
+import { AuthorizedUsecase } from '@/features/shared/usecases/authorized.use-case';
 
 export interface IRemoveResourceUsecas {
 	removeResource(input: RemoveResourceInput): Promise<Either<string, string>>;

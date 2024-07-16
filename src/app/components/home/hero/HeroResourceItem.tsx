@@ -3,11 +3,10 @@ import Image from 'next/image';
 
 type HeroResourceItemProps = {
 	resourceId: string;
-	title: string;
 	imgUrl: string;
 };
 
-const HeroResourceItem = ({ resourceId, title, imgUrl }: HeroResourceItemProps) => {
+const HeroResourceItem = ({ resourceId, imgUrl }: HeroResourceItemProps) => {
 	return (
 		<li>
 			<Dialog>
@@ -15,7 +14,7 @@ const HeroResourceItem = ({ resourceId, title, imgUrl }: HeroResourceItemProps) 
 					<picture className='relative block w-[220px] h-[220px] rounded-3xl overflow-hidden shadow-md'>
 						<Image
 							src={imgUrl}
-							alt={title}
+							alt='Resource hero image'
 							layout='fill'
 							objectFit='cover'
 							sizes='(max-width: 220px) 100vw'

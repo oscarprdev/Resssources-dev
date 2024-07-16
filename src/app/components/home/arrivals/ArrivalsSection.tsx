@@ -1,23 +1,27 @@
 import ArrivalsCard from './ArrivalsCard';
 import { isError } from '@/lib/either';
 import { toast } from '../../ui/use-toast';
-import { provideListArrivalsResourceUsecase } from '@/features/home';
+import { provideListResourceUsecase } from '@/features/resources/list';
 
 const ArrivalsSection = async () => {
-	const arrivalsResourcesUsecase = provideListArrivalsResourceUsecase();
-	const getArrivalsResourcesListResponse = await arrivalsResourcesUsecase.listArrivalsResources();
-	if (isError(getArrivalsResourcesListResponse)) {
+	const listResourcesUsecase = provideListResourceUsecase();
+	const resourcesResponse = await listResourcesUsecase.listResources({
+		published: true,
+		withUserData: true,
+		itemsPerRequest: 10,
+	});
+	if (isError(resourcesResponse)) {
 		toast({
 			variant: 'destructive',
-			description: getArrivalsResourcesListResponse.error,
+			description: resourcesResponse.error,
 		});
 	}
 	return (
 		<>
-			{!isError(getArrivalsResourcesListResponse) && (
+			{!isError(resourcesResponse) && (
 				<section className='relative grid place-items-center w-screen h-screen pt-32'>
 					<div className='absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(var(--bg-dots)_1px,transparent_1px)] [background-size:16px_16px]'></div>
-					<ArrivalsCard resources={getArrivalsResourcesListResponse.success} />
+					<ArrivalsCard resources={resourcesResponse.success} />
 				</section>
 			)}
 		</>
