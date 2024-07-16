@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from '@/auth';
-import { provideDashboardEditResourceUsecase } from '@/features/dashboard';
+import { provideEditResourceUsecase } from '@/features/resources/edit';
 import { errorResponse } from '@/lib/either';
 import { revalidatePath } from 'next/cache';
 
@@ -14,7 +14,7 @@ export const updateResourcePublishedAction = async (input: UpdateResourcePublish
 	const session = await auth();
 	if (!session?.user || !session.user.name) return errorResponse('User not authorized');
 
-	const usecase = provideDashboardEditResourceUsecase();
+	const usecase = provideEditResourceUsecase();
 
 	const response = await usecase.updateResourcePublished({ ...input, username: session.user.name });
 
