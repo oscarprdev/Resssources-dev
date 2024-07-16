@@ -26,6 +26,7 @@ const ArrivalsCard = async ({ resources }: ArrivalsCardProps) => {
 				{resources.map((resource) => (
 					<ArrivalResourceCard
 						key={resource.id}
+						resourceId={resource.id}
 						imgUrl={resource.imgUrl}
 						title={resource.title}
 						description='Some description description description description description description description description description description'

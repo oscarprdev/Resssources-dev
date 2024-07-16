@@ -67,3 +67,8 @@ export type UpdateResourcePublishedInput = {
 export type RemoveResourceInput = {
 	resourceId: string;
 };
+
+export type UpdateResourceFavInput = {
+	resourceId: string;
+	userId: string;
+};

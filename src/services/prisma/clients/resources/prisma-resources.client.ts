@@ -10,6 +10,7 @@ import {
 	GetResourcesListInput,
 	RemoveResourceInput,
 	ResourceWithRelations,
+	UpdateResourceFavInput,
 	UpdateResourceInput,
 	UpdateResourcePublishedInput,
 } from './prisma-resources.types';
@@ -156,6 +157,15 @@ export class PrismaResourcesClient implements ResourcesClient {
 			where: { id: resourceId },
 			data: {
 				published,
+			},
+		});
+	}
+
+	async updateResourceFav({ resourceId, userId }: UpdateResourceFavInput) {
+		return await prisma.favouriteResource.create({
+			data: {
+				userId: userId,
+				resourceId: resourceId,
 			},
 		});
 	}
