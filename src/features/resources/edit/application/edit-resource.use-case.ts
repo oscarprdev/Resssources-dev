@@ -5,11 +5,12 @@ import { EDIT_RESOURCES_ERRORS, EDIT_RESOURCES_SUCCESS } from './edit-resource.c
 import { editResourceInputSchema, editResourcePublishedInputSchema } from './edit-resource.schemas';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 import { AuthorizedUsecase } from '@/features/shared/usecases/authorized.use-case';
+import { UsecaseResponse } from '@/features/shared/features.types';
 
 export interface IEditResourceUsecase {
-	updateImage(input: UpdateImageInput): Promise<Either<string, UpdateImageOutput>>;
-	updateResourceInfo(input: UpdateResourceInfoInput): Promise<Either<string, string>>;
-	updateResourcePublished(input: UpdateResourcePublishedInput): Promise<Either<string, string>>;
+	updateImage(input: UpdateImageInput): UsecaseResponse<UpdateImageOutput>;
+	updateResourceInfo(input: UpdateResourceInfoInput): UsecaseResponse<string>;
+	updateResourcePublished(input: UpdateResourcePublishedInput): UsecaseResponse<string>;
 }
 
 export const MAX_FILE_SIZE_MB = 5;

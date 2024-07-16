@@ -4,7 +4,7 @@ import {
 	UpdateImagePortInput,
 	UpdateResourceInfoPortsInput,
 	UpdateResourcePublishedPortsInput,
-} from '../application/edit-resource/edit-resource.ports';
+} from '../../resources/edit/application/edit-resource.ports';
 import { EditResourceClient } from '../infrastructure/edit-resource/edit-resource.client';
 
 export class EditResourceAdapter implements EditResourcePorts {

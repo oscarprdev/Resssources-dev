@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from '@/auth';
-import { provideDashboardEditResourceUsecase } from '@/features/dashboard';
+import { provideEditResourceUsecase } from '@/features/resources/edit';
 import { errorResponse } from '@/lib/either';
 
 interface UploadImageActionInput {
@@ -12,7 +12,7 @@ export const uploadImageAction = async ({ formData }: UploadImageActionInput) =>
 	const session = await auth();
 	if (!session?.user || !session.user.name) return errorResponse('User not authorized');
 
-	const usecase = provideDashboardEditResourceUsecase();
+	const usecase = provideEditResourceUsecase();
 
 	formData.append('username', session.user.name);
 
