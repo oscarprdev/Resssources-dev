@@ -1,11 +1,12 @@
 import { IMAGE_TYPE } from '@/services/bucket/bucket.client.types';
+
+import { EditResourceClient } from '../infrastructure/edit-resource.client';
 import {
 	EditResourcePorts,
 	UpdateImagePortInput,
 	UpdateResourceInfoPortsInput,
 	UpdateResourcePublishedPortsInput,
-} from '../../resources/edit/application/edit-resource.ports';
-import { EditResourceClient } from '../infrastructure/edit-resource/edit-resource.client';
+} from '../application/edit-resource.ports';
 
 export class EditResourceAdapter implements EditResourcePorts {
 	constructor(private readonly client: EditResourceClient) {}
