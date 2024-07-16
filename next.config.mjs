@@ -17,12 +17,6 @@ const nextConfig = {
 			},
 		],
 	},
-	experimental: {
-		serverActions: {
-			bodySizeLimit: '10mb',
-		},
-		serverComponentsExternalPackages: ['puppeteer-core', '@sparticuz/chromium-min'],
-	},
 };
 
 export default nextConfig;
