@@ -1,4 +1,4 @@
-import { ResourceStored } from '@/features/shared/global.types';
+import { ResourceStored } from '@/features/shared/types/global.types';
 import {
 	CreateResourcesPorts,
 	GetResourceByTitleInput,

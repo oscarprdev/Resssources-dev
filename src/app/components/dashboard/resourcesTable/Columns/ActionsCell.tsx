@@ -4,7 +4,7 @@ import RemoveResourceModal from '../../modals/RemoveResourceModal';
 import { useState } from 'react';
 import EditResourceModal from '../../modals/EditResourceModal';
 import PublishResourceModal from '../../modals/PublishResourceModal';
-import { ResourceWithUserInfo } from '@/features/shared/global.types';
+import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
 
 type ActionsCellProps = {
 	resource: ResourceWithUserInfo;

@@ -1,4 +1,4 @@
-import { ResourceStored } from '@/features/shared/global.types';
+import { ResourceStored } from '@/features/shared/types/global.types';
 import { RemoveResourcePorts, RemoveResourcePortsInput } from '../application/remove-resource/remove-resource.ports';
 import { RemoveResourceClient } from '../infrastructure/remove-resources/remove-resources.client';
 

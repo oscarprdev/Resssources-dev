@@ -1,4 +1,4 @@
-import { ResourceApplication, UserStored } from '@/features/shared/global.types';
+import { ResourceApplication, UserStored } from '@/features/shared/types/global.types';
 
 export interface ListResourcesPorts {
 	getResources(input: GetResourcesListPortsInput): Promise<ResourceApplication[]>;

@@ -1,4 +1,4 @@
-import { Kinds, ResourceStored, UserStored } from '@/features/shared/global.types';
+import { Kinds, ResourceStored, UserStored } from '@/features/shared/types/global.types';
 
 export interface CreateResourcesPorts {
 	getUserByUsername(input: GetUserByUsernameInput): Promise<UserStored | null>;

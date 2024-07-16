@@ -2,7 +2,7 @@ import { Either, errorResponse, successResponse } from '@/lib/either';
 import { ListResourcesPorts } from './list-resources.ports';
 import { LIST_RESOURCES_ERRORS } from './list-resources.use-case.constants';
 import { GetResourcesListInput } from './list-resources.use-case.types';
-import { ResourceApplication, ResourceWithUserInfo } from '@/features/shared/global.types';
+import { ResourceApplication, ResourceWithUserInfo } from '@/features/shared/types/global.types';
 
 export interface IListResourcesUsecase {
 	getResources(input: GetResourcesListInput): Promise<Either<string, ResourceWithUserInfo[]>>;

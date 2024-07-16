@@ -1,4 +1,4 @@
-import { Kinds } from '@/features/shared/global.types';
+import { Kinds } from '@/features/shared/types/global.types';
 
 export type CreateResourceInput = {
 	username: string;

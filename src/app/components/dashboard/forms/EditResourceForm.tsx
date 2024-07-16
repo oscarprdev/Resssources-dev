@@ -11,7 +11,7 @@ import { Textarea } from '../../ui/textarea';
 import { Button } from '../../ui/button';
 import { updateResourceInfoAction, UpdateResourceInfoActionInput } from '@/app/actions/resources/update-resource-info';
 import { IconDots } from '@tabler/icons-react';
-import { ResourceWithUserInfo } from '@/features/shared/global.types';
+import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
 
 const editResourceFormSchema = z.object({
 	title: z.string(),

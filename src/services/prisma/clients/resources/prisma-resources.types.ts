@@ -16,7 +16,7 @@ export type GetResourcesListInput = {
 	withUserData: boolean;
 	published?: boolean;
 	pagination?: {
-		cursor: string;
+		cursor: string | null;
 		pageSize: number;
 	};
 };

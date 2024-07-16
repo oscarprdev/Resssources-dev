@@ -1,7 +1,7 @@
 import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-resources.client';
 import { GetResourceByIdClientInput, RemoveResourceClientInput } from './remove-resources.client.types';
 import { REMOVE_RESOURCE_ERRORS } from './remove-resource.client-constants';
-import { ResourceStored } from '@/features/shared/global.types';
+import { ResourceStored } from '@/features/shared/types/global.types';
 
 export interface IRemoveResourceClient {
 	getResourceById(input: GetResourceByIdClientInput): Promise<ResourceStored | null>;

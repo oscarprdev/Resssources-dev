@@ -9,7 +9,7 @@ import PublishedCell from './PublishedCell';
 import OwnerCell from './OwnerCell';
 import ActionsCell from './ActionsCell';
 import ImageCell from './ImageCell';
-import { ResourceWithUserInfo } from '@/features/shared/global.types';
+import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
 
 export const columns: ColumnDef<ResourceWithUserInfo>[] = [
 	{

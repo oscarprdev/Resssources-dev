@@ -3,7 +3,7 @@ import { LIST_RESOURCES_ERRORS } from './list-resources.client.constants';
 import { GetResourcesListInput, GetUserByIdInput } from './list-resources.client.types';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 import { ResourceWithRelations } from '@/services/prisma/clients/resources/prisma-resources.types';
-import { UserStored } from '@/features/shared/global.types';
+import { UserStored } from '@/features/shared/types/global.types';
 
 export interface IListResourcesClient {
 	listResources(input: GetResourcesListInput): Promise<ResourceWithRelations[]>;

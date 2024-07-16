@@ -2,7 +2,7 @@ import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-reso
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 import { GetResourceByTitleInput, GetResourceByUrlInput, GetUserByUsernameInput, StoreResourceInput } from './create-resource.infra.types';
 import { CREATE_RESOURCE_INFRA_ERRORS } from './create-resource.infra.constants';
-import { ResourceStored, UserStored } from '@/features/shared/global.types';
+import { ResourceStored, UserStored } from '@/features/shared/types/global.types';
 
 export interface ICreateResourceInfra {
 	getUserByUsername(input: GetUserByUsernameInput): Promise<UserStored | null>;

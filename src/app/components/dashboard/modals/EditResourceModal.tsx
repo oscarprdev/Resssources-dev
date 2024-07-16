@@ -1,6 +1,6 @@
 import DashboardModal from './DashboardModal';
 import EditResourceForm from '../forms/EditResourceForm';
-import { ResourceWithUserInfo } from '@/features/shared/global.types';
+import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
 
 type EditResourceModal = {
 	resource: ResourceWithUserInfo;
