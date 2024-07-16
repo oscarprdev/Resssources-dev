@@ -12,7 +12,7 @@ export interface IEditResourceUsecase {
 	updateResourcePublished(input: UpdateResourcePublishedInput): Promise<Either<string, string>>;
 }
 
-export const MAX_FILE_SIZE_MB = 2;
+export const MAX_FILE_SIZE_MB = 5;
 
 export class EditResourceUsecase extends AuthorizedUsecase implements IEditResourceUsecase {
 	constructor(private readonly ports: EditResourcePorts, private readonly userClient: UserClient) {

@@ -9,6 +9,6 @@ export class HeroResourcesInfra implements IHeroResourcesInfra {
 	constructor(private readonly client: ResourcesClient) {}
 
 	async list() {
-		return await this.client.getResourcesList({});
+		return await this.client.getResourcesList({ published: true, withUserData: false });
 	}
 }

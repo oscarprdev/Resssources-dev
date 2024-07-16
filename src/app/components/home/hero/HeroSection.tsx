@@ -11,7 +11,7 @@ const HeroSection = async () => {
 	return (
 		<section className='flex flex-col items-center gap-8'>
 			<HeroText />
-			{session?.user && <HeroCTA user={session.user} />}
+			<HeroCTA user={session?.user} />
 			<HeroResourcesList />
 		</section>
 	);

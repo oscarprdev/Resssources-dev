@@ -60,25 +60,16 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async getResourcesList({ cursor, pageSize, withUserData }: GetResourcesListInput) {
-		if (!cursor || !pageSize) {
-			return await prisma.resources.findMany({
-				orderBy: {
-					createdAt: 'asc',
-				},
-				include: {
-					favouritedBy: withUserData,
-					resourceCreatedBy: withUserData,
-				},
-			});
-		}
-
+	async getResourcesList({ published, withUserData, pagination }: GetResourcesListInput) {
 		return await prisma.resources.findMany({
-			take: pageSize,
-			cursor: cursor ? { id: cursor } : undefined,
+			where: {
+				published: published || undefined,
+			},
+			take: pagination?.pageSize || undefined,
+			cursor: pagination?.cursor ? { id: pagination.cursor } : undefined,
 			include: {
-				favouritedBy: true,
-				resourceCreatedBy: true,
+				favouritedBy: withUserData,
+				resourceCreatedBy: withUserData,
 			},
 			orderBy: {
 				createdAt: 'asc',

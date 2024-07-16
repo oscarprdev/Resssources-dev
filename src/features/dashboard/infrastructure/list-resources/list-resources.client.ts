@@ -15,7 +15,7 @@ export class ListResourcesClient implements IListResourcesClient {
 
 	async listResources({ cursor, pageSize, withUserData }: GetResourcesListInput) {
 		try {
-			return await this.resourcesClient.getResourcesList({ cursor, pageSize, withUserData });
+			return await this.resourcesClient.getResourcesList({ withUserData, pagination: { cursor, pageSize } });
 		} catch (error) {
 			throw new Error(LIST_RESOURCES_ERRORS.LISTING_RESOURCES);
 		}
