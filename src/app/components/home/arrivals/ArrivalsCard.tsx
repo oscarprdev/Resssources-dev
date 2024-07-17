@@ -1,6 +1,8 @@
 import ArrivalResourceCard from './ArrivalResourceCard';
 import ArrivalIcon from './ArrivalIcon';
 import { ResourceWithUserInfo } from '@/features/resources/shared/resources.types';
+import Link from 'next/link';
+import { IconArrowRight, IconArrowUpRight } from '@tabler/icons-react';
 
 type ArrivalsCardProps = {
 	resources: ResourceWithUserInfo[];
@@ -19,6 +21,16 @@ const ArrivalsCard = async ({ resources }: ArrivalsCardProps) => {
 				<p className='text-xl text-white'>
 					Look to the Latest Resources <span className='font-bold'>Shared by our Community</span>
 				</p>
+
+				<Link
+					href={'/resources'}
+					className='group flex items-center gap-1 py-2 px-5 border bg-white rounded-full text-blue-500 text-xs hover:bg-transparent hover:text-white duration-200'>
+					Find more
+					<IconArrowUpRight
+						size={18}
+						className='text-blue-500 group-hover:text-white'
+					/>
+				</Link>
 			</div>
 			<ArrivalIcon position='absolute left-[30%] top-24' />
 			<ArrivalIcon position='absolute left-[31.2%] top-24' />
