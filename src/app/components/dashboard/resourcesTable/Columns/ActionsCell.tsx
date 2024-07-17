@@ -1,4 +1,4 @@
-import Dropdown, { DropdownOption } from '@/app/components/core/Dropdown';
+import Dropdown, { DropdownOption } from '@/app/components/core/containers/Dropdown';
 import { IconDots, IconShare2, IconEdit, IconEraser, IconForbid } from '@tabler/icons-react';
 import RemoveResourceModal from '../../modals/RemoveResourceModal';
 import { useState } from 'react';

@@ -6,7 +6,7 @@ import { IconLogout, IconUser, IconNotebook } from '@tabler/icons-react';
 import { User } from 'next-auth';
 import { IconBrandDatabricks } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
-import Dropdown, { DropdownOption } from '../Dropdown';
+import Dropdown, { DropdownOption } from '../containers/Dropdown';
 
 type UserConfigDropdownProps = {
 	user: User;

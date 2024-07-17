@@ -15,9 +15,9 @@ const HeroResourceItem = ({ resourceId, imgUrl }: HeroResourceItemProps) => {
 						<Image
 							src={imgUrl}
 							alt='Resource hero image'
-							layout='fill'
-							objectFit='cover'
-							sizes='(max-width: 220px) 100vw'
+							className='object-cover w-full h-full'
+							height={500}
+							width={500}
 						/>
 					</picture>
 				</DialogTrigger>

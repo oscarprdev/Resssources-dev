@@ -1,7 +1,8 @@
 import { $Enums } from '@prisma/client';
 import Image from 'next/image';
 import { Badge } from '../../ui/badge';
-import LikeButton from '../../core/LikeButton';
+import LikeButton from '../../core/buttons/LikeButton';
+import DetailButton from '../../core/buttons/DetailButton';
 
 export type ArrivalResourceCardProps = {
 	resourceId: string;
@@ -21,7 +22,7 @@ const ArrivalResourceCard = ({ resourceId, imgUrl, title, description, owner, is
 					src={imgUrl}
 					alt='Arrival resource image'
 					width={500}
-					height={600}
+					height={500}
 					className='object-cover w-full h-full rounded-2xl'
 				/>
 			</picture>
@@ -34,11 +35,14 @@ const ArrivalResourceCard = ({ resourceId, imgUrl, title, description, owner, is
 						<Badge key={kind}>{kind}</Badge>
 					))}
 				</div>
-				<div className='ml-auto flex space-x-2'>
-					<LikeButton
-						resourceId={resourceId}
-						isLiked={isLiked}
-					/>
+				<div className='w-full flex items-center justify-between'>
+					<div className='ml-auto flex space-x-2'>
+						<LikeButton
+							resourceId={resourceId}
+							isLiked={isLiked}
+						/>
+						<DetailButton resourceId={resourceId} />
+					</div>
 				</div>
 			</div>
 		</article>
