@@ -10,7 +10,7 @@ type ArrivalsCardProps = {
 
 const ArrivalsCard = async ({ resources }: ArrivalsCardProps) => {
 	return (
-		<article className='relative w-[90%] max-w-[1000px] h-[500px] flex items-center gap-10 px-5 rounded-3xl shadow-lg overflow-hidden'>
+		<article className='show-container relative w-[90%] max-w-[1000px] h-[500px] flex items-center gap-10 px-5 rounded-3xl shadow-lg overflow-hidden'>
 			<div className='absolute inset-0 -z-10 h-full w-full rounded-3xl bg-blue-600 bg-[radial-gradient(var(--card-dots)_1px,transparent_1px)] [background-size:16px_16px]'></div>
 
 			<div className='flex flex-col items-start space-y-6 ml-10'>

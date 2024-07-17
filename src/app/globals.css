@@ -39,3 +39,47 @@ body {
 .marquee2-animation {
 	animation: marquee2 linear 90s infinite;
 }
+
+.show-card {
+	view-timeline-name: --show-card;
+	view-timeline-axis: block;
+
+	animation-timeline: --show-card;
+	animation-name: show-card;
+	animation-range: entry 1% cover 40%;
+	animation-fill-mode: both;
+}
+
+@keyframes show-card {
+	from {
+		opacity: 0;
+		transform: translateY(15%);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0%);
+	}
+}
+
+.show-container {
+	view-timeline-name: --show-container;
+	view-timeline-axis: block;
+
+	animation-timeline: --show-container;
+	animation-name: show-container;
+	animation-range: entry 18% cover 30%;
+	animation-fill-mode: both;
+}
+
+@keyframes show-container {
+	from {
+		opacity: 0;
+		transform: translateY(20%);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0%);
+	}
+}

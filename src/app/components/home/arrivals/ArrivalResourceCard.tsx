@@ -16,7 +16,7 @@ export type ArrivalResourceCardProps = {
 
 const ArrivalResourceCard = ({ resourceId, imgUrl, title, description, owner, isLiked, kinds }: ArrivalResourceCardProps) => {
 	return (
-		<article className='flex items-center justify-between space-x-4 bg-white rounded-2xl p-5 shadow-lg'>
+		<article className='show-card flex items-center justify-between space-x-4 bg-white rounded-2xl p-5 shadow-lg'>
 			<picture className='grid place-items-center rounded-2xl shadow-md w-1/3 h-[150px] min-w-[150px]'>
 				<Image
 					src={imgUrl}
