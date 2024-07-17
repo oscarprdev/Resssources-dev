@@ -14,7 +14,9 @@ import { IconDots } from '@tabler/icons-react';
 import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
 
 const editResourceFormSchema = z.object({
-	title: z.string(),
+	title: z.string().max(20, {
+		message: 'Max title length is 20',
+	}),
 	description: z.string(),
 	url: z.string().url({
 		message: 'Resource URL is not valid',
@@ -101,6 +103,7 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 								<Input
 									placeholder='Title'
 									disabled={form.formState.isSubmitting}
+									maxLength={20}
 									required
 									{...field}
 								/>

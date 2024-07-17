@@ -34,11 +34,12 @@ const ArrivalsCard = async ({ resources }: ArrivalsCardProps) => {
 			</div>
 			<ArrivalIcon position='absolute left-[30%] top-24' />
 			<ArrivalIcon position='absolute left-[31.2%] top-24' />
-			<div className='flex flex-col items-center space-y-5 h-full overflow-scroll py-5'>
+			<div className='flex flex-col items-center space-y-5 h-full overflow-y-scroll py-5'>
 				{resources.map((resource) => (
 					<ArrivalResourceCard
 						key={resource.id}
 						resourceId={resource.id}
+						resourceUrl={resource.resourceUrl}
 						imgUrl={resource.imgUrl}
 						title={resource.title}
 						description={resource.description}

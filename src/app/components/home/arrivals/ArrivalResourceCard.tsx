@@ -6,6 +6,7 @@ import DetailButton from '../../core/buttons/DetailButton';
 
 export type ArrivalResourceCardProps = {
 	resourceId: string;
+	resourceUrl: string;
 	imgUrl: string;
 	title: string;
 	description: string;
@@ -14,7 +15,7 @@ export type ArrivalResourceCardProps = {
 	kinds: $Enums.Kind[];
 };
 
-const ArrivalResourceCard = ({ resourceId, imgUrl, title, description, owner, isLiked, kinds }: ArrivalResourceCardProps) => {
+const ArrivalResourceCard = ({ resourceId, resourceUrl, imgUrl, title, description, owner, isLiked, kinds }: ArrivalResourceCardProps) => {
 	return (
 		<article className='show-card flex items-center justify-between space-x-4 bg-white rounded-2xl p-5 shadow-lg'>
 			<picture className='grid place-items-center rounded-2xl shadow-md w-1/3 h-[150px] min-w-[150px]'>
@@ -26,16 +27,16 @@ const ArrivalResourceCard = ({ resourceId, imgUrl, title, description, owner, is
 					className='object-cover w-full h-full rounded-2xl'
 				/>
 			</picture>
-			<div className='w-full flex flex-col items-start gap-1 h-[150px] pl-5 border border-transparent border-l-zinc-100'>
-				<p className='text-zinc-500 text-xs'>@{owner}</p>
-				<h4 className='text-2xl uppercase -mt-2'>{title}</h4>
+			<div className='w-full flex flex-col items-start gap-1 pl-5 border border-transparent border-l-zinc-100'>
+				<p className='text-zinc-400 text-xs'>@{owner}</p>
+				<h4 className='text-2xl uppercase -mt-1 truncate max-w-[90%]'>{title}</h4>
 				<p className='text-zinc-500 max-w-[250px] truncate text-sm'>{description}</p>
 				<div className='flex items-center space-x-2 mt-2'>
 					{kinds.map((kind) => (
 						<Badge key={kind}>{kind}</Badge>
 					))}
 				</div>
-				<div className='w-full flex items-center justify-between'>
+				<div className='w-full flex items-center justify-between mt-2 -mb-2'>
 					<div className='ml-auto flex space-x-2'>
 						<LikeButton
 							resourceId={resourceId}

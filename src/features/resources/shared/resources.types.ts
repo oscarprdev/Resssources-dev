@@ -1,6 +1,7 @@
 import { $Enums, Resources as Resource } from '@prisma/client';
 
-export type Kinds = $Enums.Kind[];
+export type ResourceKind = $Enums.Kind;
+export type Kinds = ResourceKind[];
 export type ResourceStored = Resource;
 
 export type ResourceApplication = {

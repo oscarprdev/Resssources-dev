@@ -12,7 +12,6 @@ const badgeVariants = cva(
 				withicon: 'text-blue-100 bg-gradient-to-br from-blue-400 to-blue-500 hover:from-blue-500 hover:to-blue-600 pr-1',
 				success: 'text-emerald-600 bg-emerald-100 font-medium',
 				destructive: 'text-zinc-600 bg-zinc-200 font-medium',
-				outline: 'text-foreground border-zinc-200 bg-white min-w-[20px]',
 			},
 		},
 		defaultVariants: {

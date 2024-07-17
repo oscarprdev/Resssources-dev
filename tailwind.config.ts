@@ -13,6 +13,13 @@ const config = {
 			},
 		},
 		extend: {
+			borderRadius: {
+				'4xl': '1.75rem',
+				'5xl': '2rem',
+			},
+			maxWidth: {
+				viewport: 'var(--max-width)',
+			},
 			keyframes: {
 				'fade-up': {
 					from: { opacity: '0', transform: 'translateY(15px)' },
