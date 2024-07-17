@@ -1,5 +1,11 @@
+'use client';
+
+import { startTransition, useEffect, useOptimistic } from 'react';
 import { Button } from '../ui/button';
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
+import { updateResourceFav } from '@/app/actions/resources/update-resource-fav';
+import { isError } from '@/lib/either';
+import { toast } from '../ui/use-toast';
 
 type LikeButtonProps = {
 	resourceId: string;
@@ -7,12 +13,32 @@ type LikeButtonProps = {
 };
 
 const LikeButton = ({ resourceId, isLiked }: LikeButtonProps) => {
+	const [optimisticLike, toggleOptimisticLike] = useOptimistic(isLiked, (state: boolean) => !state);
+
+	const handleClick = async () => {
+		startTransition(async () => {
+			toggleOptimisticLike(optimisticLike);
+
+			const response = await updateResourceFav({ resourceId, favourited: !isLiked });
+			if (isError(response)) {
+				toast({
+					variant: 'destructive',
+					description: response.error,
+				});
+
+				toggleOptimisticLike(!isLiked);
+			}
+		});
+	};
+
 	return (
 		<Button
+			type='button'
 			variant={'outline'}
 			size={'like'}
+			onClick={handleClick}
 			className='group hover:bg-zinc-50'>
-			{isLiked ? (
+			{optimisticLike ? (
 				<IconHeartFilled
 					className='text-red-500 group-hover:text-zinc-500'
 					size={20}

@@ -31,6 +31,9 @@ export interface ResourcesClient {
 	updateResource(input: UpdateResourceInput): Promise<Resource>;
 	updateResourcePublished(input: UpdateResourcePublishedInput): Promise<Resource>;
 
+	addResourceFav(input: UpdateResourceFavInput): Promise<void>;
+	removeResourceFav(input: UpdateResourceFavInput): Promise<void>;
+
 	removeResource(input: RemoveResourceInput): Promise<void>;
 }
 
@@ -161,11 +164,22 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async updateResourceFav({ resourceId, userId }: UpdateResourceFavInput) {
-		return await prisma.favouriteResource.create({
+	async addResourceFav({ resourceId, userId }: UpdateResourceFavInput) {
+		await prisma.favouriteResource.create({
 			data: {
 				userId: userId,
 				resourceId: resourceId,
+			},
+		});
+	}
+
+	async removeResourceFav({ resourceId, userId }: UpdateResourceFavInput) {
+		await prisma.favouriteResource.delete({
+			where: {
+				userId_resourceId: {
+					userId,
+					resourceId,
+				},
 			},
 		});
 	}

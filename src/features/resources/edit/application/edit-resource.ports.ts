@@ -2,6 +2,8 @@ export interface EditResourcePorts {
 	updateImage(input: UpdateImagePortInput): Promise<string>;
 	updateResourceInfo(input: UpdateResourceInfoPortsInput): Promise<void>;
 	updateResourcePublished(input: UpdateResourcePublishedPortsInput): Promise<void>;
+	removeResourceFav(input: UpdateResourceFavPortsInput): Promise<void>;
+	addResourceFav(input: UpdateResourceFavPortsInput): Promise<void>;
 }
 
 export type UpdateImagePortInput = {
@@ -20,4 +22,9 @@ export type UpdateResourceInfoPortsInput = {
 export type UpdateResourcePublishedPortsInput = {
 	resourceId: string;
 	published: boolean;
+};
+
+export type UpdateResourceFavPortsInput = {
+	resourceId: string;
+	userId: string;
 };

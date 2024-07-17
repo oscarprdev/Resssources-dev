@@ -28,6 +28,6 @@ export interface ResourceWithUserInfo extends ResourceApplication {
 		userId: string;
 		resourceId: string;
 		createdAt: Date;
-		username: string | null;
+		username: string;
 	}[];
 }

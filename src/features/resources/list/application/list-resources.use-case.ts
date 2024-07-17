@@ -40,8 +40,9 @@ export class ListResourcesUsecase extends FeatureUsecase implements IListResourc
 	private async addUserInfoToResource(resource: ResourceApplication) {
 		const resourceCreatedBy = resource.resourceCreatedBy[0];
 		const userResponse = await this.ports.getUserById({ userId: resourceCreatedBy.userId });
+		if (!userResponse) throw new Error('Owner of resource not found');
 
-		const resourceCreatedByWithUserInfo = [{ ...resourceCreatedBy, username: userResponse ? userResponse.username : null }];
+		const resourceCreatedByWithUserInfo = [{ ...resourceCreatedBy, username: userResponse.username }];
 		return {
 			...resource,
 			resourceCreatedBy: resourceCreatedByWithUserInfo,

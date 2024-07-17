@@ -1,18 +1,42 @@
 import { BucketClient } from '@/services/bucket/bucket.client';
 import { EDIT_RESOURCE_ERRORS } from './edit-resource.client.constants';
-import { UpdateImageClientInput, UpdateResourceClientInput, UpdateResourcePublishedClientInput } from './edit-resource.client.types';
+import {
+	UpdateImageClientInput as UpdateImageInfraInput,
+	UpdateResourceFavInfraInput,
+	UpdateResourceClientInput as UpdateResourceInfraInput,
+	UpdateResourcePublishedClientInput as UpdateResourcePublishedInfraInput,
+} from './edit-resource.client.types';
 import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-resources.client';
 
-export interface IEditResourceClient {
-	updateResource(input: UpdateResourceClientInput): Promise<void>;
-	updateResourcePublished(input: UpdateResourcePublishedClientInput): Promise<void>;
-	updateImage(input: UpdateImageClientInput): Promise<string>;
+export interface IEditResourceInfra {
+	updateResource(input: UpdateResourceInfraInput): Promise<void>;
+	updateResourcePublished(input: UpdateResourcePublishedInfraInput): Promise<void>;
+	updateImage(input: UpdateImageInfraInput): Promise<string>;
+
+	addResourceFav(input: UpdateResourceFavInfraInput): Promise<void>;
+	removeResourceFav(input: UpdateResourceFavInfraInput): Promise<void>;
 }
 
-export class EditResourceClient implements IEditResourceClient {
+export class EditResourceInfra implements IEditResourceInfra {
 	constructor(private readonly resourcesClient: ResourcesClient, private readonly bucket: BucketClient) {}
 
-	async updateResourcePublished({ resourceId, published }: UpdateResourcePublishedClientInput): Promise<void> {
+	async addResourceFav({ resourceId, userId }: UpdateResourceFavInfraInput) {
+		try {
+			await this.resourcesClient.addResourceFav({ resourceId, userId });
+		} catch (error) {
+			throw new Error(EDIT_RESOURCE_ERRORS.UPDATTING_RESOURCE);
+		}
+	}
+
+	async removeResourceFav({ resourceId, userId }: UpdateResourceFavInfraInput): Promise<void> {
+		try {
+			await this.resourcesClient.removeResourceFav({ resourceId, userId });
+		} catch (error) {
+			throw new Error(EDIT_RESOURCE_ERRORS.REMOVING_FAV);
+		}
+	}
+
+	async updateResourcePublished({ resourceId, published }: UpdateResourcePublishedInfraInput): Promise<void> {
 		try {
 			await this.resourcesClient.updateResourcePublished({ resourceId, published });
 		} catch (error) {
@@ -20,7 +44,7 @@ export class EditResourceClient implements IEditResourceClient {
 		}
 	}
 
-	async updateResource({ resourceId, resourceUrl, title, description, imgUrl }: UpdateResourceClientInput): Promise<void> {
+	async updateResource({ resourceId, resourceUrl, title, description, imgUrl }: UpdateResourceInfraInput): Promise<void> {
 		try {
 			await this.resourcesClient.updateResource({ resourceId, resourceUrl, title, description, imgUrl });
 		} catch (error) {
@@ -28,7 +52,7 @@ export class EditResourceClient implements IEditResourceClient {
 		}
 	}
 
-	async updateImage({ id, imageData, type }: UpdateImageClientInput) {
+	async updateImage({ id, imageData, type }: UpdateImageInfraInput) {
 		try {
 			const { imgUrl } = await this.bucket.uploadImage({ id, imageData, type });
 

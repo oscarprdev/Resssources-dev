@@ -1,8 +1,14 @@
 import { Either, errorResponse, successResponse } from '@/lib/either';
-import { UpdateImageInput, UpdateImageOutput, UpdateResourceInfoInput, UpdateResourcePublishedInput } from './edit-resource.types';
+import {
+	UpdateImageInput,
+	UpdateImageOutput,
+	UpdateResourceFavInput,
+	UpdateResourceInfoInput,
+	UpdateResourcePublishedInput,
+} from './edit-resource.types';
 import { EditResourcePorts } from './edit-resource.ports';
 import { EDIT_RESOURCES_ERRORS, EDIT_RESOURCES_SUCCESS } from './edit-resource.constants';
-import { editResourceInputSchema, editResourcePublishedInputSchema } from './edit-resource.schemas';
+import { editResourceFavInputSchema, editResourceInputSchema, editResourcePublishedInputSchema } from './edit-resource.schemas';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 import { AuthorizedUsecase } from '@/features/shared/usecases/authorized.use-case';
 import { UsecaseResponse } from '@/features/shared/features.types';
@@ -11,6 +17,7 @@ export interface IEditResourceUsecase {
 	updateImage(input: UpdateImageInput): UsecaseResponse<UpdateImageOutput>;
 	updateResourceInfo(input: UpdateResourceInfoInput): UsecaseResponse<string>;
 	updateResourcePublished(input: UpdateResourcePublishedInput): UsecaseResponse<string>;
+	updateResourceFav(input: UpdateResourceFavInput): UsecaseResponse<string>;
 }
 
 export const MAX_FILE_SIZE_MB = 5;
@@ -18,6 +25,23 @@ export const MAX_FILE_SIZE_MB = 5;
 export class EditResourceUsecase extends AuthorizedUsecase implements IEditResourceUsecase {
 	constructor(private readonly ports: EditResourcePorts, private readonly userClient: UserClient) {
 		super(userClient);
+	}
+
+	async updateResourceFav(input: UpdateResourceFavInput) {
+		try {
+			this.validateInput(input, editResourceFavInputSchema, EDIT_RESOURCES_ERRORS.INVALID_INPUT);
+			const user = await this.isUserAuthorized(input.username);
+
+			if (input.favourited) {
+				await this.ports.addResourceFav({ resourceId: input.resourceId, userId: user.id });
+			} else {
+				await this.ports.removeResourceFav({ resourceId: input.resourceId, userId: user.id });
+			}
+
+			return successResponse(EDIT_RESOURCES_SUCCESS.DEFAULT);
+		} catch (error) {
+			return errorResponse(error instanceof Error ? error.message : EDIT_RESOURCES_ERRORS.DEFAULT);
+		}
 	}
 
 	async updateResourcePublished(input: UpdateResourcePublishedInput): Promise<Either<string, string>> {

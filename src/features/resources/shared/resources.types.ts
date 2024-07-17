@@ -14,7 +14,11 @@ export type ResourceApplication = {
 	updatedAt: string;
 	published: boolean;
 	kind: Kinds;
-	favouritedBy: Object[];
+	favouritedBy: {
+		userId: string;
+		resourceId: string;
+		favouritedAt: Date;
+	}[];
 	resourceCreatedBy: {
 		userId: string;
 		resourceId: string;
@@ -27,6 +31,6 @@ export interface ResourceWithUserInfo extends ResourceApplication {
 		userId: string;
 		resourceId: string;
 		createdAt: Date;
-		username: string | null;
+		username: string;
 	}[];
 }

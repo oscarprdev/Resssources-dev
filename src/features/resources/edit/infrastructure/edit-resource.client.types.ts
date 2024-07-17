@@ -14,4 +14,12 @@ export type UpdateResourceClientInput = {
 	resourceUrl: string;
 };
 
-export type UpdateResourcePublishedClientInput = { resourceId: string; published: boolean };
+export type UpdateResourcePublishedClientInput = {
+	resourceId: string;
+	published: boolean;
+};
+
+export type UpdateResourceFavInfraInput = {
+	resourceId: string;
+	userId: string;
+};

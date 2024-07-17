@@ -9,10 +9,11 @@ export type ArrivalResourceCardProps = {
 	title: string;
 	description: string;
 	owner: string;
+	isLiked: boolean;
 	kinds: $Enums.Kind[];
 };
 
-const ArrivalResourceCard = ({ resourceId, imgUrl, title, description, owner, kinds }: ArrivalResourceCardProps) => {
+const ArrivalResourceCard = ({ resourceId, imgUrl, title, description, owner, isLiked, kinds }: ArrivalResourceCardProps) => {
 	return (
 		<article className='flex items-center justify-between space-x-4 bg-white rounded-2xl p-5 shadow-lg'>
 			<picture className='grid place-items-center rounded-2xl shadow-md w-1/3 h-[150px] min-w-[150px]'>
@@ -36,7 +37,7 @@ const ArrivalResourceCard = ({ resourceId, imgUrl, title, description, owner, ki
 				<div className='ml-auto flex space-x-2'>
 					<LikeButton
 						resourceId={resourceId}
-						isLiked={false}
+						isLiked={isLiked}
 					/>
 				</div>
 			</div>

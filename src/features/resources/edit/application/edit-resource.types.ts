@@ -20,3 +20,9 @@ export type UpdateResourcePublishedInput = {
 	resourceId: string;
 	published: boolean;
 };
+
+export type UpdateResourceFavInput = {
+	resourceId: string;
+	favourited: boolean;
+	username: string;
+};

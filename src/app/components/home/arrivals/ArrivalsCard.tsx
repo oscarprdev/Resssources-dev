@@ -1,6 +1,6 @@
 import ArrivalResourceCard from './ArrivalResourceCard';
 import ArrivalIcon from './ArrivalIcon';
-import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
+import { ResourceWithUserInfo } from '@/features/resources/shared/resources.types';
 
 type ArrivalsCardProps = {
 	resources: ResourceWithUserInfo[];
@@ -29,9 +29,10 @@ const ArrivalsCard = async ({ resources }: ArrivalsCardProps) => {
 						resourceId={resource.id}
 						imgUrl={resource.imgUrl}
 						title={resource.title}
-						description='Some description description description description description description description description description description'
-						owner='oscarpr'
-						kinds={['FRONTEND', 'STYLES']}
+						description={resource.description}
+						owner={resource.resourceCreatedBy[0].username}
+						isLiked={resource.favouritedBy.some((user) => user.userId === resource.resourceCreatedBy[0].userId)}
+						kinds={resource.kind}
 					/>
 				))}
 			</div>

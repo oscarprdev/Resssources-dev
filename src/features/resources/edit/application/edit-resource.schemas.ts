@@ -14,3 +14,9 @@ export const editResourcePublishedInputSchema = z.object({
 	username: z.string(),
 	published: z.boolean(),
 });
+
+export const editResourceFavInputSchema = z.object({
+	resourceId: z.string(),
+	username: z.string(),
+	favourited: z.boolean(),
+});

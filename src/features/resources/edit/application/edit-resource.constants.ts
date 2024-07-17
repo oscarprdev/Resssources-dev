@@ -10,4 +10,5 @@ export const EDIT_RESOURCES_ERRORS = {
 export const EDIT_RESOURCES_SUCCESS = {
 	DEFAULT: 'Resource editted successfully.',
 	VISIBILITY: 'Resource visibility editted successfully.',
+	
 };
