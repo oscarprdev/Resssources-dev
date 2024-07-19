@@ -1,11 +1,12 @@
 export const RESOURCES_ERRORS = {
-	DESCRIBING: 'Error describing resource',
-	LISTING: 'Error listing resources',
-	CREATING: 'Error creating resources',
-	EDITTING: 'Error editting resource',
+	DESCRIBING: 'Application Error describing resource',
+	LISTING: 'Application Error listing resources',
+	CREATING: 'Application Error creating resources',
+	EDITTING: 'Application Error editting resource',
 };
 
 export const RESOURCES_INFRA_ERRORS = {
-	USER_BY_ID: 'Error retrieving user by its id',
-	LISTING: 'Error listing resources from database',
+	USER_BY_ID: 'Infra Error retrieving user by its id',
+	LISTING: 'Infra Error listing resources from database',
+	COUNTING: 'Infra Error counting resources',
 };

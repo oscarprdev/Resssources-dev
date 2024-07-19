@@ -12,6 +12,16 @@ export type GetResourceByUrlInput = {
 	resourceUrl: string;
 };
 
+export type GetResourcesCountInput = {
+	published?: boolean;
+	pagination: {
+		cursor?: string;
+	};
+	filters: {
+		kinds: $Enums.Kind[];
+	};
+};
+
 export type GetResourcesListInput = {
 	withUserData: boolean;
 	published?: boolean;

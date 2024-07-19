@@ -38,7 +38,7 @@ model Resources {
   imgUrl            String
   faviconUrl        String
   resourceUrl       String              @unique
-  createdAt         DateTime            @default(now())
+  createdAt         DateTime            @default(now()) @unique
   updatedAt         DateTime            @updatedAt
   published         Boolean             @default(false)
   kind              Kind[]

@@ -5,16 +5,26 @@ export type ResourceImage = {
 	imgUrl: string;
 };
 
+export type ListResourcesImagesInput = {
+	kinds: Kinds;
+};
+
 export type ListResourcesInput = {
 	published?: boolean;
 	itemsPerRequest?: number;
 	cursor?: string;
-	kinds?: Kinds;
+	kinds: Kinds;
 	withUserData: boolean;
 };
 
 export type ListResourcesOutput = {
-	resources: ResourceWithUserInfo[];
-	moreItems: boolean | null;
-	cursor: string;
+	items: ResourceWithUserInfo[];
+	moreItems: boolean;
+	cursor?: string;
+};
+
+export type GetResourcesCountInput = {
+	published?: boolean;
+	cursor?: string;
+	kinds: Kinds;
 };

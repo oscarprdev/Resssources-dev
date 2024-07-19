@@ -5,14 +5,13 @@ import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/cr
 import { ResourceKind } from '@/features/resources/shared/resources.types';
 import { cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useMemo } from 'react';
 
 const ResourcesFilters = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const params = useSearchParams();
 
-	const kindsParams = useMemo(() => params.get('kinds'), [params]);
+	const kindsParams = params.get('kinds');
 
 	const handleKindClick = (kind: ResourceKind) => {
 		const kinds = kindsParams?.split(',') || [];

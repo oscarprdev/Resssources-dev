@@ -1,6 +1,11 @@
 import { ResourceApplication } from '../../shared/resources.types';
 import { GetUserByIdInput, IListResourcesPorts } from '../application/list-resources.ports';
-import { ListResourcesInput, ResourceImage } from '../application/list-resources.use-case.types';
+import {
+	GetResourcesCountInput,
+	ListResourcesImagesInput,
+	ListResourcesInput,
+	ResourceImage,
+} from '../application/list-resources.use-case.types';
 import { ListResourcesInfra } from '../infrastructure/list-resources.infra';
 import { UserStored } from '@/features/shared/types/global.types';
 import { formatDistanceTime } from '@/lib/dates';
@@ -8,9 +13,14 @@ import { formatDistanceTime } from '@/lib/dates';
 export class ListResourcesAdapters implements IListResourcesPorts {
 	constructor(private readonly infra: ListResourcesInfra) {}
 
-	async listResourcesImages() {
+	async getResourcesCount({ published, cursor, kinds }: GetResourcesCountInput): Promise<number> {
+		return await this.infra.getResourcesCount({ published, pagination: { cursor }, filters: { kinds } });
+	}
+
+	async listResourcesImages({ kinds }: ListResourcesImagesInput) {
 		const infraResources = await this.infra.listResources({
 			withUserData: false,
+			kinds,
 		});
 
 		return infraResources.map(resources => ({

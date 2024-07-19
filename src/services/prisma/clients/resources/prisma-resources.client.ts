@@ -3,6 +3,7 @@ import {
 	GetResourceByIdInput,
 	GetResourceByTitleInput,
 	GetResourceByUrlInput,
+	GetResourcesCountInput,
 	GetResourcesListByFavInput,
 	GetResourcesListByKindInput,
 	GetResourcesListByOwnerInput,
@@ -20,6 +21,7 @@ export interface ResourcesClient {
 	getResourceById(input: GetResourceByIdInput): Promise<Resource | null>;
 	getResourceByTitle(input: GetResourceByTitleInput): Promise<Resource | null>;
 	getResourceByUrl(input: GetResourceByUrlInput): Promise<Resource | null>;
+	getResourcesCount(input: GetResourcesCountInput): Promise<number>;
 
 	getResourcesList(input: GetResourcesListInput): Promise<ResourceWithRelations[]>;
 	getResourcesListByOwner(input: GetResourcesListByOwnerInput): Promise<Resource[]>;
@@ -64,17 +66,32 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async getResourcesList({ published, withUserData, pagination, filters }: GetResourcesListInput) {
-		return await prisma.resources.findMany({
-			skip: pagination.cursor ? 1 : 0,
+	async getResourcesCount({ published, filters, pagination }: GetResourcesCountInput) {
+		return await prisma.resources.count({
 			where: {
 				published: published || undefined,
 				kind: {
 					hasSome: filters.kinds,
 				},
 			},
-			take: pagination?.pageSize ? pagination.pageSize + 1 : undefined,
-			cursor: pagination?.cursor ? { id: pagination.cursor } : undefined,
+			cursor: pagination && pagination.cursor ? { id: pagination.cursor } : undefined,
+			orderBy: {
+				createdAt: 'asc',
+			},
+		});
+	}
+
+	async getResourcesList({ published, withUserData, pagination, filters }: GetResourcesListInput) {
+		return await prisma.resources.findMany({
+			skip: pagination && pagination.cursor ? 1 : 0,
+			where: {
+				published: published || undefined,
+				kind: {
+					hasSome: filters.kinds,
+				},
+			},
+			take: (pagination && pagination.pageSize) || undefined,
+			cursor: pagination && pagination.cursor ? { id: pagination.cursor } : undefined,
 			include: {
 				favouritedBy: withUserData,
 				resourceCreatedBy: withUserData,

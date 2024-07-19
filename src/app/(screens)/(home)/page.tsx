@@ -17,7 +17,7 @@ export default function Home({ searchParams: { kinds } }: HomePageProps) {
 		<>
 			<HeroSection />
 			<ArrivalsSection />
-			<ResourcesListSection kindFilter={kindsFilter} />
+			<ResourcesListSection kindsFilter={kindsFilter} />
 		</>
 	);
 }

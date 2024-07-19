@@ -1,3 +1,4 @@
+import { RESOURCE_KIND_VALUES } from '../../create/application/create-resources.schemas';
 import { RESOURCES_ERRORS } from '../../shared/resources.constants';
 import { ResourceApplication, ResourceWithUserInfo } from '../../shared/resources.types';
 import { IListResourcesPorts } from './list-resources.ports';
@@ -18,7 +19,7 @@ export class ListResourcesUsecase extends FeatureUsecase implements IListResourc
 
 	async listResourcesImages() {
 		try {
-			const response = await this.ports.listResourcesImages();
+			const response = await this.ports.listResourcesImages({ kinds: RESOURCE_KIND_VALUES });
 
 			return successResponse(response);
 		} catch (error) {
@@ -28,23 +29,28 @@ export class ListResourcesUsecase extends FeatureUsecase implements IListResourc
 
 	async listResources({ published, itemsPerRequest, cursor, kinds, withUserData }: ListResourcesInput) {
 		try {
-			const resources = await this.ports.listResources({
-				published,
-				itemsPerRequest,
-				cursor,
-				withUserData,
-				kinds,
-			});
+			const [resources, count] = await Promise.all([
+				this.ports.listResources({
+					published,
+					itemsPerRequest,
+					cursor,
+					withUserData,
+					kinds: kinds || RESOURCE_KIND_VALUES,
+				}),
+				this.ports.getResourcesCount({
+					published,
+					cursor,
+					kinds: kinds || RESOURCE_KIND_VALUES,
+				}),
+			]);
 			const resourcesWithUserInfo = await Promise.all(
 				resources.map(resource => this.addUserInfoToResource(resource))
 			);
 
-			const moreItems = itemsPerRequest ? resources.length > itemsPerRequest : false;
-
 			return successResponse({
-				resources: resourcesWithUserInfo,
-				moreItems,
-				cursor: resources[resources.length - 1].id,
+				items: resourcesWithUserInfo,
+				moreItems: itemsPerRequest ? count - 1 > itemsPerRequest : false,
+				cursor: resources.length > 0 ? resources[resources.length - 1].id : undefined,
 			});
 		} catch (error) {
 			return this.errorUsecaseResponse(error, RESOURCES_ERRORS.LISTING);
