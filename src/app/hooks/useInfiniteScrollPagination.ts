@@ -73,7 +73,7 @@ export const useInfiniteScrollPagination = <I, R extends PaginationResponse>({
 	);
 
 	const updateLastResourceObserved = (items: R[], cursor?: string) => {
-		if (items.length > 0 && cursor) {
+		if (items.length > 5 && cursor) {
 			const lastItemId = provideLastItemId(cursor);
 			lastResource.current = document.getElementById(lastItemId);
 
@@ -82,11 +82,6 @@ export const useInfiniteScrollPagination = <I, R extends PaginationResponse>({
 			}
 		}
 	};
-
-	useEffect(() => {
-		handleFetchAction(inputAction);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	useEffect(() => {
 		updateLastResourceObserved(paginationState.items, paginationState.cursor);

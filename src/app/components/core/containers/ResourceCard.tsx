@@ -31,7 +31,7 @@ const ResourceCard = ({
 	return (
 		<article
 			id={`resource-card-${resourceId}`}
-			className="show-card relative flex flex-col min-w-[320px] gap-5 items-center p-2 bg-white border border-zinc-100 shadow-sm rounded-5xl">
+			className="show-card relative flex flex-col min-w-[320px] h-fit gap-5 items-center p-2 bg-white border border-zinc-100 shadow-sm rounded-5xl">
 			<div className="absolute left-4 top-4">
 				<LikeButton resourceId={resourceId} isLiked={isLiked} />
 			</div>
