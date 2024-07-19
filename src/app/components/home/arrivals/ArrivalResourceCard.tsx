@@ -1,5 +1,6 @@
 import DetailButton from '../../core/buttons/DetailButton';
 import LikeButton from '../../core/buttons/LikeButton';
+import ResourceDescription from '../../core/containers/ResourceDescription';
 import { Badge } from '../../ui/badge';
 import { $Enums } from '@prisma/client';
 import Image from 'next/image';
@@ -39,7 +40,10 @@ const ArrivalResourceCard = ({
 			<div className="w-full flex flex-col items-start gap-1 pl-5 border border-transparent border-l-zinc-100">
 				<p className="text-zinc-400 text-xs">@{owner}</p>
 				<h4 className="text-2xl uppercase -mt-1 truncate max-w-[90%]">{title}</h4>
-				<p className="text-zinc-500 max-w-[250px] truncate text-sm">{description}</p>
+				<ResourceDescription
+					description={description}
+					triggerClass="text-zinc-500 max-w-[300px] truncate text-sm hover:text-zinc-300"
+				/>
 				<div className="flex items-center space-x-2 mt-2">
 					{kinds.map(kind => (
 						<Badge key={kind}>{kind}</Badge>

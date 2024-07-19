@@ -3,11 +3,14 @@
 import { Badge } from '../ui/badge';
 import { columns } from './resourcesTable/Columns/columns';
 import ResourceTable from './resourcesTable/ResourceTable';
+import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
 import { provideListResourceUsecase } from '@/features/resources/list';
+import { isError, successResponse } from '@/lib/either';
 
 const Dashboard = async () => {
 	const listResourcesUsecase = provideListResourceUsecase();
 	const response = await listResourcesUsecase.listResources({
+		kinds: RESOURCE_KIND_VALUES,
 		withUserData: true,
 		itemsPerRequest: 10,
 	});
@@ -17,11 +20,11 @@ const Dashboard = async () => {
 			<div className="flex flex-col space-y-1">
 				<div className="flex itesm-center space-x-2">
 					<h2 className="text-zinc-800 text-lg">Resources</h2>
-					<Badge variant={'outline'}>20</Badge>
+					{!isError(response) && <Badge>{response.success.items.length}</Badge>}
 				</div>
 				<p className="text-zinc-500 text-xs font-light">See all resources created by users</p>
 			</div>
-			<ResourceTable columns={columns} data={response} />
+			<ResourceTable columns={columns} data={isError(response) ? [] : response.success.items} />
 		</section>
 	);
 };

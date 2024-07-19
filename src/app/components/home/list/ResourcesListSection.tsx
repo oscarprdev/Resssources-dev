@@ -9,7 +9,7 @@ type ResourcesListSectionProps = {
 
 const ResourcesListSection = ({ kindsFilter }: ResourcesListSectionProps) => {
 	return (
-		<Section>
+		<Section id="all-resources">
 			<div className="flex flex-col gap-5 w-full">
 				<div className="w-full max-w-viewport px-24 mb-5">
 					<h3 className="text-2xl text-zinc-600">See All Resources</h3>

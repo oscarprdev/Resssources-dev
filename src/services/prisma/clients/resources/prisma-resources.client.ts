@@ -76,7 +76,7 @@ export class PrismaResourcesClient implements ResourcesClient {
 			},
 			cursor: pagination && pagination.cursor ? { id: pagination.cursor } : undefined,
 			orderBy: {
-				createdAt: 'asc',
+				createdAt: 'desc',
 			},
 		});
 	}
@@ -97,7 +97,7 @@ export class PrismaResourcesClient implements ResourcesClient {
 				resourceCreatedBy: withUserData,
 			},
 			orderBy: {
-				createdAt: 'asc',
+				createdAt: 'desc',
 			},
 		});
 	}

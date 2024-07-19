@@ -2,6 +2,7 @@ import { Badge } from '../../ui/badge';
 import DetailButton from '../buttons/DetailButton';
 import FavCountButton from '../buttons/FavCountButton';
 import LikeButton from '../buttons/LikeButton';
+import ResourceDescription from './ResourceDescription';
 import { Kinds } from '@/features/resources/shared/resources.types';
 import Image from 'next/image';
 
@@ -48,7 +49,10 @@ const ResourceCard = ({
 			<div className="flex flex-col gap-2 w-full px-2">
 				<p className="text-xs text-zinc-400">@{owner}</p>
 				<h4 className="text-zinc-700 uppercase -mt-2 text-xl truncate">{title}</h4>
-				<p className="text-sm truncate text-zinc-500">{description}</p>
+				<ResourceDescription
+					description={description}
+					triggerClass="text-sm truncate text-zinc-500 hover:text-zinc-300"
+				/>
 				<div className="flex items-center space-x-2 mt-2">
 					{kinds.map(kind => (
 						<Badge key={kind}>{kind}</Badge>

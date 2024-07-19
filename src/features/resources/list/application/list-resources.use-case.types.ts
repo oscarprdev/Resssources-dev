@@ -21,6 +21,7 @@ export type ListResourcesOutput = {
 	items: ResourceWithUserInfo[];
 	moreItems: boolean;
 	cursor?: string;
+	totalItems?: number;
 };
 
 export type GetResourcesCountInput = {

@@ -3,7 +3,7 @@ export const REMOVE_RESOURCE_USECASE_ERRORS = {
 	DEFAULT: 'Error removing resource',
 	INVALID_USERNAME: 'Username not valid.',
 	RESOURCE_NOT_FOUND: 'Resource not found',
-	REMOVE_NOT_ALLOWED: 'Remove resource not allowed',
+	REMOVE_NOT_ALLOWED: 'Remove public resources is not allowed',
 };
 
 export const REMOVE_RESOURCE_USECASE_SUCCESS = {

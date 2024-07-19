@@ -16,7 +16,7 @@ const InfoCell = ({ faviconUrl, title, description }: InfoCellProp) => {
 					className="object-cover w-full h-full"
 				/>
 			</picture>
-			<div className="w-full flex flex-col space-y-1 max-w-[300px] -mt-[1px]">
+			<div className="w-full flex flex-col space-y-1 max-w-[280px] -mt-[1px]">
 				<p className="text-sm font-bold truncate capitalize text-zinc-600">{title}</p>
 				<p className="text-xs text-zinc-600 truncate">{description}</p>
 			</div>

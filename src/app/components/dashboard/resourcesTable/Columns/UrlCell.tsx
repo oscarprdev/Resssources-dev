@@ -6,12 +6,14 @@ type UrlCellProps = {
 
 const UrlCell = ({ url }: UrlCellProps) => {
 	return (
-		<Link
-			href={url}
-			target="blank"
-			className="text-xs text-zinc-700 hover:underline hover:text-zinc-900 duration-200">
-			{url}
-		</Link>
+		<div className="truncate max-w-[150px]">
+			<Link
+				href={url}
+				target="blank"
+				className="text-xs text-zinc-700  hover:underline hover:text-zinc-900 duration-200">
+				{url}
+			</Link>
+		</div>
 	);
 };
 

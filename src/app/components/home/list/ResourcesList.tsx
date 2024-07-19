@@ -42,7 +42,7 @@ export const ResourcesList = ({ resources }: ResourcesListProps) => {
 					imgUrl={resource.imgUrl}
 					owner={resource.resourceCreatedBy[0].username}
 					kinds={resource.kind}
-					favCount={10}
+					favCount={resource.favouritedBy.length}
 					isLiked={resource.favouritedBy.some(user => user.userId === resource.resourceCreatedBy[0].userId)}
 				/>
 			))}

@@ -1,9 +1,7 @@
 'use client';
 
 import { Button } from '../../ui/button';
-import { toast } from '../../ui/use-toast';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/app/components/ui/table';
-import { Either, isError } from '@/lib/either';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import {
 	ColumnDef,
@@ -18,22 +16,15 @@ import { useState } from 'react';
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
-	data: Either<string, TData[]>;
+	data: TData[];
 }
 
 const ResourceTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [pageIndex, setPageIndex] = useState(0);
 
-	if (isError(data)) {
-		toast({
-			variant: 'destructive',
-			description: data.error,
-		});
-	}
-
 	const table = useReactTable({
-		data: !isError(data) ? data.success : [],
+		data,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
