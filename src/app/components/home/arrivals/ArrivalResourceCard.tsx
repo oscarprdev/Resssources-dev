@@ -52,7 +52,7 @@ const ArrivalResourceCard = ({
 				<div className="w-full flex items-center justify-between mt-2 -mb-2">
 					<div className="ml-auto flex space-x-2">
 						<LikeButton resourceId={resourceId} isLiked={isLiked} />
-						<DetailButton resourceId={resourceId} />
+						<DetailButton resourceUrl={resourceUrl} />
 					</div>
 				</div>
 			</div>

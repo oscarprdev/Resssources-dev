@@ -60,7 +60,7 @@ const ResourceCard = ({
 				</div>
 				<div className="flex justify-between items-center mt-5 mb-2 w-full">
 					<FavCountButton favCount={favCount} />
-					<DetailButton resourceId={resourceId} />
+					<DetailButton resourceUrl={resourceUrl} />
 				</div>
 			</div>
 		</article>
