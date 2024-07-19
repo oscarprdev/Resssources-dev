@@ -1,11 +1,10 @@
 'use client';
 
-import * as React from 'react';
-import * as ToastPrimitives from '@radix-ui/react-toast';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { X } from 'lucide-react';
-
 import { cn } from '@/lib/utils';
+import * as ToastPrimitives from '@radix-ui/react-toast';
+import { type VariantProps, cva } from 'class-variance-authority';
+import { X } from 'lucide-react';
+import * as React from 'react';
 
 const ToastProvider = ToastPrimitives.Provider;
 
@@ -43,13 +42,7 @@ const Toast = React.forwardRef<
 	React.ElementRef<typeof ToastPrimitives.Root>,
 	React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> & VariantProps<typeof toastVariants>
 >(({ className, variant, ...props }, ref) => {
-	return (
-		<ToastPrimitives.Root
-			ref={ref}
-			className={cn(toastVariants({ variant }), className)}
-			{...props}
-		/>
-	);
+	return <ToastPrimitives.Root ref={ref} className={cn(toastVariants({ variant }), className)} {...props} />;
 });
 Toast.displayName = ToastPrimitives.Root.displayName;
 
@@ -74,10 +67,13 @@ const ToastClose = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<ToastPrimitives.Close
 		ref={ref}
-		className={cn('absolute right-2 top-2 rounded-md p-1 text-zinc-400 hover:text-zinc-700 hover:rotate-180 duration-200', className)}
-		toast-close=''
+		className={cn(
+			'absolute right-2 top-2 rounded-md p-1 text-zinc-400 hover:text-zinc-700 hover:rotate-180 duration-200',
+			className
+		)}
+		toast-close=""
 		{...props}>
-		<X className='h-4 w-4' />
+		<X className="h-4 w-4" />
 	</ToastPrimitives.Close>
 ));
 ToastClose.displayName = ToastPrimitives.Close.displayName;
@@ -98,11 +94,7 @@ const ToastDescription = React.forwardRef<
 	React.ElementRef<typeof ToastPrimitives.Description>,
 	React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>
 >(({ className, ...props }, ref) => (
-	<ToastPrimitives.Description
-		ref={ref}
-		className={cn('text-sm opacity-90 text-zinc-500', className)}
-		{...props}
-	/>
+	<ToastPrimitives.Description ref={ref} className={cn('text-sm opacity-90 text-zinc-500', className)} {...props} />
 ));
 ToastDescription.displayName = ToastPrimitives.Description.displayName;
 

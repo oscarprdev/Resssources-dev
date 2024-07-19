@@ -1,8 +1,7 @@
-import ArrivalsCard from './ArrivalsCard';
-import { isError } from '@/lib/either';
-import { toast } from '../../ui/use-toast';
-import { provideListResourceUsecase } from '@/features/resources/list';
 import Section from '../../core/containers/Section';
+import ArrivalsCard from './ArrivalsCard';
+import { provideListResourceUsecase } from '@/features/resources/list';
+import { isError } from '@/lib/either';
 
 const ArrivalsSection = async () => {
 	const listResourcesUsecase = provideListResourceUsecase();
@@ -11,17 +10,12 @@ const ArrivalsSection = async () => {
 		withUserData: true,
 		itemsPerRequest: 10,
 	});
-	if (isError(resourcesResponse)) {
-		toast({
-			variant: 'destructive',
-			description: resourcesResponse.error,
-		});
-	}
+
 	return (
 		<>
 			{!isError(resourcesResponse) && (
 				<Section>
-					<ArrivalsCard resources={resourcesResponse.success} />
+					<ArrivalsCard resources={resourcesResponse.success.resources} />
 				</Section>
 			)}
 		</>

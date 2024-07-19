@@ -7,11 +7,9 @@ type KindsCellProps = {
 
 const KindsCell = ({ kinds }: KindsCellProps) => {
 	return (
-		<div className='flex items-center space-x-1'>
-			{kinds.map((kind) => (
-				<Badge
-					key={kind}
-					className='w-fit'>
+		<div className="flex items-center space-x-1">
+			{kinds.map(kind => (
+				<Badge key={kind} className="w-fit">
 					{kind}
 				</Badge>
 			))}

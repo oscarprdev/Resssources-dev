@@ -1,6 +1,6 @@
+import { FEATURES_ERRORS } from './features.constants';
 import { errorResponse } from '@/lib/either';
 import { ZodType } from 'zod';
-import { FEATURES_ERRORS } from './features.constants';
 
 export class FeatureUsecase {
 	constructor() {}

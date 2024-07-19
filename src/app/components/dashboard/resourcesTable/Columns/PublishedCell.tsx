@@ -6,9 +6,7 @@ type PublishedCellProps = {
 
 const PublishedCell = ({ published }: PublishedCellProps) => {
 	return (
-		<Badge
-			variant={published ? 'success' : 'destructive'}
-			className='w-fit'>
+		<Badge variant={published ? 'success' : 'destructive'} className="w-fit">
 			{published ? 'Public' : 'Private'}
 		</Badge>
 	);

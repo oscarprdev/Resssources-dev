@@ -1,4 +1,4 @@
-import { $Enums, Prisma, Users as User } from '@prisma/client';
+import { $Enums, Prisma } from '@prisma/client';
 
 export type GetResourceByIdInput = {
 	resourceId: string;
@@ -18,6 +18,9 @@ export type GetResourcesListInput = {
 	pagination: {
 		cursor?: string;
 		pageSize?: number;
+	};
+	filters: {
+		kinds: $Enums.Kind[];
 	};
 };
 

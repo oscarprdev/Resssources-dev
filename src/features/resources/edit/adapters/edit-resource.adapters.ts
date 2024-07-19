@@ -1,6 +1,3 @@
-import { IMAGE_TYPE } from '@/services/bucket/bucket.client.types';
-
-import { EditResourceInfra } from '../infrastructure/edit-resource.client';
 import {
 	EditResourcePorts,
 	UpdateImagePortInput,
@@ -8,6 +5,8 @@ import {
 	UpdateResourceInfoPortsInput,
 	UpdateResourcePublishedPortsInput,
 } from '../application/edit-resource.ports';
+import { EditResourceInfra } from '../infrastructure/edit-resource.client';
+import { IMAGE_TYPE } from '@/services/bucket/bucket.client.types';
 
 export class EditResourceAdapter implements EditResourcePorts {
 	constructor(private readonly infra: EditResourceInfra) {}
@@ -24,12 +23,28 @@ export class EditResourceAdapter implements EditResourcePorts {
 		await this.infra.updateResourcePublished({ resourceId, published });
 	}
 
-	async updateResourceInfo({ resourceId, resourceUrl, title, description, imgUrl }: UpdateResourceInfoPortsInput): Promise<void> {
-		await this.infra.updateResource({ resourceId, resourceUrl, title, description, imgUrl });
+	async updateResourceInfo({
+		resourceId,
+		resourceUrl,
+		title,
+		description,
+		imgUrl,
+	}: UpdateResourceInfoPortsInput): Promise<void> {
+		await this.infra.updateResource({
+			resourceId,
+			resourceUrl,
+			title,
+			description,
+			imgUrl,
+		});
 	}
 
 	async updateImage({ id, imageFile }: UpdateImagePortInput) {
 		const imageData = (await imageFile.arrayBuffer()) as Buffer;
-		return await this.infra.updateImage({ id, imageData, type: imageFile.type as IMAGE_TYPE });
+		return await this.infra.updateImage({
+			id,
+			imageData,
+			type: imageFile.type as IMAGE_TYPE,
+		});
 	}
 }

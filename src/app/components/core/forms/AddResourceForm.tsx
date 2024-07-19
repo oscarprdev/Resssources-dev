@@ -1,21 +1,33 @@
 'use client';
 
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/app/components/ui/form';
-import { Input } from '@/app/components/ui/input';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { Either, isError } from '@/lib/either';
-import FormAction from './FormAction';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
-import { $Enums } from '@prisma/client';
 import { Badge } from '../../ui/badge';
-import { XIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
+import FormAction from './FormAction';
+import {
+	Form,
+	FormControl,
+	FormDescription,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/app/components/ui/form';
+import { Input } from '@/app/components/ui/input';
 import { CREATE_RESOURCES_SUCCESS } from '@/features/resources/create/application/create-resources.constants';
 import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
+import { Either, isError } from '@/lib/either';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { $Enums } from '@prisma/client';
+import { XIcon } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-export type AddResourceFormValues = { url: string; kinds: $Enums.Kind[]; error: string | null };
+export type AddResourceFormValues = {
+	url: string;
+	kinds: $Enums.Kind[];
+	error: string | null;
+};
 type AddResourceFormProps = {
 	handleSubmit(values: AddResourceFormValues): Promise<Either<string, string>>;
 	afterAddResourceSubmit(successMessage: string): void;
@@ -58,7 +70,7 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceSubmit }: AddResourceFo
 	};
 
 	const handleRemoveKind = (currentKinds: $Enums.Kind[], kindToRemove: $Enums.Kind) => {
-		const kindIndex = currentKinds.findIndex((kind) => kind === kindToRemove);
+		const kindIndex = currentKinds.findIndex(kind => kind === kindToRemove);
 		currentKinds.splice(kindIndex, 1);
 
 		const badge = document.querySelector(`#badge-${kindToRemove}`);
@@ -71,19 +83,17 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceSubmit }: AddResourceFo
 
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className='flex flex-col gap-3 w-full'>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full">
 				<FormField
 					control={form.control}
-					name='url'
+					name="url"
 					render={({ field }) => (
-						<FormItem className='animate-fade-up'>
-							<FormLabel className='text-zinc-700 font-normal'>Resource URL</FormLabel>
+						<FormItem className="animate-fade-up">
+							<FormLabel className="text-zinc-700 font-normal">Resource URL</FormLabel>
 							<FormControl>
 								<Input
-									type='url'
-									placeholder='Resource URL'
+									type="url"
+									placeholder="Resource URL"
 									disabled={form.formState.isSubmitting}
 									required
 									{...field}
@@ -95,29 +105,33 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceSubmit }: AddResourceFo
 				/>
 				<FormField
 					control={form.control}
-					name='kinds'
+					name="kinds"
 					render={({ field }) => (
 						<FormItem>
-							<div className='flex flex-col items-start gap-2'>
-								<div className='flex items-center gap-2'>
-									<FormLabel className='text-zinc-700 font-normal'>Resource Kinds</FormLabel>
-									<p className={cn('text-xs', field.value.length < MAX_KINDS ? 'text-zinc-200' : 'text-zinc-400')}>
+							<div className="flex flex-col items-start gap-2">
+								<div className="flex items-center gap-2">
+									<FormLabel className="text-zinc-700 font-normal">Resource Kinds</FormLabel>
+									<p
+										className={cn(
+											'text-xs',
+											field.value.length < MAX_KINDS ? 'text-zinc-200' : 'text-zinc-400'
+										)}>
 										{field.value.length}/{MAX_KINDS}
 									</p>
 								</div>
-								<div className='flex items-center gap-1 flex-wrap'>
-									{field.value.map((kind) => (
+								<div className="flex items-center gap-1 flex-wrap">
+									{field.value.map(kind => (
 										<Badge
 											id={`badge-${kind}`}
 											variant={'withicon'}
 											key={kind}
-											className='flex items-center justify-between gap-1 animate-fade-up-light aria-pressed:animate-fade-down-light'>
+											className="flex items-center justify-between gap-1 animate-fade-up-light aria-pressed:animate-fade-down-light">
 											{kind}
 											<button
-												type='button'
+												type="button"
 												disabled={form.formState.isSubmitting}
 												onClick={() => handleRemoveKind(field.value, kind)}
-												className='text-blue-100 p-1 rounded-full bg-transparent hover:bg-blue-200 hover:text-blue-500 duration-300'>
+												className="text-blue-100 p-1 rounded-full bg-transparent hover:bg-blue-200 hover:text-blue-500 duration-300">
 												<XIcon size={14} />
 											</button>
 										</Badge>
@@ -125,38 +139,35 @@ const AddResourceForm = ({ handleSubmit, afterAddResourceSubmit }: AddResourceFo
 								</div>
 							</div>
 							<Select
-								onValueChange={(kind) => handleSelectKindChange(field.value, kind as $Enums.Kind)}
-								value=''>
+								onValueChange={kind => handleSelectKindChange(field.value, kind as $Enums.Kind)}
+								value="">
 								<FormControl>
 									<SelectTrigger
-										className='capitalize'
+										className="capitalize"
 										disabled={field.value.length === MAX_KINDS || form.formState.isSubmitting}>
-										<SelectValue placeholder='Select resource kind' />
+										<SelectValue placeholder="Select resource kind" />
 									</SelectTrigger>
 								</FormControl>
-								<SelectContent
-									className='bg-white max-h-[200px]'
-									side='bottom'>
-									{RESOURCE_KIND_VALUES.map((kind) => (
+								<SelectContent className="bg-white max-h-[200px]" side="bottom">
+									{RESOURCE_KIND_VALUES.map(kind => (
 										<SelectItem
 											aria-selected={field.value.includes(kind)}
 											key={kind}
 											value={kind}
-											className='capitalize text-xs text-zinc-400 hover:text-zinc-600'>
+											className="capitalize text-xs text-zinc-400 hover:text-zinc-600">
 											{kind.toLowerCase()}
 										</SelectItem>
 									))}
 								</SelectContent>
 							</Select>
-							<FormDescription className='text-xs text-zinc-500'>Choose the kind that fits better for your resource.</FormDescription>
+							<FormDescription className="text-xs text-zinc-500">
+								Choose the kind that fits better for your resource.
+							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<FormAction
-					error={form.getValues('error')}
-					isSubmitting={form.formState.isSubmitting}
-				/>
+				<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
 			</form>
 		</Form>
 	);

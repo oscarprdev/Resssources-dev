@@ -1,7 +1,7 @@
-import Credentials from 'next-auth/providers/credentials';
-import { NextAuthConfig } from 'next-auth';
 import { provideAuthUserUseCase } from './features/core/auth-user';
 import { isError } from './lib/either';
+import { NextAuthConfig } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
 
 export default {
 	providers: [

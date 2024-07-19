@@ -1,17 +1,20 @@
-import { RemoveResourceInput } from './remove-resource.types';
-import { removeResourceInputSchema } from './remove-resource.schemas';
 import { REMOVE_RESOURCE_USECASE_ERRORS, REMOVE_RESOURCE_USECASE_SUCCESS } from './remove-resource.constants';
-import { Either, errorResponse, successResponse } from '@/lib/either';
 import { RemoveResourcePorts } from './remove-resource.ports';
-import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
+import { removeResourceInputSchema } from './remove-resource.schemas';
+import { RemoveResourceInput } from './remove-resource.types';
 import { AuthorizedUsecase } from '@/features/shared/usecases/authorized.use-case';
+import { Either, errorResponse, successResponse } from '@/lib/either';
+import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 
 export interface IRemoveResourceUsecas {
 	removeResource(input: RemoveResourceInput): Promise<Either<string, string>>;
 }
 
 export class RemoveResourceUsecase extends AuthorizedUsecase implements IRemoveResourceUsecas {
-	constructor(private readonly ports: RemoveResourcePorts, private readonly userClient: UserClient) {
+	constructor(
+		private readonly ports: RemoveResourcePorts,
+		private readonly userClient: UserClient
+	) {
 		super(userClient);
 	}
 
@@ -20,7 +23,9 @@ export class RemoveResourceUsecase extends AuthorizedUsecase implements IRemoveR
 			this.validateInput(input, removeResourceInputSchema, REMOVE_RESOURCE_USECASE_ERRORS.INVALID_INPUT);
 			await this.isUserAuthorized(input.username);
 
-			const resourceResponse = await this.ports.getResourceById({ resourceId: input.resourceId });
+			const resourceResponse = await this.ports.getResourceById({
+				resourceId: input.resourceId,
+			});
 
 			if (!resourceResponse) return errorResponse(REMOVE_RESOURCE_USECASE_ERRORS.RESOURCE_NOT_FOUND);
 			if (resourceResponse.published) return errorResponse(REMOVE_RESOURCE_USECASE_ERRORS.REMOVE_NOT_ALLOWED);

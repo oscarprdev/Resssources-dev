@@ -1,6 +1,6 @@
-import { UserStored } from '@/features/shared/types/global.types';
 import { ResourceApplication } from '../../shared/resources.types';
 import { ListResourcesInput, ResourceImage } from './list-resources.use-case.types';
+import { UserStored } from '@/features/shared/types/global.types';
 
 export interface IListResourcesPorts {
 	listResourcesImages(): Promise<ResourceImage[]>;

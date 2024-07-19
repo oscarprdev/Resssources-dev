@@ -1,8 +1,13 @@
+import { CREATE_RESOURCE_INFRA_ERRORS } from './create-resource.infra.constants';
+import {
+	GetResourceByTitleInput,
+	GetResourceByUrlInput,
+	GetUserByUsernameInput,
+	StoreResourceInput,
+} from './create-resource.infra.types';
+import { ResourceStored, UserStored } from '@/features/shared/types/global.types';
 import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-resources.client';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
-import { GetResourceByTitleInput, GetResourceByUrlInput, GetUserByUsernameInput, StoreResourceInput } from './create-resource.infra.types';
-import { CREATE_RESOURCE_INFRA_ERRORS } from './create-resource.infra.constants';
-import { ResourceStored, UserStored } from '@/features/shared/types/global.types';
 
 export interface ICreateResourceInfra {
 	getUserByUsername(input: GetUserByUsernameInput): Promise<UserStored | null>;
@@ -14,7 +19,10 @@ export interface ICreateResourceInfra {
 }
 
 export class CreateResourceInfra implements ICreateResourceInfra {
-	constructor(private readonly usersClient: UserClient, private readonly resourcesClient: ResourcesClient) {}
+	constructor(
+		private readonly usersClient: UserClient,
+		private readonly resourcesClient: ResourcesClient
+	) {}
 
 	async getUserByUsername({ username }: GetUserByUsernameInput) {
 		try {
@@ -43,7 +51,16 @@ export class CreateResourceInfra implements ICreateResourceInfra {
 		}
 	}
 
-	async storeResource({ resourceId, resourceUrl, title, description, faviconUrl, imgUrl, kinds, ownerId }: StoreResourceInput) {
+	async storeResource({
+		resourceId,
+		resourceUrl,
+		title,
+		description,
+		faviconUrl,
+		imgUrl,
+		kinds,
+		ownerId,
+	}: StoreResourceInput) {
 		try {
 			await this.resourcesClient.createResource({
 				resourceId,

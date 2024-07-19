@@ -1,10 +1,10 @@
 'use client';
 
+import { Badge } from '../../ui/badge';
 import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
 import { ResourceKind } from '@/features/resources/shared/resources.types';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Badge } from '../../ui/badge';
 import { cn } from '@/lib/utils';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 
 const ResourcesFilters = () => {
@@ -18,7 +18,7 @@ const ResourcesFilters = () => {
 		const kinds = kindsParams?.split(',') || [];
 
 		if (kinds.includes(kind)) {
-			const index = kinds.findIndex((currentKind) => currentKind === kind);
+			const index = kinds.findIndex(currentKind => currentKind === kind);
 			kinds.splice(index, 1);
 		} else {
 			kinds.push(kind);
@@ -30,8 +30,8 @@ const ResourcesFilters = () => {
 	};
 
 	return (
-		<section className='w-full max-w-[700px] flex items-center justify-center gap-2 flex-wrap'>
-			{RESOURCE_KIND_VALUES.map((kind) => (
+		<section className="w-full max-w-[700px] flex items-center justify-center gap-2 flex-wrap">
+			{RESOURCE_KIND_VALUES.map(kind => (
 				<Badge
 					key={kind}
 					className={cn(

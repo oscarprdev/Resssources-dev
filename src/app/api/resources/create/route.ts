@@ -14,7 +14,11 @@ export async function POST(request: NextRequest) {
 		const { url, kinds, username }: CreateResourceInput = await request.json();
 
 		const createResourceUsecase = provideCreateResourceUsecase();
-		const response = await createResourceUsecase.createResource({ username, resourceUrl: url, kinds });
+		const response = await createResourceUsecase.createResource({
+			username,
+			resourceUrl: url,
+			kinds,
+		});
 
 		if (isError(response)) {
 			throw new Error(response.error);
@@ -22,6 +26,12 @@ export async function POST(request: NextRequest) {
 
 		return NextResponse.json(response.success, { status: 201 });
 	} catch (error) {
-		return NextResponse.json({ error }, { status: 500, statusText: error instanceof Error ? error.message : 'Internal server error' });
+		return NextResponse.json(
+			{ error },
+			{
+				status: 500,
+				statusText: error instanceof Error ? error.message : 'Internal server error',
+			}
+		);
 	}
 }

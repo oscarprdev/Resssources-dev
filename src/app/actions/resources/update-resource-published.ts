@@ -16,7 +16,10 @@ export const updateResourcePublishedAction = async (input: UpdateResourcePublish
 
 	const usecase = provideEditResourceUsecase();
 
-	const response = await usecase.updateResourcePublished({ ...input, username: session.user.name });
+	const response = await usecase.updateResourcePublished({
+		...input,
+		username: session.user.name,
+	});
 
 	revalidatePath('/');
 	revalidatePath('/dashboard');

@@ -5,7 +5,7 @@ type ResourceDetailPageProps = {
 export default function ResourceDetailPage({ params: { id } }: ResourceDetailPageProps) {
 	return (
 		<>
-			<p className='mt-32'>{id}</p>
+			<p className="mt-32">{id}</p>
 		</>
 	);
 }

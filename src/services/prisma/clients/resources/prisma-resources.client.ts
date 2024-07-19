@@ -1,4 +1,3 @@
-import prisma from '@/services/prisma/db';
 import {
 	CreateResourceInput,
 	GetResourceByIdInput,
@@ -14,6 +13,7 @@ import {
 	UpdateResourceInput,
 	UpdateResourcePublishedInput,
 } from './prisma-resources.types';
+import prisma from '@/services/prisma/db';
 import { Resources as Resource } from '@prisma/client';
 
 export interface ResourcesClient {
@@ -64,12 +64,16 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async getResourcesList({ published, withUserData, pagination }: GetResourcesListInput) {
+	async getResourcesList({ published, withUserData, pagination, filters }: GetResourcesListInput) {
 		return await prisma.resources.findMany({
+			skip: pagination.cursor ? 1 : 0,
 			where: {
 				published: published || undefined,
+				kind: {
+					hasSome: filters.kinds,
+				},
 			},
-			take: pagination?.pageSize || undefined,
+			take: pagination?.pageSize ? pagination.pageSize + 1 : undefined,
 			cursor: pagination?.cursor ? { id: pagination.cursor } : undefined,
 			include: {
 				favouritedBy: withUserData,
@@ -120,7 +124,16 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async createResource({ resourceId, title, description, faviconUrl, imgUrl, resourceUrl, kinds, ownerId }: CreateResourceInput) {
+	async createResource({
+		resourceId,
+		title,
+		description,
+		faviconUrl,
+		imgUrl,
+		resourceUrl,
+		kinds,
+		ownerId,
+	}: CreateResourceInput) {
 		return await prisma.resources.create({
 			data: {
 				id: resourceId,

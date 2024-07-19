@@ -1,10 +1,10 @@
-import { Either, errorResponse, successResponse } from '@/lib/either';
-import { CreateResourceInput } from './create-resources.types';
+import { CREATE_RESOURCES_ERRORS, CREATE_RESOURCES_SUCCESS } from './create-resources.constants';
 import { CreateResourcesPorts } from './create-resources.ports';
 import { createResourceInputSchema } from './create-resources.schemas';
-import { CREATE_RESOURCES_ERRORS, CREATE_RESOURCES_SUCCESS } from './create-resources.constants';
-import { JSDOM } from 'jsdom';
+import { CreateResourceInput } from './create-resources.types';
 import { FeatureUsecase } from '@/features/shared/features.use-case';
+import { Either, errorResponse, successResponse } from '@/lib/either';
+import { JSDOM } from 'jsdom';
 
 export interface ICreateResourcesUsecase {
 	createResource(input: CreateResourceInput): Promise<Either<string, string>>;
@@ -58,7 +58,10 @@ export class CreateResourceUsecase extends FeatureUsecase implements ICreateReso
 	}
 
 	private async validateResourceInputData(title: string, resourceUrl: string) {
-		const [byTitle, byUrl] = await Promise.all([this.ports.getResourceByTitle({ title }), this.ports.getResourceByUrl({ resourceUrl })]);
+		const [byTitle, byUrl] = await Promise.all([
+			this.ports.getResourceByTitle({ title }),
+			this.ports.getResourceByUrl({ resourceUrl }),
+		]);
 
 		if (byUrl?.id) {
 			throw new Error(CREATE_RESOURCES_ERRORS.RETRIEVING_RESOURCE_BY_URL);
@@ -76,8 +79,7 @@ export class CreateResourceUsecase extends FeatureUsecase implements ICreateReso
 
 			const response = await fetch(resourceUrl, {
 				headers: {
-					Accept:
-						'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+					Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 					Host: host,
 					'User-Agent':
 						'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36',
@@ -92,8 +94,10 @@ export class CreateResourceUsecase extends FeatureUsecase implements ICreateReso
 
 			const title = dom.window.document.title || host;
 			const description =
-				document.querySelector('meta[name="description"]')?.getAttribute('content') || `Description for ${host} page not found`;
-			const favicon = document.querySelector('link[rel="icon"], link[rel="shortcut icon"]')?.getAttribute('href') || null;
+				document.querySelector('meta[name="description"]')?.getAttribute('content') ||
+				`Description for ${host} page not found`;
+			const favicon =
+				document.querySelector('link[rel="icon"], link[rel="shortcut icon"]')?.getAttribute('href') || null;
 			const faviconUrl = favicon ? new URL(favicon, resourceUrl).href : '';
 
 			return { title, description, faviconUrl };

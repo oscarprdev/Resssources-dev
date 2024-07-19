@@ -1,7 +1,7 @@
-import { Users as User } from '@prisma/client';
+import { AUTH_USER_INFRA_ERRORS } from './auth-user.infra.constants';
 import { CreateUserInfraInput, GetUserByCredentialsInfraInput, GetUserByUsername } from './auth-user.infra.types';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
-import { AUTH_USER_INFRA_ERRORS } from './auth-user.infra.constants';
+import { Users as User } from '@prisma/client';
 
 export interface IAuthUserInfra {
 	getUserByUsername(input: GetUserByUsername): Promise<User | null>;

@@ -12,12 +12,14 @@ type DashboardModal = {
 
 const DashboardModal = ({ isOpened, size, toggleModal, title, children }: DashboardModal) => {
 	return (
-		<Dialog
-			open={isOpened}
-			onOpenChange={toggleModal}>
-			<DialogContent className={cn('flex flex-col items-center px-5 w-full', size === 'md' ? 'max-w-[400px]' : 'max-w-[600px]')}>
+		<Dialog open={isOpened} onOpenChange={toggleModal}>
+			<DialogContent
+				className={cn(
+					'flex flex-col items-center px-5 w-full',
+					size === 'md' ? 'max-w-[400px]' : 'max-w-[600px]'
+				)}>
 				<DialogHeader>
-					<DialogTitle className='text-lg font-normal'>{title}</DialogTitle>
+					<DialogTitle className="text-lg font-normal">{title}</DialogTitle>
 				</DialogHeader>
 				{children}
 			</DialogContent>

@@ -19,7 +19,10 @@ export const updateResourceInfoAction = async (input: UpdateResourceInfoActionIn
 
 	const usecase = provideEditResourceUsecase();
 
-	const response = await usecase.updateResourceInfo({ ...input, username: session.user.name });
+	const response = await usecase.updateResourceInfo({
+		...input,
+		username: session.user.name,
+	});
 
 	revalidatePath('/');
 	revalidatePath('/dashboard');

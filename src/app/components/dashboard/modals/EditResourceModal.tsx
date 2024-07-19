@@ -1,5 +1,5 @@
-import DashboardModal from './DashboardModal';
 import EditResourceForm from '../forms/EditResourceForm';
+import DashboardModal from './DashboardModal';
 import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
 
 type EditResourceModal = {
@@ -10,15 +10,8 @@ type EditResourceModal = {
 
 const EditResourceModal = ({ resource, isOpened, toggleModal }: EditResourceModal) => {
 	return (
-		<DashboardModal
-			isOpened={isOpened}
-			toggleModal={toggleModal}
-			title='Edit resource'
-			size='xl'>
-			<EditResourceForm
-				resource={resource}
-				toggleModal={toggleModal}
-			/>
+		<DashboardModal isOpened={isOpened} toggleModal={toggleModal} title="Edit resource" size="xl">
+			<EditResourceForm resource={resource} toggleModal={toggleModal} />
 		</DashboardModal>
 	);
 };

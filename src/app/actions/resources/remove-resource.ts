@@ -15,7 +15,10 @@ export const removeResourceAction = async (input: RemoveResourceInfoActionInput)
 
 	const usecase = provideRemoveResourceUsecase();
 
-	const response = await usecase.removeResource({ ...input, username: session.user.name });
+	const response = await usecase.removeResource({
+		...input,
+		username: session.user.name,
+	});
 
 	revalidatePath('/');
 	revalidatePath('/dashboard');

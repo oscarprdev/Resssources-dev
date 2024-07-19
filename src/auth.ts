@@ -1,6 +1,6 @@
-import NextAuth from 'next-auth';
 import authConfig from './auth.config';
 import { $Enums } from '@prisma/client';
+import NextAuth from 'next-auth';
 
 export const {
 	handlers: { GET, POST },

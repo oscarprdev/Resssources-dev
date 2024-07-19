@@ -16,7 +16,11 @@ export const updateResourceFav = async ({ resourceId, favourited }: UpdateResour
 
 	const editResourceUsecase = provideEditResourceUsecase();
 
-	const response = await editResourceUsecase.updateResourceFav({ resourceId, username: session.user.name, favourited });
+	const response = await editResourceUsecase.updateResourceFav({
+		resourceId,
+		username: session.user.name,
+		favourited,
+	});
 
 	revalidatePath('/');
 

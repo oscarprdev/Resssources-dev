@@ -11,11 +11,11 @@ const HeroResourceItem = ({ resourceId, imgUrl }: HeroResourceItemProps) => {
 		<li>
 			<Dialog>
 				<DialogTrigger>
-					<picture className='relative block w-[220px] h-[220px] rounded-3xl overflow-hidden shadow-md'>
+					<picture className="relative block w-[220px] h-[220px] rounded-3xl overflow-hidden shadow-md">
 						<Image
 							src={imgUrl}
-							alt='Resource hero image'
-							className='object-cover w-full h-full'
+							alt="Resource hero image"
+							className="object-cover w-full h-full"
 							height={500}
 							width={500}
 						/>

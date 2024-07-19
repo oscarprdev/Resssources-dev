@@ -1,5 +1,5 @@
-import { BUCKET_ACCES_KEY, BUCKET_BASE_URL, BUCKET_KEY_ID, BUCKET_NAME, BUCKET_URL } from '@/constants';
 import { UploadImageInput, UploadImageOutput } from './bucket.client.types';
+import { BUCKET_ACCES_KEY, BUCKET_BASE_URL, BUCKET_KEY_ID, BUCKET_NAME, BUCKET_URL } from '@/constants';
 import { Bucket } from '@oprdev/cloudflare-r2-storage';
 
 export interface IBucketClient {

@@ -1,17 +1,17 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/components/ui/form';
-import { ChangeEvent } from 'react';
-import EditResourceImage from './EditResourceImageField';
-import { isError } from '@/lib/either';
-import { uploadImageAction } from '@/app/actions/images/upload-image';
+import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
-import { Button } from '../../ui/button';
-import { updateResourceInfoAction, UpdateResourceInfoActionInput } from '@/app/actions/resources/update-resource-info';
-import { IconDots } from '@tabler/icons-react';
+import EditResourceImage from './EditResourceImageField';
+import { uploadImageAction } from '@/app/actions/images/upload-image';
+import { UpdateResourceInfoActionInput, updateResourceInfoAction } from '@/app/actions/resources/update-resource-info';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/components/ui/form';
 import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
+import { isError } from '@/lib/either';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { IconDots } from '@tabler/icons-react';
+import { ChangeEvent } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const editResourceFormSchema = z.object({
 	title: z.string().max(20, {
@@ -85,23 +85,18 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className='flex flex-col items-start gap-3 w-full'>
-				<EditResourceImage
-					form={form}
-					updateFormImageValue={updateFormImageValue}
-				/>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-start gap-3 w-full">
+				<EditResourceImage form={form} updateFormImageValue={updateFormImageValue} />
 
 				<FormField
 					control={form.control}
-					name='title'
+					name="title"
 					render={({ field }) => (
-						<FormItem className='animate-fade-up w-full'>
-							<FormLabel className='text-zinc-700 font-normal'>Title</FormLabel>
+						<FormItem className="animate-fade-up w-full">
+							<FormLabel className="text-zinc-700 font-normal">Title</FormLabel>
 							<FormControl>
 								<Input
-									placeholder='Title'
+									placeholder="Title"
 									disabled={form.formState.isSubmitting}
 									maxLength={20}
 									required
@@ -114,14 +109,14 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 				/>
 				<FormField
 					control={form.control}
-					name='url'
+					name="url"
 					render={({ field }) => (
-						<FormItem className='animate-fade-up w-full'>
-							<FormLabel className='text-zinc-700 font-normal'>URL</FormLabel>
+						<FormItem className="animate-fade-up w-full">
+							<FormLabel className="text-zinc-700 font-normal">URL</FormLabel>
 							<FormControl>
 								<Input
-									type='url'
-									placeholder='URL'
+									type="url"
+									placeholder="URL"
 									disabled={form.formState.isSubmitting}
 									required
 									{...field}
@@ -133,13 +128,13 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 				/>
 				<FormField
 					control={form.control}
-					name='description'
+					name="description"
 					render={({ field }) => (
-						<FormItem className='animate-fade-up w-full'>
-							<FormLabel className='text-zinc-700 font-normal'>Description</FormLabel>
+						<FormItem className="animate-fade-up w-full">
+							<FormLabel className="text-zinc-700 font-normal">Description</FormLabel>
 							<FormControl>
 								<Textarea
-									placeholder='Description'
+									placeholder="Description"
 									disabled={form.formState.isSubmitting}
 									required
 									{...field}
@@ -149,17 +144,16 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 						</FormItem>
 					)}
 				/>
-				<div className='relative flex items-center space-x-2 w-full mt-6'>
+				<div className="relative flex items-center space-x-2 w-full mt-6">
 					{form.getValues('error') && (
-						<FormMessage className='absolute -top-6 w-full flex items-center justify-center'>{form.getValues('error')}</FormMessage>
+						<FormMessage className="absolute -top-6 w-full flex items-center justify-center">
+							{form.getValues('error')}
+						</FormMessage>
 					)}
 					<Button disabled={form.formState.isSubmitting || !form.formState.isDirty}>
-						{form.formState.isSubmitting ? <IconDots className='animate-pulse text-zinc-300' /> : 'Update'}
+						{form.formState.isSubmitting ? <IconDots className="animate-pulse text-zinc-300" /> : 'Update'}
 					</Button>
-					<Button
-						type='button'
-						variant={'secondary'}
-						onClick={() => toggleModal(false)}>
+					<Button type="button" variant={'secondary'} onClick={() => toggleModal(false)}>
 						Cancel
 					</Button>
 				</div>

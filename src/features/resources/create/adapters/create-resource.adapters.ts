@@ -1,4 +1,3 @@
-import { ResourceStored } from '@/features/shared/types/global.types';
 import {
 	CreateResourcesPorts,
 	GetResourceByTitleInput,
@@ -7,6 +6,7 @@ import {
 } from '../application/create-resources.ports';
 import { ICreateResourceInfra } from '../infrastructure/create-resource.infra';
 import { GetResourceByUrlInput } from '../infrastructure/create-resource.infra.types';
+import { ResourceStored } from '@/features/shared/types/global.types';
 
 export class CreateResourceAdapters implements CreateResourcesPorts {
 	constructor(private readonly createResourcesInfra: ICreateResourceInfra) {}
@@ -23,7 +23,16 @@ export class CreateResourceAdapters implements CreateResourcesPorts {
 		return this.createResourcesInfra.getResourceByUrl({ resourceUrl });
 	}
 
-	async storeResource({ resourceId, resourceUrl, title, description, faviconUrl, imgUrl, kinds, ownerId }: StoreResourceInput) {
+	async storeResource({
+		resourceId,
+		resourceUrl,
+		title,
+		description,
+		faviconUrl,
+		imgUrl,
+		kinds,
+		ownerId,
+	}: StoreResourceInput) {
 		await this.createResourcesInfra.storeResource({
 			resourceId,
 			resourceUrl,

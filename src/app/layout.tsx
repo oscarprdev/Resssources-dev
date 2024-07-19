@@ -1,9 +1,9 @@
+import Main from './components/core/containers/Main';
+import Header from './components/core/header/Header';
+import './globals.css';
+import { Toaster } from '@/app/components/ui/toaster';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
-import Header from './components/core/header/Header';
-import Main from './components/core/containers/Main';
-import { Toaster } from '@/app/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,7 +18,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html lang="en">
 			<body className={inter.className}>
 				<Header />
 				<Main>{children}</Main>

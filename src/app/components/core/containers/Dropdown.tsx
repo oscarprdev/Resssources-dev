@@ -25,19 +25,15 @@ type DropdownProps = {
 const Dropdown = ({ dropdownOptions, size, children }: DropdownProps) => {
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger
-				asChild
-				className='cursor-pointer'>
+			<DropdownMenuTrigger asChild className="cursor-pointer">
 				{children}
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className={cn(size === 'sm' ? 'w-34' : 'w-48')}>
 				<DropdownMenuGroup>
 					{dropdownOptions.map(
-						(item) =>
+						item =>
 							item.isAllowed && (
-								<DropdownMenuItem
-									key={item.label}
-									onClick={item.action}>
+								<DropdownMenuItem key={item.label} onClick={item.action}>
 									{item.icon && item.icon}
 									{item.label}
 								</DropdownMenuItem>

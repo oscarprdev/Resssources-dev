@@ -1,11 +1,11 @@
+import FormAction from './FormAction';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { RegisterUserInput } from '@/features/core/auth-user/application/auth-user.types';
 import { Either, isError } from '@/lib/either';
-import FormAction from './FormAction';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 export type RegisterFormValues = RegisterUserInput & {
 	error: string | null;
@@ -51,19 +51,44 @@ const RegisterForm = ({ handleSubmit, afterRegisterFormSubmit }: RegisterFormPro
 
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className='flex flex-col gap-3 w-full'>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full">
 				<FormField
 					control={form.control}
-					name='username'
+					name="username"
 					render={({ field }) => (
-						<FormItem className='animate-fade-up'>
-							<FormLabel className='text-zinc-700 font-normal'>Username</FormLabel>
+						<FormItem className="animate-fade-up">
+							<FormLabel className="text-zinc-700 font-normal">Username</FormLabel>
+							<FormControl>
+								<Input placeholder="Username" autoComplete="username" required {...field} />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="email"
+					render={({ field }) => (
+						<FormItem className="animate-fade-up">
+							<FormLabel className="text-zinc-700 font-normal">Email</FormLabel>
+							<FormControl>
+								<Input type="email" placeholder="Email" required {...field} />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="password"
+					render={({ field }) => (
+						<FormItem className="animate-fade-up">
+							<FormLabel className="text-zinc-700 font-normal">Password</FormLabel>
 							<FormControl>
 								<Input
-									placeholder='Username'
-									autoComplete='username'
+									type="password"
+									placeholder="Password"
+									autoComplete="current-password"
 									required
 									{...field}
 								/>
@@ -72,47 +97,7 @@ const RegisterForm = ({ handleSubmit, afterRegisterFormSubmit }: RegisterFormPro
 						</FormItem>
 					)}
 				/>
-				<FormField
-					control={form.control}
-					name='email'
-					render={({ field }) => (
-						<FormItem className='animate-fade-up'>
-							<FormLabel className='text-zinc-700 font-normal'>Email</FormLabel>
-							<FormControl>
-								<Input
-									type='email'
-									placeholder='Email'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='password'
-					render={({ field }) => (
-						<FormItem className='animate-fade-up'>
-							<FormLabel className='text-zinc-700 font-normal'>Password</FormLabel>
-							<FormControl>
-								<Input
-									type='password'
-									placeholder='Password'
-									autoComplete='current-password'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormAction
-					error={form.getValues('error')}
-					isSubmitting={form.formState.isSubmitting}
-				/>
+				<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
 			</form>
 		</Form>
 	);

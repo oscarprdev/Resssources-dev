@@ -1,4 +1,9 @@
-import { AuthUserPorts, CreateUserInput, GetUserByCredentialsInput, GetUserByUsernameInput } from '../application/auth-user.ports';
+import {
+	AuthUserPorts,
+	CreateUserInput,
+	GetUserByCredentialsInput,
+	GetUserByUsernameInput,
+} from '../application/auth-user.ports';
 import { IAuthUserInfra } from '../infrastructure/auth-user.infra';
 
 export class AuthUserAdapter implements AuthUserPorts {

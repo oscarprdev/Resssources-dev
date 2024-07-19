@@ -1,6 +1,6 @@
-import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
-import { UseCase } from './use-case';
 import { UserStored } from '../types/global.types';
+import { UseCase } from './use-case';
+import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 
 export class AuthorizedUsecase extends UseCase {
 	constructor(private readonly usersClient: UserClient) {

@@ -1,15 +1,15 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
-import InfoCell from './InfoCell';
-import UrlCell from './UrlCell';
-import KindsCell from './KindsCell';
-import DateCell from './DateCell';
-import PublishedCell from './PublishedCell';
-import OwnerCell from './OwnerCell';
 import ActionsCell from './ActionsCell';
+import DateCell from './DateCell';
 import ImageCell from './ImageCell';
+import InfoCell from './InfoCell';
+import KindsCell from './KindsCell';
+import OwnerCell from './OwnerCell';
+import PublishedCell from './PublishedCell';
+import UrlCell from './UrlCell';
 import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
+import { ColumnDef } from '@tanstack/react-table';
 
 export const columns: ColumnDef<ResourceWithUserInfo>[] = [
 	{
@@ -25,13 +25,7 @@ export const columns: ColumnDef<ResourceWithUserInfo>[] = [
 			const description = row.original.description;
 			const faviconUrl = row.original.faviconUrl;
 
-			return (
-				<InfoCell
-					title={title}
-					description={description}
-					faviconUrl={faviconUrl}
-				/>
-			);
+			return <InfoCell title={title} description={description} faviconUrl={faviconUrl} />;
 		},
 	},
 	{

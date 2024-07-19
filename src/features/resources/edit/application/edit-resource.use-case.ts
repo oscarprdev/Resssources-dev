@@ -1,4 +1,10 @@
-import { Either, errorResponse, successResponse } from '@/lib/either';
+import { EDIT_RESOURCES_ERRORS, EDIT_RESOURCES_SUCCESS } from './edit-resource.constants';
+import { EditResourcePorts } from './edit-resource.ports';
+import {
+	editResourceFavInputSchema,
+	editResourceInputSchema,
+	editResourcePublishedInputSchema,
+} from './edit-resource.schemas';
 import {
 	UpdateImageInput,
 	UpdateImageOutput,
@@ -6,12 +12,10 @@ import {
 	UpdateResourceInfoInput,
 	UpdateResourcePublishedInput,
 } from './edit-resource.types';
-import { EditResourcePorts } from './edit-resource.ports';
-import { EDIT_RESOURCES_ERRORS, EDIT_RESOURCES_SUCCESS } from './edit-resource.constants';
-import { editResourceFavInputSchema, editResourceInputSchema, editResourcePublishedInputSchema } from './edit-resource.schemas';
-import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
-import { AuthorizedUsecase } from '@/features/shared/usecases/authorized.use-case';
 import { UsecaseResponse } from '@/features/shared/features.types';
+import { AuthorizedUsecase } from '@/features/shared/usecases/authorized.use-case';
+import { Either, errorResponse, successResponse } from '@/lib/either';
+import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 
 export interface IEditResourceUsecase {
 	updateImage(input: UpdateImageInput): UsecaseResponse<UpdateImageOutput>;
@@ -23,7 +27,10 @@ export interface IEditResourceUsecase {
 export const MAX_FILE_SIZE_MB = 5;
 
 export class EditResourceUsecase extends AuthorizedUsecase implements IEditResourceUsecase {
-	constructor(private readonly ports: EditResourcePorts, private readonly userClient: UserClient) {
+	constructor(
+		private readonly ports: EditResourcePorts,
+		private readonly userClient: UserClient
+	) {
 		super(userClient);
 	}
 
@@ -33,9 +40,15 @@ export class EditResourceUsecase extends AuthorizedUsecase implements IEditResou
 			const user = await this.isUserAuthorized(input.username);
 
 			if (input.favourited) {
-				await this.ports.addResourceFav({ resourceId: input.resourceId, userId: user.id });
+				await this.ports.addResourceFav({
+					resourceId: input.resourceId,
+					userId: user.id,
+				});
 			} else {
-				await this.ports.removeResourceFav({ resourceId: input.resourceId, userId: user.id });
+				await this.ports.removeResourceFav({
+					resourceId: input.resourceId,
+					userId: user.id,
+				});
 			}
 
 			return successResponse(EDIT_RESOURCES_SUCCESS.DEFAULT);
@@ -93,7 +106,10 @@ export class EditResourceUsecase extends AuthorizedUsecase implements IEditResou
 
 			const imageId = `${username}/${resourceId}`;
 
-			const response = await this.ports.updateImage({ id: imageId, imageFile: image });
+			const response = await this.ports.updateImage({
+				id: imageId,
+				imageFile: image,
+			});
 
 			return successResponse({ imgUrl: response });
 		} catch (error) {

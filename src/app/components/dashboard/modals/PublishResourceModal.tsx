@@ -1,9 +1,9 @@
-import { updateResourcePublishedAction } from '@/app/actions/resources/update-resource-published';
-import DashboardModal from './DashboardModal';
-import { startTransition, useState } from 'react';
-import { isError } from '@/lib/either';
 import { toast } from '../../ui/use-toast';
+import DashboardModal from './DashboardModal';
 import DashboardModalActions, { ModalState } from './DashboardModalActions';
+import { updateResourcePublishedAction } from '@/app/actions/resources/update-resource-published';
+import { isError } from '@/lib/either';
+import { startTransition, useState } from 'react';
 
 type PublishResourceModal = {
 	resourceId: string;
@@ -13,13 +13,25 @@ type PublishResourceModal = {
 	toggleModal: (opened: boolean) => void;
 };
 
-const PublishResourceModal = ({ resourceId, published, resourceTitle, isOpened, toggleModal }: PublishResourceModal) => {
-	const [modalState, setModalState] = useState<ModalState>({ error: null, loading: false });
+const PublishResourceModal = ({
+	resourceId,
+	published,
+	resourceTitle,
+	isOpened,
+	toggleModal,
+}: PublishResourceModal) => {
+	const [modalState, setModalState] = useState<ModalState>({
+		error: null,
+		loading: false,
+	});
 
 	const handlePublishClick = async () => {
-		setModalState((prev) => ({ ...prev, loading: true }));
+		setModalState(prev => ({ ...prev, loading: true }));
 
-		const response = await updateResourcePublishedAction({ resourceId, published: !published });
+		const response = await updateResourcePublishedAction({
+			resourceId,
+			published: !published,
+		});
 		if (isError(response)) {
 			return setModalState({ error: response.error, loading: false });
 		}
@@ -39,15 +51,11 @@ const PublishResourceModal = ({ resourceId, published, resourceTitle, isOpened, 
 	};
 
 	return (
-		<DashboardModal
-			isOpened={isOpened}
-			toggleModal={handleToggleModal}
-			size='md'
-			title='Publish resource'>
-			<article className='flex flex-col items-center space-y-8 w-full'>
-				<p className='text-zinc-600 text-sm max-w-[90%] text-center'>
+		<DashboardModal isOpened={isOpened} toggleModal={handleToggleModal} size="md" title="Publish resource">
+			<article className="flex flex-col items-center space-y-8 w-full">
+				<p className="text-zinc-600 text-sm max-w-[90%] text-center">
 					Do you really want to {published ? 'unpublish' : 'publish'} the resource{' '}
-					<span className='font-bold max-w-[10ch]'>{resourceTitle}</span>?
+					<span className="font-bold max-w-[10ch]">{resourceTitle}</span>?
 				</p>
 				<DashboardModalActions
 					modalState={modalState}
