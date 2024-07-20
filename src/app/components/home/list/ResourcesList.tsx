@@ -1,6 +1,6 @@
 'use client';
 
-import ResourceCard from '../../core/containers/ResourceCard';
+import ResourceCard, { ResourceCardProps } from '../../core/containers/ResourceCard';
 import ResourceCardSkeleton from '../../core/skeletons/ResourceCardSkeleton';
 import { useResourcesListWithPagination } from '@/app/hooks/useResourcesListPagination';
 import { Kinds, ResourceWithUserInfo } from '@/features/resources/shared/resources.types';
@@ -35,16 +35,31 @@ export const ResourcesList = ({ resources }: ResourcesListProps) => {
 			{resources.map(resource => (
 				<ResourceCard
 					key={resource.id}
-					resourceId={resource.id}
-					title={resource.title}
-					description={resource.description}
-					resourceUrl={resource.resourceUrl}
-					imgUrl={resource.imgUrl}
-					owner={resource.resourceCreatedBy[0].username}
-					kinds={resource.kind}
-					favCount={resource.favouritedBy.length}
-					isLiked={resource.favouritedBy.some(user => user.userId === resource.resourceCreatedBy[0].userId)}
-				/>
+					props={{
+						resourceId: resource.id,
+						title: resource.title,
+						description: resource.description,
+						resourceUrl: resource.resourceUrl,
+						imgUrl: resource.imgUrl,
+						kinds: resource.kind,
+						owner: resource.resourceCreatedBy[0].username,
+						favCount: resource.favouritedBy.length,
+						isLiked: resource.favouritedBy.some(
+							user => user.userId === resource.resourceCreatedBy[0].userId
+						),
+					}}>
+					<ResourceCard.Like />
+					<ResourceCard.Image />
+					<ResourceCard.Content>
+						<ResourceCard.Owner />
+						<ResourceCard.Title />
+						<ResourceCard.Description />
+						<ResourceCard.Footer>
+							<ResourceCard.FavCount />
+							<ResourceCard.DetailButton />
+						</ResourceCard.Footer>
+					</ResourceCard.Content>
+				</ResourceCard>
 			))}
 		</>
 	);
