@@ -33,3 +33,7 @@ export type EditUserCredentialsClientInput = {
 	userId: string;
 	password: string;
 };
+
+export type GetUserSocialMediaClientInput = {
+	userId: string;
+};

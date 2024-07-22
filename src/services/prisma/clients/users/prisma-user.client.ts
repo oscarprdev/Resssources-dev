@@ -6,16 +6,19 @@ import {
 	GetUserByIdInput,
 	GetUserByResourceCreatedInput,
 	GetUserByUsernameInput,
+	GetUserSocialMediaClientInput,
 	GetUsersListByResourceFavInput,
 } from './prisma-user.client.types';
 import prisma from '@/services/prisma/db';
-import { Users as User } from '@prisma/client';
+import { SocialMedia, Users as User } from '@prisma/client';
 
 export interface UserClient {
 	getUserById(input: GetUserByIdInput): Promise<User | null>;
 	getUserByResourceCreated(input: GetUserByResourceCreatedInput): Promise<User | null>;
 	getUserByCredentials(input: GetUserByCredentialsInput): Promise<User | null>;
 	getUserByUsername(input: GetUserByUsernameInput): Promise<User | null>;
+
+	getUserSocialMedia(input: GetUserSocialMediaClientInput): Promise<SocialMedia | null>;
 
 	getUserListByResourceFav(input: GetUsersListByResourceFavInput): Promise<User[]>;
 
@@ -57,6 +60,14 @@ export class PrismaUserClient implements UserClient {
 		return await prisma.users.findUnique({
 			where: {
 				username,
+			},
+		});
+	}
+
+	async getUserSocialMedia({ userId }: GetUserSocialMediaClientInput) {
+		return await prisma.socialMedia.findUnique({
+			where: {
+				userId,
 			},
 		});
 	}

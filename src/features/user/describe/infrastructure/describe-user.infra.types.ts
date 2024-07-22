@@ -1,7 +1,7 @@
-import { UserStored } from '@/features/shared/types/global.types';
+import { SocialMedia, UserStored } from '@/features/shared/types/global.types';
 
 export type GetUserInfoInfraInput = {
-	userId: string;
+	username: string;
 };
 
 export type GetUserInfoInfraOutput = UserStored | null;
@@ -14,3 +14,9 @@ export type GetUserCountsInfraOutput = {
 	createdCount: number;
 	favCount: number;
 };
+
+export type GetUserSocialMediaInfraInput = {
+	userId: string;
+};
+
+export type GetUserSocialMediaInfraOutput = SocialMedia;

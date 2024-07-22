@@ -29,7 +29,7 @@ const EditUserCredentialsModal = ({ userId }: EditUserCredentialsModalProps) => 
 		<Dialog>
 			<DialogTrigger
 				ref={triggerDialog}
-				className="py-2 px-10 bg-white text-md rounded-md font-semibold hover:bg-blue-400/50 hover:text-blue-100 duration-200">
+				className="py-2 px-10 bg-transparent border border-white text-white text-sm rounded-full hover:bg-white hover:text-black hover:font-semibold duration-500">
 				Edit password
 			</DialogTrigger>
 			<DialogContent className={cn('flex flex-col items-center px-10 w-full max-w-[420px]')}>

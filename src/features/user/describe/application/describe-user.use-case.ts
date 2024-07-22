@@ -21,18 +21,29 @@ export class DefaultDescribeUserUsecase extends FeatureUsecase implements Descri
 
 	async getUserInfo(input: GetUserInfoInputDto) {
 		try {
-			const { userId } = getUserInfoInputDto.parse(input);
+			const { username } = getUserInfoInputDto.parse(input);
 
-			const user = await this.ports.getUserInfo({ userId });
+			const user = await this.ports.getUserInfo({ username });
 			if (!user) throw new Error(DESCRIBE_USER_USE_CASE_ERRORS.NOT_FOUND);
 
-			const { favCount, createdCount } = await this.ports.getUserInfoCounts({ userId });
+			const socialMediaResponse = await this.ports.getUserSocialMedia({ userId: user.id });
+
+			const { favCount, createdCount } = await this.ports.getUserInfoCounts({ userId: user.id });
 
 			const output = {
-				username: user.username,
+				userId: user.id,
 				email: user.email,
+				profileImage: user.profileImage,
+				description: user.description,
 				favCount,
 				createdCount,
+				...(socialMediaResponse && {
+					socialMedia: {
+						github: socialMediaResponse.github,
+						linkedin: socialMediaResponse.linkedin,
+						twitter: socialMediaResponse.twitter,
+					},
+				}),
 			} satisfies GetUserInfoOutputDto;
 
 			return successResponse(getUserInfoOutputDto.parse(output));

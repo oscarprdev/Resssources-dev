@@ -51,9 +51,23 @@ model Users {
   username            String              @unique
   password            String
   email               String              @unique
+  description         String              @default("User description")
+  profileImage        String              @default("https://pub-dd6ab2097287461d82afdef8be7ad9a4.r2.dev/default.webp")
   role                Role                @default(DEFAULT)
   resourcesCreated    ResourcesCreated[]
   favouritesResources FavouriteResource[]
+  socialMedia         SocialMedia[]
+}
+
+model SocialMedia {
+  userId      String
+  twitter     String
+  github      String
+  linkedin    String
+
+  user        Users       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId])
 }
 
 model FavouriteResource {

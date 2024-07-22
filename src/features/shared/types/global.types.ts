@@ -1,8 +1,9 @@
-import { $Enums, Resources as Resource, Users as User } from '@prisma/client';
+import { $Enums, SocialMedia as PrismaSocialMedia, Resources as Resource, Users as User } from '@prisma/client';
 
 export type Kinds = $Enums.Kind[];
 export type ResourceStored = Resource;
 export type UserStored = User;
+export type SocialMedia = PrismaSocialMedia;
 
 export type ResourceApplication = {
 	id: string;

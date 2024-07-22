@@ -4,6 +4,8 @@ import {
 	GetUserCountsInfraOutput,
 	GetUserInfoInfraInput,
 	GetUserInfoInfraOutput,
+	GetUserSocialMediaInfraInput,
+	GetUserSocialMediaInfraOutput,
 } from './describe-user.infra.types';
 import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-resources.client';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
@@ -11,6 +13,8 @@ import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 export interface DescribeUserInfra {
 	getUserInfo(input: GetUserInfoInfraInput): Promise<GetUserInfoInfraOutput>;
 	getUserInfoCounts(input: GetUserCountsInfraInput): Promise<GetUserCountsInfraOutput>;
+
+	getUserSocialMedia(input: GetUserSocialMediaInfraInput): Promise<GetUserSocialMediaInfraOutput | null>;
 }
 
 export class DefaultDescribeUserInfra implements DescribeUserInfra {
@@ -19,15 +23,15 @@ export class DefaultDescribeUserInfra implements DescribeUserInfra {
 		private readonly resourcesClient: ResourcesClient
 	) {}
 
-	async getUserInfo({ userId }: GetUserInfoInfraInput) {
+	async getUserInfo({ username }: GetUserInfoInfraInput) {
 		try {
-			return this.userClient.getUserById({ userId });
+			return this.userClient.getUserByUsername({ username });
 		} catch (error) {
 			throw new Error(DESCRIBE_USER_INFRA_ERRORS.GET_USER);
 		}
 	}
 
-	async getUserInfoCounts({ userId }: GetUserCountsInfraInput): Promise<GetUserCountsInfraOutput> {
+	async getUserInfoCounts({ userId }: GetUserCountsInfraInput) {
 		try {
 			const [createdCount, favCount] = await Promise.all([
 				this.resourcesClient.getResourcesByOwnerCount({ userId }),
@@ -40,6 +44,14 @@ export class DefaultDescribeUserInfra implements DescribeUserInfra {
 			};
 		} catch (error) {
 			throw new Error(DESCRIBE_USER_INFRA_ERRORS.COUNT);
+		}
+	}
+
+	async getUserSocialMedia({ userId }: GetUserSocialMediaInfraInput) {
+		try {
+			return this.userClient.getUserSocialMedia({ userId });
+		} catch (error) {
+			throw new Error(DESCRIBE_USER_INFRA_ERRORS.SOCIAL);
 		}
 	}
 }

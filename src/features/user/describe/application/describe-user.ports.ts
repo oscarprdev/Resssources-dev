@@ -1,21 +1,27 @@
-import { UserStored } from '@/features/shared/types/global.types';
+import { SocialMedia, UserStored } from '@/features/shared/types/global.types';
 
 export interface DescribeUserPorts {
 	getUserInfo(input: GetUserInfoPortInput): Promise<GetUserInfoPortOutput>;
-	getUserInfoCounts(input: GetUserInfoCountsInput): Promise<GetUserInfoCountsOutput>;
+	getUserInfoCounts(input: GetUserInfoCountsPortInput): Promise<GetUserInfoCountsPortOutput>;
+
+	getUserSocialMedia(input: GetUserSocialMediaPortInput): Promise<SocialMedia | null>;
 }
 
 export type GetUserInfoPortInput = {
-	userId: string;
+	username: string;
 };
 
 export type GetUserInfoPortOutput = UserStored | null;
 
-export type GetUserInfoCountsInput = {
+export type GetUserInfoCountsPortInput = {
 	userId: string;
 };
 
-export type GetUserInfoCountsOutput = {
+export type GetUserInfoCountsPortOutput = {
 	favCount: number;
 	createdCount: number;
+};
+
+export type GetUserSocialMediaPortInput = {
+	userId: string;
 };

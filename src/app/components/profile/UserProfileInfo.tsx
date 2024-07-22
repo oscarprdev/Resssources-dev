@@ -1,34 +1,80 @@
-import UserProfileTooltip from './UserProfileTooltip';
+import { Badge } from '../ui/badge';
+import { IconBrandGithub, IconBrandLinkedin, IconBrandX } from '@tabler/icons-react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 
 type UserProfileInfoProps = {
 	username: string;
 	favCount: number;
 	createdCount: number;
+	profileImage: string;
+	description: string;
+	socialMedia?: {
+		github?: string;
+		linkedin?: string;
+		twitter?: string;
+	};
+	children: ReactNode;
 };
 
-const UserProfileInfo = ({ username, createdCount, favCount }: UserProfileInfoProps) => {
+const UserProfileInfo = ({
+	username,
+	createdCount,
+	favCount,
+	profileImage,
+	description,
+	socialMedia,
+	children,
+}: UserProfileInfoProps) => {
 	return (
-		<div className="flex flex-col items-center gap-7 py-2">
-			<h2 className="text-zinc-100 text-md font-bold">@{username}</h2>
-			<div className="flex items-center justify-center w-full h-7 gap-5">
-				<UserProfileTooltip tooltipContent="Explore shared resources">
-					<Link href={`/resources/${username}?shared=true`}>
-						<div className="flex flex-col items-center w-[80px] py-2 rounded-md hover:bg-zinc-800 duration-200">
-							<p className="text-md font-bold text-2xl text-zinc-100">{createdCount}</p>
-							<p className="text-xs text-zinc-200">Shared</p>
-						</div>
-					</Link>
-				</UserProfileTooltip>
-				<span aria-hidden className="w-[1px] h-full bg-stone-700 rounded-full"></span>
-				<UserProfileTooltip tooltipContent="Explore favs resources">
-					<Link href={`/resources/${username}?favs=true`}>
-						<div className="flex flex-col items-center w-[80px] py-2 rounded-md hover:bg-zinc-800 duration-200">
-							<p className="text-md font-bold text-2xl text-zinc-100">{favCount}</p>
-							<p className="text-xs text-zinc-200">Favs</p>
-						</div>
-					</Link>
-				</UserProfileTooltip>
+		<div className="flex flex-col items-center gap-4 py-2 w-[85%] mb-auto mt-5">
+			<div className="flex items-center gap-5">
+				<picture className="overflow-hidden w-[80px] rounded-full border-2 border-zinc-200">
+					<Image
+						src={profileImage}
+						alt="User profile image"
+						width={500}
+						height={500}
+						className="object-cover w-full h-full rounded-full"
+					/>
+				</picture>
+				<div className="flex flex-col items-start gap-2">
+					<div className="flex items-center gap-2">
+						<h2 className="text-zinc-600 text-sm tracking-wide">@{username}</h2>
+						<Badge className="capitalize">Shared: {createdCount}</Badge>
+						<Badge className="capitalize">Fav: {favCount}</Badge>
+					</div>
+					<p className="text-xs text-zinc-500 max-w-[100ch]">{description}</p>
+					<div className="flex items-center gap-5">
+						{socialMedia && (
+							<div className="flex items-center gap-2">
+								{socialMedia.github && (
+									<Link
+										href={socialMedia.github}
+										className="p-1 grid place-items-center border border-zinc-300 rounded-md hover:bg-zinc-50 duration-300">
+										<IconBrandGithub size={20} className="text-zinc-500" />
+									</Link>
+								)}
+								{socialMedia.linkedin && (
+									<Link
+										href={socialMedia.linkedin}
+										className="p-1 grid place-items-center border border-zinc-300 rounded-md hover:bg-zinc-50 duration-300">
+										<IconBrandLinkedin size={20} className="text-zinc-500" />
+									</Link>
+								)}
+								{socialMedia.twitter && (
+									<Link
+										href={socialMedia.twitter}
+										className="p-1 grid place-items-center border border-zinc-300 rounded-md hover:bg-zinc-50 duration-300">
+										<IconBrandX size={20} className="text-zinc-500" />
+									</Link>
+								)}
+							</div>
+						)}
+						{children}
+					</div>
+				</div>
 			</div>
 		</div>
 	);
