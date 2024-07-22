@@ -28,7 +28,11 @@ const EditUserInfoModal = ({ userId, email }: EditUserInfoModalProps) => {
 
 	return (
 		<Dialog>
-			<DialogTrigger ref={triggerDialog}>Edit info</DialogTrigger>
+			<DialogTrigger
+				ref={triggerDialog}
+				className="py-2 px-10 bg-white text-md rounded-md font-semibold hover:bg-blue-400/50 hover:text-blue-100 duration-200">
+				Edit information
+			</DialogTrigger>
 			<DialogContent className={cn('flex flex-col items-center px-10 w-full max-w-[420px]')}>
 				<DialogHeader>
 					<DialogTitle className="text-2xl font-normal">Edit user information</DialogTitle>

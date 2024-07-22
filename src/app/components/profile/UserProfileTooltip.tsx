@@ -1,24 +1,18 @@
-import { Badge } from '../../ui/badge';
+import { Badge } from '../ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 
-type UserProfileCtaProps = {
-	label: string;
+type UserProfileTooltipProps = {
 	tooltipContent: string;
-	href: string;
+	children: ReactNode;
 };
 
-const UserProfileCta = ({ label, tooltipContent, href }: UserProfileCtaProps) => {
+const UserProfileTooltip = ({ tooltipContent, children }: UserProfileTooltipProps) => {
 	return (
 		<TooltipProvider delayDuration={300}>
 			<Tooltip>
-				<TooltipTrigger>
-					<Link href={href}>
-						<Badge variant={'outline'} className="hover:bg-zinc-100 hover:text-zinc-400">
-							{label}
-						</Badge>
-					</Link>
-				</TooltipTrigger>
+				<TooltipTrigger>{children}</TooltipTrigger>
 				<TooltipContent className="z-20 grid place-items-center bg-white w-fit text-xs shadow-sm border mb-2 rounded-xl py-1 px-3 text-zinc-500">
 					{tooltipContent}
 				</TooltipContent>
@@ -27,4 +21,4 @@ const UserProfileCta = ({ label, tooltipContent, href }: UserProfileCtaProps) =>
 	);
 };
 
-export default UserProfileCta;
+export default UserProfileTooltip;
