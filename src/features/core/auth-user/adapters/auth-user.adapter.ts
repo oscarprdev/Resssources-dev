@@ -28,6 +28,7 @@ export class AuthUserAdapter implements AuthUserPorts {
 			username: userInfra.username,
 			password: userInfra.password,
 			role: userInfra.role,
+			id: userInfra.id,
 		};
 	}
 

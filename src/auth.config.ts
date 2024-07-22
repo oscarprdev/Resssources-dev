@@ -20,6 +20,7 @@ export default {
 				return {
 					name: response.success.username,
 					role: response.success.role,
+					id: response.success.id,
 				};
 			},
 		}),

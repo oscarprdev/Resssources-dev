@@ -33,6 +33,7 @@ export class AuthUserUsecase implements IAuthUserUsecase {
 			return successResponse({
 				username: userExist.username,
 				role: userExist.role,
+				id: userExist.id,
 			});
 		} catch (e) {
 			return errorResponse(e instanceof Error ? e.message : AUTH_USER_ERRORS.DEFAULT_LOGIN_ERROR);

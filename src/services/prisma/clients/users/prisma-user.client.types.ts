@@ -23,3 +23,13 @@ export type GetUserByCredentialsInput = {
 export type GetUsersListByResourceFavInput = {
 	resourceId: string;
 };
+
+export type EditUserInfoClientInput = {
+	userId: string;
+	email: string;
+};
+
+export type EditUserCredentialsClientInput = {
+	userId: string;
+	password: string;
+};

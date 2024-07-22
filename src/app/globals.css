@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-	@import url(./styles/index.css);
-}
-
 :root {
 	--bg-dots: #e0e1e4;
 	--primary: #4f81ee;
@@ -19,4 +15,8 @@ html {
 
 body {
 	overflow-x: hidden;
+}
+
+@layer base {
+	@import url(./styles/index.css);
 }

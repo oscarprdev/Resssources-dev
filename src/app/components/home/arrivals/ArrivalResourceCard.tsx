@@ -1,5 +1,6 @@
 import DetailButton from '../../core/buttons/DetailButton';
 import LikeButton from '../../core/buttons/LikeButton';
+import UserButton from '../../core/buttons/UserButton';
 import ResourceDescription from '../../core/containers/ResourceDescription';
 import { Badge } from '../../ui/badge';
 import { $Enums } from '@prisma/client';
@@ -38,7 +39,7 @@ const ArrivalResourceCard = ({
 				/>
 			</picture>
 			<div className="w-full flex flex-col items-start gap-1 pl-5 border border-transparent border-l-zinc-100">
-				<p className="text-zinc-400 text-xs">@{owner}</p>
+				<UserButton username={owner} />
 				<h4 className="text-2xl uppercase -mt-1 truncate max-w-[90%]">{title}</h4>
 				<ResourceDescription
 					description={description}

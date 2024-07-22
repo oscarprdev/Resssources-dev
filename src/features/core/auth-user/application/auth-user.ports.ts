@@ -24,6 +24,7 @@ export type GetUserByUsernameInput = {
 export type GetUserByUsernameOutput = {
 	username: string;
 	password: string;
+	id: string;
 	role: $Enums.Role;
 };
 

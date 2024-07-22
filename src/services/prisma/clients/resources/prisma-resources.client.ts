@@ -3,7 +3,9 @@ import {
 	GetResourceByIdInput,
 	GetResourceByTitleInput,
 	GetResourceByUrlInput,
+	GetResourcesByOwnerCountInput,
 	GetResourcesCountInput,
+	GetResourcesFavCountInput,
 	GetResourcesListByFavInput,
 	GetResourcesListByKindInput,
 	GetResourcesListByOwnerInput,
@@ -21,7 +23,10 @@ export interface ResourcesClient {
 	getResourceById(input: GetResourceByIdInput): Promise<Resource | null>;
 	getResourceByTitle(input: GetResourceByTitleInput): Promise<Resource | null>;
 	getResourceByUrl(input: GetResourceByUrlInput): Promise<Resource | null>;
+
 	getResourcesCount(input: GetResourcesCountInput): Promise<number>;
+	getResourcesByOwnerCount(input: GetResourcesByOwnerCountInput): Promise<number>;
+	getResourcesFavCount(input: GetResourcesFavCountInput): Promise<number>;
 
 	getResourcesList(input: GetResourcesListInput): Promise<ResourceWithRelations[]>;
 	getResourcesListByOwner(input: GetResourcesListByOwnerInput): Promise<Resource[]>;
@@ -77,6 +82,26 @@ export class PrismaResourcesClient implements ResourcesClient {
 			cursor: pagination && pagination.cursor ? { id: pagination.cursor } : undefined,
 			orderBy: {
 				createdAt: 'desc',
+			},
+		});
+	}
+
+	async getResourcesByOwnerCount({ userId }: GetResourcesByOwnerCountInput) {
+		return prisma.resources.count({
+			where: {
+				resourceCreatedBy: {
+					some: { userId },
+				},
+			},
+		});
+	}
+
+	async getResourcesFavCount({ userId }: GetResourcesFavCountInput) {
+		return prisma.resources.count({
+			where: {
+				favouritedBy: {
+					some: { userId },
+				},
 			},
 		});
 	}

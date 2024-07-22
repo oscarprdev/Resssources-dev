@@ -1,6 +1,6 @@
 'use client';
 
-import ResourceCard, { ResourceCardProps } from '../../core/containers/ResourceCard';
+import ResourceCard from '../../core/containers/ResourceCard';
 import ResourceCardSkeleton from '../../core/skeletons/ResourceCardSkeleton';
 import { useResourcesListWithPagination } from '@/app/hooks/useResourcesListPagination';
 import { Kinds, ResourceWithUserInfo } from '@/features/resources/shared/resources.types';

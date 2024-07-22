@@ -38,6 +38,14 @@ export type GetResourcesListByOwnerInput = {
 	userId: string;
 };
 
+export type GetResourcesByOwnerCountInput = {
+	userId: string;
+};
+
+export type GetResourcesFavCountInput = {
+	userId: string;
+};
+
 export type GetResourcesListByFavInput = {
 	userId: string;
 };
