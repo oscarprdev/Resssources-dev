@@ -7,3 +7,7 @@ export type EditUserCredentialsInfraInput = {
 	userId: string;
 	password: string;
 };
+
+export type GetUserByUserIdInfraInput = {
+	userId: string;
+};

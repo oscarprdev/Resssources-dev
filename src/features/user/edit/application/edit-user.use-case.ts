@@ -6,9 +6,11 @@ import {
 	editUserInfoInput,
 } from './edit-user.dto';
 import { EditUserPorts } from './edit-user.ports';
+import { SALT } from '@/constants';
 import { UsecaseResponse } from '@/features/shared/features.types';
 import { FeatureUsecase } from '@/features/shared/features.use-case';
 import { successResponse } from '@/lib/either';
+import bcrypt from 'bcryptjs';
 
 export interface EditUserUsecase {
 	editInfo(input: EditUserInfoInput): UsecaseResponse<string>;
@@ -36,7 +38,15 @@ export class DefaultEditUserUsecase extends FeatureUsecase implements EditUserUs
 		try {
 			const { userId, password } = editUserCredentialsInput.parse(input);
 
-			await this.ports.editCredentials({ userId, password });
+			const currentPasswordResponse = await this.ports.getCurrentPasswordByUserId({ userId });
+			if (!currentPasswordResponse) throw new Error('Error: Password not found for current user');
+
+			const isSamePassword = await bcrypt.compare(password, currentPasswordResponse.password);
+			if (isSamePassword) throw new Error('Error: New password cannot be equal as current password');
+
+			const passwordCrypted = await bcrypt.hash(password, SALT);
+
+			await this.ports.editCredentials({ userId, password: passwordCrypted });
 
 			return successResponse(EDIT_USER_SUCCESS.CREDENTIALS);
 		} catch (error) {

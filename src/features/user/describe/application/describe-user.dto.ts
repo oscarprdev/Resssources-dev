@@ -9,7 +9,6 @@ export type GetUserInfoInputDto = z.infer<typeof getUserInfoInputDto>;
 export const getUserInfoOutputDto = z.object({
 	username: z.string(),
 	email: z.string().email(),
-	password: z.string(),
 	favCount: z.number(),
 	createdCount: z.number(),
 });

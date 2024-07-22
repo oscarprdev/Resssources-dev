@@ -31,7 +31,6 @@ export class DefaultDescribeUserUsecase extends FeatureUsecase implements Descri
 			const output = {
 				username: user.username,
 				email: user.email,
-				password: user.password,
 				favCount,
 				createdCount,
 			} satisfies GetUserInfoOutputDto;

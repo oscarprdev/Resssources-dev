@@ -16,7 +16,7 @@ const Profile = async ({ userId }: ProfileProps) => {
 
 	if (isError(response)) return <p>Error</p>;
 
-	const { email, username, favCount, createdCount, password } = response.success;
+	const { email, username, favCount, createdCount } = response.success;
 
 	const session = await auth();
 	const isUserAuthorized = username === session?.user?.name;
@@ -27,7 +27,7 @@ const Profile = async ({ userId }: ProfileProps) => {
 			<UserProfileCtas favCount={favCount} createdCount={createdCount} username={username} />
 			<div className="flex flex-col w-full items-center gap-2">
 				<EditUserInfoModal userId={userId} email={email} />
-				<EditUserCredentialsModal userId={userId} password={password} />
+				<EditUserCredentialsModal userId={userId} />
 			</div>
 		</section>
 	);

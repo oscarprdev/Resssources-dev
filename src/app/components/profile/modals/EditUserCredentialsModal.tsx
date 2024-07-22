@@ -9,10 +9,9 @@ import { useRef } from 'react';
 
 type EditUserCredentialsModalProps = {
 	userId: string;
-	password: string;
 };
 
-const EditUserCredentialsModal = ({ userId, password }: EditUserCredentialsModalProps) => {
+const EditUserCredentialsModal = ({ userId }: EditUserCredentialsModalProps) => {
 	const triggerDialog = useRef<HTMLButtonElement>(null);
 
 	const handleEditUserCredentialsFormSubmit = async ({ password }: EditUserCredentialsFormValues) => {
@@ -28,17 +27,14 @@ const EditUserCredentialsModal = ({ userId, password }: EditUserCredentialsModal
 
 	return (
 		<Dialog>
-			<DialogTrigger ref={triggerDialog}>Edit info</DialogTrigger>
+			<DialogTrigger ref={triggerDialog}>Edit password</DialogTrigger>
 			<DialogContent className={cn('flex flex-col items-center px-10 w-full max-w-[420px]')}>
 				<DialogHeader>
-					<DialogTitle className="text-2xl font-normal">Add your resource</DialogTitle>
+					<DialogTitle className="text-2xl font-normal">Edit password</DialogTitle>
 				</DialogHeader>
 				<EditUserCredentialsForm
 					handleSubmit={handleEditUserCredentialsFormSubmit}
 					afterEditUserCredentialsFormSubmit={afterEditUserCredentialsFormSubmit}
-					defaultValues={{
-						password,
-					}}
 				/>
 			</DialogContent>
 		</Dialog>

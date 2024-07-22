@@ -1,4 +1,10 @@
-import { EditUserCredentialsPortsInput, EditUserInfoPortsInput, EditUserPorts } from '../application/edit-user.ports';
+import {
+	EditUserCredentialsPortsInput,
+	EditUserInfoPortsInput,
+	EditUserPorts,
+	GetCurrentPasswordByUserIdInput,
+	GetCurrentPasswordByUserIdOutput,
+} from '../application/edit-user.ports';
 import { EditUserInfra } from '../infrastructure/edit-user.infra';
 
 export class EditUserAdapters implements EditUserPorts {
@@ -10,5 +16,14 @@ export class EditUserAdapters implements EditUserPorts {
 
 	async editCredentials({ userId, password }: EditUserCredentialsPortsInput) {
 		await this.infra.editCredentials({ userId, password });
+	}
+
+	async getCurrentPasswordByUserId({ userId }: GetCurrentPasswordByUserIdInput) {
+		const userResponse = await this.infra.getUserByUserId({ userId });
+		if (!userResponse) return null;
+
+		return {
+			password: userResponse.password,
+		};
 	}
 }

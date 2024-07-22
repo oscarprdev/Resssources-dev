@@ -16,9 +16,6 @@ export type EditUserCredentialsFormValues = EditUserCredentialsInput & {
 type EditUserCredentialsFormProps = {
 	handleSubmit(values: EditUserCredentialsFormValues): Promise<Either<string, string>>;
 	afterEditUserCredentialsFormSubmit(successMessage: string): void;
-	defaultValues: {
-		password: string;
-	};
 };
 
 const editUserCredentialsFormSchema = z
@@ -34,11 +31,12 @@ const editUserCredentialsFormSchema = z
 const EditUserCredentialsForm = ({
 	handleSubmit,
 	afterEditUserCredentialsFormSubmit,
-	defaultValues,
 }: EditUserCredentialsFormProps) => {
 	const form = useForm<EditUserCredentialsFormValues>({
 		resolver: zodResolver(editUserCredentialsFormSchema),
-		defaultValues,
+		defaultValues: {
+			password: '',
+		},
 	});
 
 	const onSubmit = async (values: EditUserCredentialsFormValues) => {

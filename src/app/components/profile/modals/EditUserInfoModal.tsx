@@ -31,7 +31,7 @@ const EditUserInfoModal = ({ userId, email }: EditUserInfoModalProps) => {
 			<DialogTrigger ref={triggerDialog}>Edit info</DialogTrigger>
 			<DialogContent className={cn('flex flex-col items-center px-10 w-full max-w-[420px]')}>
 				<DialogHeader>
-					<DialogTitle className="text-2xl font-normal">Add your resource</DialogTitle>
+					<DialogTitle className="text-2xl font-normal">Edit user information</DialogTitle>
 				</DialogHeader>
 				<EditUserInfoForm
 					handleSubmit={handleEditUserInfoFormSubmit}
