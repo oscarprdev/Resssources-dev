@@ -1,8 +1,8 @@
+import ProfileResources from './ProfileResources';
 import UserProfileInfo from './UserProfileInfo';
-import EditUserCredentialsModal from './modals/EditUserCredentialsModal';
-import EditUserInfoModal from './modals/EditUserInfoModal';
-import RemoveUserModal from './modals/RemoveUserModal';
 import { auth } from '@/auth';
+import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
+import { Kinds } from '@/features/shared/types/global.types';
 import { provideDescribeUserUsecase } from '@/features/user/describe';
 import { isError } from '@/lib/either';
 import Link from 'next/link';
@@ -10,17 +10,20 @@ import { ReactNode } from 'react';
 
 type ProfileProps = {
 	username: string;
+	kinds: string;
 };
 
 const ProfileSection = ({ children }: { children: ReactNode }) => {
 	return (
-		<section className="w-screen bg-white min-h-screen gap-4 grid place-items-center rounded-2xl shadow-md">
+		<section className="w-screen bg-white min-h-screen gap-7 grid place-items-center rounded-2xl shadow-md">
 			{children}
 		</section>
 	);
 };
 
-const Profile = async ({ username }: ProfileProps) => {
+const Profile = async ({ username, kinds }: ProfileProps) => {
+	const kindsFilter = kinds ? (kinds.split(',') as Kinds) : RESOURCE_KIND_VALUES;
+
 	const describeUserUsecase = provideDescribeUserUsecase();
 	const response = await describeUserUsecase.getUserInfo({ username });
 
@@ -33,7 +36,7 @@ const Profile = async ({ username }: ProfileProps) => {
 			</ProfileSection>
 		);
 
-	const { email, userId, favCount, createdCount, profileImage, description, socialMedia } = response.success;
+	const { userId, favCount, createdCount, profileImage, description, socialMedia } = response.success;
 
 	const session = await auth();
 	const isUserAuthorized = username === session?.user?.name;
@@ -55,6 +58,8 @@ const Profile = async ({ username }: ProfileProps) => {
 					</Link>
 				)}
 			</UserProfileInfo>
+			<span className="bg-zinc-200 w-[70%] h-[1px]"></span>
+			<ProfileResources userId={userId} kindsFilters={kindsFilter} />
 		</ProfileSection>
 	);
 };

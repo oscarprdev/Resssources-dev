@@ -1,5 +1,5 @@
-import { ResourceApplication } from '../../shared/resources.types';
-import { GetUserByIdInput, IListResourcesPorts } from '../application/list-resources.ports';
+import { Kinds, ResourceApplication } from '../../shared/resources.types';
+import { GetUserByIdPortsInput, IListResourcesPorts } from '../application/list-resources.ports';
 import {
 	GetResourcesCountInput,
 	ListResourcesImagesInput,
@@ -29,8 +29,9 @@ export class ListResourcesAdapters implements IListResourcesPorts {
 		})) satisfies ResourceImage[];
 	}
 
-	async listResources({ published, itemsPerRequest, cursor, withUserData, kinds }: ListResourcesInput) {
+	async listResources({ userId, published, itemsPerRequest, cursor, withUserData, kinds }: ListResourcesInput) {
 		const infraResources = await this.infra.listResources({
+			userId,
 			published,
 			itemsPerRequest,
 			cursor,
@@ -45,7 +46,7 @@ export class ListResourcesAdapters implements IListResourcesPorts {
 		}));
 	}
 
-	async getUserById({ userId }: GetUserByIdInput): Promise<UserStored | null> {
+	async getUserById({ userId }: GetUserByIdPortsInput): Promise<UserStored | null> {
 		return await this.infra.getUserById({ userId });
 	}
 }

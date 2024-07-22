@@ -21,9 +21,10 @@ export class ListResourcesInfra implements IListResourcesInfra {
 		private readonly usersClient: UserClient
 	) {}
 
-	async listResources({ published, itemsPerRequest, cursor, kinds, withUserData }: ListResourcesInfraInput) {
+	async listResources({ userId, published, itemsPerRequest, cursor, kinds, withUserData }: ListResourcesInfraInput) {
 		try {
 			return await this.resourceClient.getResourcesList({
+				userId,
 				published,
 				withUserData,
 				pagination: { pageSize: itemsPerRequest, cursor },

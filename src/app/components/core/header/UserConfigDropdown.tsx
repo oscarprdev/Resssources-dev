@@ -22,15 +22,15 @@ const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
 
 	const dropdownOptions: DropdownOption[] = [
 		{
-			label: 'Your profile',
+			label: 'Profile',
 			isAllowed: true,
 			action: async () => router.push(`/${user.name}`),
 			icon: <IconUser size={20} className="text-zinc-500 mr-2" />,
 		},
 		{
-			label: 'Your resources',
+			label: 'Account',
 			isAllowed: true,
-			action: async () => router.push('/resources'),
+			action: async () => router.push(`/account/${user.id}`),
 			icon: <IconNotebook size={20} className="text-zinc-500 mr-2" />,
 		},
 		{

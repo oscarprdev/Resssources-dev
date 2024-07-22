@@ -1,27 +1,33 @@
 'use client';
 
-import ResourceCard from '../../core/containers/ResourceCard';
-import ResourceCardSkeleton from '../../core/skeletons/ResourceCardSkeleton';
+import ResourceCard from '../core/containers/ResourceCard';
+import ResourcesFilters from '../core/containers/ResourcesFilters';
+import ResourceCardSkeleton from '../core/skeletons/ResourceCardSkeleton';
 import { useResourcesListWithPagination } from '@/app/hooks/useResourcesListPagination';
-import { Kinds, ResourceWithUserInfo } from '@/features/resources/shared/resources.types';
+import { ResourceWithUserInfo } from '@/features/resources/shared/resources.types';
+import { Kinds } from '@/features/shared/types/global.types';
 
-type ResourcesListControllerProps = {
-	kindsFilter: Kinds;
+export type ProfileResourcesProps = {
+	userId: string;
+	kindsFilters: Kinds;
 };
 
-export const ResourcesListController = ({ kindsFilter }: ResourcesListControllerProps) => {
-	const { loading, resources } = useResourcesListWithPagination(kindsFilter);
+const ProfileResources = ({ userId, kindsFilters }: ProfileResourcesProps) => {
+	const { loading, resources } = useResourcesListWithPagination(kindsFilters, userId);
 
 	return (
-		<div className="show-container relative grid w-full max-w-viewport grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 px-24 min-h-screen">
-			{loading ? (
-				<ResourceListLoading />
-			) : resources.length === 0 ? (
-				<ResourceListNoResults />
-			) : (
-				<ResourcesList resources={resources} />
-			)}
-		</div>
+		<section className="w-full flex flex-col gap-5 items-center">
+			<ResourcesFilters />
+			<div className="relative grid w-full max-w-viewport grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 px-24 min-h-screen">
+				{loading ? (
+					<ResourceListLoading />
+				) : resources.length === 0 ? (
+					<ResourceListNoResults />
+				) : (
+					<ResourcesList resources={resources} />
+				)}
+			</div>
+		</section>
 	);
 };
 
@@ -51,7 +57,6 @@ const ResourcesList = ({ resources }: ResourcesListProps) => {
 					<ResourceCard.Like />
 					<ResourceCard.Image />
 					<ResourceCard.Content>
-						<ResourceCard.Owner />
 						<ResourceCard.Title />
 						<ResourceCard.Description />
 						<ResourceCard.Badges />
@@ -84,3 +89,5 @@ const ResourceListLoading = () => {
 		</>
 	);
 };
+
+export default ProfileResources;

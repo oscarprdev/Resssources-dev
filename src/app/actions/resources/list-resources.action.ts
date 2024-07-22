@@ -3,11 +3,12 @@
 import { provideListResourceUsecase } from '@/features/resources/list';
 import { Kinds } from '@/features/shared/types/global.types';
 
-type ListResourcesActionInput = { kindsFilter: Kinds; cursor?: string };
+type ListResourcesActionInput = { kindsFilter: Kinds; cursor?: string; userId?: string };
 
-export const listResourcesAction = async ({ kindsFilter, cursor }: ListResourcesActionInput) => {
+export const listResourcesAction = async ({ kindsFilter, cursor, userId }: ListResourcesActionInput) => {
 	const listResourcesUsecase = provideListResourceUsecase();
 	const resourcesResponse = await listResourcesUsecase.listResources({
+		userId,
 		published: true,
 		withUserData: true,
 		itemsPerRequest: 8,

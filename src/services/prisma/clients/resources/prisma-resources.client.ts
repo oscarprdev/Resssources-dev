@@ -17,7 +17,7 @@ import {
 	UpdateResourcePublishedInput,
 } from './prisma-resources.types';
 import prisma from '@/services/prisma/db';
-import { Resources as Resource } from '@prisma/client';
+import { $Enums, Resources as Resource } from '@prisma/client';
 
 export interface ResourcesClient {
 	getResourceById(input: GetResourceByIdInput): Promise<Resource | null>;
@@ -71,12 +71,15 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async getResourcesCount({ published, filters, pagination }: GetResourcesCountInput) {
+	async getResourcesCount({ userId, published, filters, pagination }: GetResourcesCountInput) {
 		return await prisma.resources.count({
 			where: {
 				published: published || undefined,
 				kind: {
 					hasSome: filters.kinds,
+				},
+				resourceCreatedBy: {
+					some: { userId },
 				},
 			},
 			cursor: pagination && pagination.cursor ? { id: pagination.cursor } : undefined,
@@ -106,14 +109,25 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async getResourcesList({ published, withUserData, pagination, filters }: GetResourcesListInput) {
+	async getResourcesList({ userId, published, withUserData, pagination, filters }: GetResourcesListInput) {
 		return await prisma.resources.findMany({
 			skip: pagination && pagination.cursor ? 1 : 0,
 			where: {
-				published: published || undefined,
-				kind: {
-					hasSome: filters.kinds,
-				},
+				AND: [
+					{
+						resourceCreatedBy: {
+							some: userId ? { userId } : undefined,
+						},
+					},
+					{
+						published: published !== undefined ? published : undefined,
+					},
+					{
+						kind: {
+							hasSome: filters.kinds,
+						},
+					},
+				],
 			},
 			take: (pagination && pagination.pageSize) || undefined,
 			cursor: pagination && pagination.cursor ? { id: pagination.cursor } : undefined,

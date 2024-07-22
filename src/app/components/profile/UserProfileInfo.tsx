@@ -52,6 +52,7 @@ const UserProfileInfo = ({
 								{socialMedia.github && (
 									<Link
 										href={socialMedia.github}
+										target="blank"
 										className="p-1 grid place-items-center border border-zinc-300 rounded-md hover:bg-zinc-50 duration-300">
 										<IconBrandGithub size={20} className="text-zinc-500" />
 									</Link>
@@ -59,6 +60,7 @@ const UserProfileInfo = ({
 								{socialMedia.linkedin && (
 									<Link
 										href={socialMedia.linkedin}
+										target="blank"
 										className="p-1 grid place-items-center border border-zinc-300 rounded-md hover:bg-zinc-50 duration-300">
 										<IconBrandLinkedin size={20} className="text-zinc-500" />
 									</Link>
@@ -66,6 +68,7 @@ const UserProfileInfo = ({
 								{socialMedia.twitter && (
 									<Link
 										href={socialMedia.twitter}
+										target="blank"
 										className="p-1 grid place-items-center border border-zinc-300 rounded-md hover:bg-zinc-50 duration-300">
 										<IconBrandX size={20} className="text-zinc-500" />
 									</Link>

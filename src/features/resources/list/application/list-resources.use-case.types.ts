@@ -13,6 +13,7 @@ export type ListResourcesInput = {
 	published?: boolean;
 	itemsPerRequest?: number;
 	cursor?: string;
+	userId?: string;
 	kinds: Kinds;
 	withUserData: boolean;
 };
@@ -27,5 +28,6 @@ export type ListResourcesOutput = {
 export type GetResourcesCountInput = {
 	published?: boolean;
 	cursor?: string;
+	userId?: string;
 	kinds: Kinds;
 };

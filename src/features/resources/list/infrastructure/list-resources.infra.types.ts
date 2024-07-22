@@ -4,6 +4,7 @@ export type ListResourcesInfraInput = {
 	published?: boolean;
 	itemsPerRequest?: number;
 	cursor?: string;
+	userId?: string;
 	kinds: Kinds;
 	withUserData: boolean;
 };
@@ -14,6 +15,7 @@ export type GetUserByIdInfraInput = {
 
 export type GetResourcesCountInfraInput = {
 	published?: boolean;
+	userId?: string;
 	pagination: {
 		cursor?: string;
 	};

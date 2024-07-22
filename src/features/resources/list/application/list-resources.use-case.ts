@@ -1,6 +1,6 @@
 import { RESOURCE_KIND_VALUES } from '../../create/application/create-resources.schemas';
 import { RESOURCES_ERRORS } from '../../shared/resources.constants';
-import { ResourceApplication, ResourceWithUserInfo } from '../../shared/resources.types';
+import { Kinds, ResourceApplication, ResourceWithUserInfo } from '../../shared/resources.types';
 import { IListResourcesPorts } from './list-resources.ports';
 import { ListResourcesInput, ListResourcesOutput, ResourceImage } from './list-resources.use-case.types';
 import { UsecaseResponse } from '@/features/shared/features.types';
@@ -27,18 +27,20 @@ export class ListResourcesUsecase extends FeatureUsecase implements IListResourc
 		}
 	}
 
-	async listResources({ published, itemsPerRequest, cursor, kinds, withUserData }: ListResourcesInput) {
+	async listResources({ userId, published, itemsPerRequest, cursor, kinds, withUserData }: ListResourcesInput) {
 		try {
 			const [resources, count] = await Promise.all([
 				this.ports.listResources({
 					published,
 					itemsPerRequest,
 					cursor,
+					userId,
 					withUserData,
 					kinds: kinds || RESOURCE_KIND_VALUES,
 				}),
 				this.ports.getResourcesCount({
 					published,
+					userId,
 					cursor,
 					kinds: kinds || RESOURCE_KIND_VALUES,
 				}),

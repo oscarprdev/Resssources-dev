@@ -13,6 +13,7 @@ export type GetResourceByUrlInput = {
 };
 
 export type GetResourcesCountInput = {
+	userId?: string;
 	published?: boolean;
 	pagination: {
 		cursor?: string;
@@ -23,6 +24,7 @@ export type GetResourcesCountInput = {
 };
 
 export type GetResourcesListInput = {
+	userId?: string;
 	withUserData: boolean;
 	published?: boolean;
 	pagination: {
