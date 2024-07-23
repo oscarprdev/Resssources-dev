@@ -20,3 +20,9 @@ export type GetUserSocialMediaInfraInput = {
 };
 
 export type GetUserSocialMediaInfraOutput = SocialMedia;
+
+export type GetUserByIdInfraInput = {
+	userId: string;
+};
+
+export type GetUserByIdInfraOutput = UserStored | null;

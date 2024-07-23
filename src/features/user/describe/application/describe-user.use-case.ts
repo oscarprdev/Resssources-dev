@@ -1,7 +1,11 @@
 import { DESCRIBE_USER_USE_CASE_ERRORS } from './describe-user.dictionary';
 import {
+	GetUserByIdInputDto,
+	GetUserByIdOutputDto,
 	GetUserInfoInputDto,
 	GetUserInfoOutputDto,
+	getUserByIdInputDto,
+	getUserByIdOutputDto,
 	getUserInfoInputDto,
 	getUserInfoOutputDto,
 } from './describe-user.dto';
@@ -12,6 +16,7 @@ import { successResponse } from '@/lib/either';
 
 export interface DescribeUserUserUsecase {
 	getUserInfo(input: GetUserInfoInputDto): UsecaseResponse<GetUserInfoOutputDto>;
+	getUserById(input: GetUserByIdInputDto): UsecaseResponse<GetUserByIdOutputDto>;
 }
 
 export class DefaultDescribeUserUsecase extends FeatureUsecase implements DescribeUserUserUsecase {
@@ -49,6 +54,35 @@ export class DefaultDescribeUserUsecase extends FeatureUsecase implements Descri
 			return successResponse(getUserInfoOutputDto.parse(output));
 		} catch (error) {
 			return this.errorUsecaseResponse(error, DESCRIBE_USER_USE_CASE_ERRORS.GET_USER);
+		}
+	}
+
+	async getUserById(input: GetUserByIdInputDto) {
+		try {
+			const { userId } = getUserByIdInputDto.parse(input);
+			const user = await this.ports.getUserById({ userId });
+			if (!user) throw new Error(DESCRIBE_USER_USE_CASE_ERRORS.NOT_FOUND);
+
+			const socialMediaResponse = await this.ports.getUserSocialMedia({ userId: user.id });
+
+			const output = {
+				userId,
+				username: user.username,
+				email: user.email,
+				profileImage: user.profileImage,
+				description: user.description,
+				...(socialMediaResponse && {
+					socialMedia: {
+						github: socialMediaResponse.github,
+						linkedin: socialMediaResponse.linkedin,
+						twitter: socialMediaResponse.twitter,
+					},
+				}),
+			} satisfies GetUserByIdOutputDto;
+
+			return successResponse(getUserByIdOutputDto.parse(output));
+		} catch (error) {
+			return this.errorUsecaseResponse(error, DESCRIBE_USER_USE_CASE_ERRORS.GET_BY_ID);
 		}
 	}
 }

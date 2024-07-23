@@ -1,5 +1,6 @@
 import {
 	DescribeUserPorts,
+	GetUserByIdPortInput,
 	GetUserInfoCountsPortInput,
 	GetUserInfoPortInput,
 	GetUserSocialMediaPortInput,
@@ -15,6 +16,10 @@ export class DescribeUserAdapter implements DescribeUserPorts {
 
 	async getUserInfoCounts({ userId }: GetUserInfoCountsPortInput) {
 		return await this.infra.getUserInfoCounts({ userId });
+	}
+
+	async getUserById({ userId }: GetUserByIdPortInput) {
+		return await this.infra.getUserById({ userId });
 	}
 
 	async getUserSocialMedia({ userId }: GetUserSocialMediaPortInput) {

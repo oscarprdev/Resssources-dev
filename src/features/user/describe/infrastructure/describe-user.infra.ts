@@ -1,5 +1,7 @@
 import { DESCRIBE_USER_INFRA_ERRORS } from './describe-user.infra.dictionary';
 import {
+	GetUserByIdInfraInput,
+	GetUserByIdInfraOutput,
 	GetUserCountsInfraInput,
 	GetUserCountsInfraOutput,
 	GetUserInfoInfraInput,
@@ -13,6 +15,8 @@ import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 export interface DescribeUserInfra {
 	getUserInfo(input: GetUserInfoInfraInput): Promise<GetUserInfoInfraOutput>;
 	getUserInfoCounts(input: GetUserCountsInfraInput): Promise<GetUserCountsInfraOutput>;
+
+	getUserById(input: GetUserByIdInfraInput): Promise<GetUserByIdInfraOutput>;
 
 	getUserSocialMedia(input: GetUserSocialMediaInfraInput): Promise<GetUserSocialMediaInfraOutput | null>;
 }
@@ -44,6 +48,14 @@ export class DefaultDescribeUserInfra implements DescribeUserInfra {
 			};
 		} catch (error) {
 			throw new Error(DESCRIBE_USER_INFRA_ERRORS.COUNT);
+		}
+	}
+
+	async getUserById({ userId }: GetUserByIdInfraInput) {
+		try {
+			return await this.userClient.getUserById({ userId });
+		} catch (error) {
+			throw new Error(DESCRIBE_USER_INFRA_ERRORS.GET_USER_BY_ID);
 		}
 	}
 
