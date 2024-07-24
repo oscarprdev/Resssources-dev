@@ -1,7 +1,7 @@
 'use client';
 
-import { accountContext } from './AccountProvider';
-import EditUserInfoForm, { EditUserInfoFormValues } from './forms/EditUserInfoForm';
+import { accountContext } from '../AccountProvider';
+import EditUserInfoForm, { EditUserInfoFormValues } from '../forms/EditUserInfoForm';
 import { editUserInfoAction } from '@/app/actions/users/edit-user-info.action';
 import { useContext } from 'react';
 

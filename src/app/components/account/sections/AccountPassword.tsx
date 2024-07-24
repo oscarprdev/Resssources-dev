@@ -1,7 +1,7 @@
 'use client';
 
-import { accountContext } from './AccountProvider';
-import EditUserCredentialsForm, { EditUserCredentialsFormValues } from './forms/EditUserCredentialsForm';
+import { accountContext } from '../AccountProvider';
+import EditUserCredentialsForm, { EditUserCredentialsFormValues } from '../forms/EditUserCredentialsForm';
 import { editUserCredentialsAction } from '@/app/actions/users/edit-user-credentials.action';
 import { useContext } from 'react';
 
