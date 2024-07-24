@@ -54,7 +54,7 @@ const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFor
 					name="description"
 					render={({ field }) => (
 						<FormItem className="animate-fade-up">
-							<FormLabel className="text-zinc-700 font-bold">Email</FormLabel>
+							<FormLabel className="text-zinc-700 font-bold">Description</FormLabel>
 							<FormControl>
 								<Textarea placeholder="Description" required {...field} />
 							</FormControl>
