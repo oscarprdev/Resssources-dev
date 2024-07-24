@@ -23,3 +23,27 @@ export const editUserProfileInput = z.object({
 });
 
 export type EditUserProfileInput = z.infer<typeof editUserProfileInput>;
+
+export const editUserSocialInput = z.object({
+	userId: z.string(),
+	twitter: z
+		.string()
+		.optional()
+		.refine(val => !val || z.string().url().safeParse(val).success, {
+			message: 'Twitter value has invalid URL',
+		}),
+	linkedin: z
+		.string()
+		.optional()
+		.refine(val => !val || z.string().url().safeParse(val).success, {
+			message: 'Linkedin value has invalid URL',
+		}),
+	github: z
+		.string()
+		.optional()
+		.refine(val => !val || z.string().url().safeParse(val).success, {
+			message: 'Github value has invalid URL',
+		}),
+});
+
+export type EditUserSocialInput = z.infer<typeof editUserSocialInput>;

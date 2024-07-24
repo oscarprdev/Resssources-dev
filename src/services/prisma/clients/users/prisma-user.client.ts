@@ -3,6 +3,7 @@ import {
 	EditUserCredentialsClientInput as EditCredentialsClientInput,
 	EditUserInfoClientInput as EditInfoClientInput,
 	EditProfileClientInput,
+	EditSocialLinksClientInput,
 	GetUserByCredentialsInput,
 	GetUserByIdInput,
 	GetUserByResourceCreatedInput,
@@ -28,6 +29,7 @@ export interface UserClient {
 	editInfo(input: EditInfoClientInput): Promise<User>;
 	editProfile(input: EditProfileClientInput): Promise<User>;
 	editCredentials(input: EditCredentialsClientInput): Promise<User>;
+	editSocialLinks(input: EditSocialLinksClientInput): Promise<SocialMedia>;
 }
 
 export class PrismaUserClient implements UserClient {
@@ -116,6 +118,19 @@ export class PrismaUserClient implements UserClient {
 			data: {
 				description,
 				profileImage,
+			},
+		});
+	}
+
+	async editSocialLinks({ userId, twitter, linkedin, github }: EditSocialLinksClientInput) {
+		return await prisma.socialMedia.update({
+			where: {
+				userId,
+			},
+			data: {
+				twitter,
+				linkedin,
+				github,
 			},
 		});
 	}

@@ -8,6 +8,11 @@ type AccountContext = {
 	username: string;
 	description: string;
 	profileImage: string;
+	socialMedia?: {
+		twitter?: string;
+		linkedin?: string;
+		github?: string;
+	};
 };
 
 export const accountContext = createContext<AccountContext | undefined>(undefined);

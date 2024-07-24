@@ -4,6 +4,7 @@ export interface EditUserPorts {
 	editInfo(input: EditUserInfoPortsInput): Promise<void>;
 	editCredentials(input: EditUserCredentialsPortsInput): Promise<void>;
 	editUserProfile(input: EditUseProfilePortsInput): Promise<void>;
+	editUserSocial(input: EditUserSocialPortsInput): Promise<void>;
 
 	uploadImage(input: UploadImagePortsInput): Promise<string>;
 
@@ -40,4 +41,11 @@ export type EditUseProfilePortsInput = {
 	userId: string;
 	imgUrl: string;
 	description: string;
+};
+
+export type EditUserSocialPortsInput = {
+	userId: string;
+	twitter: string;
+	linkedin: string;
+	github: string;
 };

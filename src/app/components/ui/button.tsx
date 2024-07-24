@@ -8,7 +8,7 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: 'bg-black text-zinc-100 hover:bg-black/80 duration-200 rounded-full w-full text-zinc-200',
+				default: 'bg-black text-zinc-100 hover:bg-black/80 duration-200 rounded-full w-full text-zinc-100',
 				destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
 				outline:
 					'bg-white border border-zinc-200 text-zinc-100 hover:bg-zinc-50 duration-200 rounded-full w-full text-zinc-800',
@@ -18,8 +18,8 @@ const buttonVariants = cva(
 			},
 			size: {
 				default: 'h-10 px-10 py-7',
-				sm: 'h-9 rounded-full w-fit px-5',
-				lg: 'h-11 rounded-md px-8',
+				sm: 'h-9 px-5',
+				lg: 'h-11 px-8',
 				icon: 'h-10 w-10',
 				like: 'p-2',
 			},

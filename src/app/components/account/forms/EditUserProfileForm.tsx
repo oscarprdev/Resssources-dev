@@ -49,13 +49,13 @@ const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFor
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full animate-fade-up">
 				<ProfileImageInput form={form} />
 				<FormField
 					control={form.control}
 					name="description"
 					render={({ field }) => (
-						<FormItem className="animate-fade-up">
+						<FormItem>
 							<FormLabel className="text-zinc-700 font-bold">Description</FormLabel>
 							<FormControl>
 								<Textarea placeholder="Description" required {...field} />
@@ -64,8 +64,13 @@ const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFor
 						</FormItem>
 					)}
 				/>
-				<div className="ml-auto min-w-[200px]">
-					<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				<div className="ml-auto">
+					<FormAction
+						text="Save profile"
+						size={'lg'}
+						error={form.getValues('error')}
+						isSubmitting={form.formState.isSubmitting}
+					/>
 				</div>
 			</form>
 		</Form>

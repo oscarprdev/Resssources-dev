@@ -1,4 +1,5 @@
 import {
+	EditSocialLinksInfraInput,
 	EditUserCredentialsInfraInput,
 	EditUserInfoInfraInput,
 	EditUserProfileInfraInput,
@@ -13,6 +14,7 @@ export interface EditUserInfra {
 	editInfo(input: EditUserInfoInfraInput): Promise<void>;
 	editCredentials(input: EditUserCredentialsInfraInput): Promise<void>;
 	editUserProfile(input: EditUserProfileInfraInput): Promise<void>;
+	editSocialLinks(input: EditSocialLinksInfraInput): Promise<void>;
 
 	uploadImage(input: UploadImageInfraInput): Promise<string>;
 
@@ -35,6 +37,10 @@ export class DefaultEditUserInfra implements EditUserInfra {
 
 	async editUserProfile({ userId, description, profileImage }: EditUserProfileInfraInput) {
 		await this.userClient.editProfile({ userId, description, profileImage });
+	}
+
+	async editSocialLinks({ userId, twitter, linkedin, github }: EditSocialLinksInfraInput) {
+		await this.userClient.editSocialLinks({ userId, twitter, linkedin, github });
 	}
 
 	async uploadImage({ id, image, type }: UploadImageInfraInput) {

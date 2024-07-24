@@ -25,3 +25,10 @@ export type UploadImageInfraInput = {
 	image: Buffer;
 	type: IMAGE_TYPE;
 };
+
+export type EditSocialLinksInfraInput = {
+	userId: string;
+	twitter: string;
+	linkedin: string;
+	github: string;
+};

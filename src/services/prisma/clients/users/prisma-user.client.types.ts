@@ -43,3 +43,10 @@ export type EditProfileClientInput = {
 	description: string;
 	profileImage: string;
 };
+
+export type EditSocialLinksClientInput = {
+	userId: string;
+	twitter: string;
+	linkedin: string;
+	github: string;
+};

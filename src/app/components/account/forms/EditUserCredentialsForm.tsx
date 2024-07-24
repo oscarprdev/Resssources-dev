@@ -64,8 +64,6 @@ const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps)
 			return form.setValue('error', response.error);
 		}
 
-		form.reset();
-
 		toast({
 			description: response.success,
 		});
@@ -73,12 +71,12 @@ const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps)
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full animate-fade-up">
 				<FormField
 					control={form.control}
 					name="oldPassword"
 					render={({ field }) => (
-						<FormItem className="animate-fade-up">
+						<FormItem>
 							<FormLabel className="text-zinc-700 font-bold">Old Password</FormLabel>
 							<FormControl>
 								<Input
@@ -97,7 +95,7 @@ const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps)
 					control={form.control}
 					name="password"
 					render={({ field }) => (
-						<FormItem className="animate-fade-up">
+						<FormItem>
 							<FormLabel className="text-zinc-700 font-bold">New Password</FormLabel>
 							<FormControl>
 								<Input type="password" placeholder="New Password" required {...field} />
@@ -113,7 +111,7 @@ const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps)
 					control={form.control}
 					name="passwordRepeated"
 					render={({ field }) => (
-						<FormItem className="animate-fade-up">
+						<FormItem>
 							<FormLabel className="text-zinc-700 font-bold">Repeat Password</FormLabel>
 							<FormControl>
 								<Input
@@ -128,8 +126,13 @@ const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps)
 						</FormItem>
 					)}
 				/>
-				<div className="ml-auto min-w-[200px]">
-					<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				<div className="ml-auto">
+					<FormAction
+						text="Update password"
+						size={'lg'}
+						error={form.getValues('error')}
+						isSubmitting={form.formState.isSubmitting}
+					/>
 				</div>
 			</form>
 		</Form>

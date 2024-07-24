@@ -43,12 +43,12 @@ const EditUserInfoForm = ({ handleSubmit, defaultValues }: EditUserInfoFormProps
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full animate-fade-up">
 				<FormField
 					control={form.control}
 					name="email"
 					render={({ field }) => (
-						<FormItem className="animate-fade-up">
+						<FormItem>
 							<FormLabel className="text-zinc-700 font-bold">Email</FormLabel>
 							<FormControl>
 								<Input placeholder="Email" autoComplete="email" required {...field} />
@@ -57,8 +57,13 @@ const EditUserInfoForm = ({ handleSubmit, defaultValues }: EditUserInfoFormProps
 						</FormItem>
 					)}
 				/>
-				<div className="ml-auto min-w-[200px]">
-					<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				<div className="ml-auto">
+					<FormAction
+						text="Save Changes"
+						size={'lg'}
+						error={form.getValues('error')}
+						isSubmitting={form.formState.isSubmitting}
+					/>
 				</div>
 			</form>
 		</Form>

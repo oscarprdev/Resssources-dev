@@ -1,6 +1,6 @@
 'use server';
 
-import { auth } from '@/auth';
+import { validateUserAuth } from '../shared/validate-user-auth';
 import { provideEditUserUsecase } from '@/features/user/edit';
 import { errorResponse } from '@/lib/either';
 import { revalidatePath } from 'next/cache';
@@ -13,10 +13,8 @@ export type EditUserInfoActionInput = {
 export const editUserInfoAction = async ({ userId, email }: EditUserInfoActionInput) => {
 	if (!userId) return errorResponse('User Id is mandatory to update the user info');
 
-	const session = await auth();
-	if (!session?.user || !session.user.name || session.user.id !== userId) {
-		return errorResponse('User not authorized');
-	}
+	const isUserAuth = await validateUserAuth(userId);
+	if (!isUserAuth) errorResponse('User not authorized');
 
 	const usecase = provideEditUserUsecase();
 	const usecaseResponse = await usecase.editInfo({ userId, email });

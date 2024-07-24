@@ -1,6 +1,6 @@
 'use server';
 
-import { auth } from '@/auth';
+import { validateUserAuth } from '../shared/validate-user-auth';
 import { provideEditUserUsecase } from '@/features/user/edit';
 import { errorResponse } from '@/lib/either';
 import { revalidatePath } from 'next/cache';
@@ -15,10 +15,8 @@ export const editUserProfileAction = async ({ userId, username, formData }: Edit
 	if (!userId) return errorResponse('User Id is mandatory to update the user profile');
 	if (!username) return errorResponse('Username is mandatory to update user profile');
 
-	const session = await auth();
-	if (!session?.user || !session.user.name || session.user.id !== userId) {
-		return errorResponse('User not authorized');
-	}
+	const isUserAuth = await validateUserAuth(userId);
+	if (!isUserAuth) errorResponse('User not authorized');
 
 	const image = formData.get('image') as File | null;
 	const description = formData.get('description') as string | null;

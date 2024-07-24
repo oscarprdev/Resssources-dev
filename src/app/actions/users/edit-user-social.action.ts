@@ -5,23 +5,24 @@ import { provideEditUserUsecase } from '@/features/user/edit';
 import { errorResponse } from '@/lib/either';
 import { revalidatePath } from 'next/cache';
 
-export type EditUserCredencialsActionInput = {
+export type EditUserSocialActionInput = {
 	userId?: string;
-	password: string;
-	oldPassword: string;
+	twitter?: string;
+	linkedin?: string;
+	github?: string;
 };
 
-export const editUserCredentialsAction = async ({ userId, password, oldPassword }: EditUserCredencialsActionInput) => {
-	if (!userId) return errorResponse('User Id is mandatory to update the user credentials');
+export const editUserSocialAction = async ({ userId, twitter, linkedin, github }: EditUserSocialActionInput) => {
+	if (!userId) return errorResponse('User Id is mandatory to update the user info');
 
 	const isUserAuth = await validateUserAuth(userId);
 	if (!isUserAuth) errorResponse('User not authorized');
 
 	const usecase = provideEditUserUsecase();
-	const usecaseResponse = await usecase.editCredentials({ userId, password, oldPassword });
+	const usecaseResponse = await usecase.editSocial({ userId, twitter, linkedin, github });
 
 	revalidatePath('/account');
-	revalidatePath('/account/password');
+	revalidatePath('/account/social');
 
 	return usecaseResponse;
 };

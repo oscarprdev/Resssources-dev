@@ -3,8 +3,8 @@ import {
 	EditUserCredentialsPortsInput,
 	EditUserInfoPortsInput,
 	EditUserPorts,
+	EditUserSocialPortsInput,
 	GetCurrentPasswordByUserIdPortsInput,
-	GetCurrentPasswordByUserIdPortsOutput,
 	UploadImagePortsInput,
 } from '../application/edit-user.ports';
 import { EditUserInfra } from '../infrastructure/edit-user.infra';
@@ -31,6 +31,10 @@ export class EditUserAdapters implements EditUserPorts {
 
 	async editUserProfile({ userId, description, imgUrl }: EditUseProfilePortsInput) {
 		await this.infra.editUserProfile({ userId, description, profileImage: imgUrl });
+	}
+
+	async editUserSocial({ userId, twitter, linkedin, github }: EditUserSocialPortsInput) {
+		await this.infra.editSocialLinks({ userId, twitter, linkedin, github });
 	}
 
 	async uploadImage(input: UploadImagePortsInput) {

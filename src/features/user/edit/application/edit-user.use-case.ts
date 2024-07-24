@@ -3,9 +3,11 @@ import {
 	EditUserCredentialsInput,
 	EditUserInfoInput,
 	EditUserProfileInput,
+	EditUserSocialInput,
 	editUserCredentialsInput,
 	editUserInfoInput,
 	editUserProfileInput,
+	editUserSocialInput,
 } from './edit-user.dto';
 import { EditUserPorts } from './edit-user.ports';
 import { SALT } from '@/constants';
@@ -19,6 +21,7 @@ export interface EditUserUsecase {
 	editInfo(input: EditUserInfoInput): UsecaseResponse<string>;
 	editProfile(input: EditUserProfileInput): UsecaseResponse<string>;
 	editCredentials(input: EditUserCredentialsInput): UsecaseResponse<string>;
+	editSocial(input: EditUserSocialInput): UsecaseResponse<string>;
 }
 
 export class DefaultEditUserUsecase extends FeatureUsecase implements EditUserUsecase {
@@ -48,6 +51,23 @@ export class DefaultEditUserUsecase extends FeatureUsecase implements EditUserUs
 			return successResponse(EDIT_USER_SUCCESS.PROFILE);
 		} catch (error) {
 			return this.errorUsecaseResponse(error, EDIT_USER_ERRORS.PROFILE);
+		}
+	}
+
+	async editSocial(input: EditUserSocialInput) {
+		try {
+			const { userId, twitter, linkedin, github } = editUserSocialInput.parse(input);
+
+			await this.ports.editUserSocial({
+				userId,
+				twitter: twitter || '',
+				linkedin: linkedin || '',
+				github: github || '',
+			});
+
+			return successResponse(EDIT_USER_SUCCESS.SOCIAL);
+		} catch (error) {
+			return this.errorUsecaseResponse(error, EDIT_USER_ERRORS.SOCIAL);
 		}
 	}
 
