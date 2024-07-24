@@ -19,8 +19,9 @@ export const editUserInfoAction = async ({ userId, email }: EditUserInfoActionIn
 	}
 
 	const usecase = provideEditUserUsecase();
+	const usecaseResponse = await usecase.editInfo({ userId, email });
 
 	revalidatePath('/account');
 
-	return await usecase.editInfo({ userId, email });
+	return usecaseResponse;
 };

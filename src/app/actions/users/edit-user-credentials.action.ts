@@ -18,9 +18,10 @@ export const editUserCredentialsAction = async ({ userId, password, oldPassword 
 	if (!session?.user || !session.user.name || session.user.id !== userId) return errorResponse('User not authorized');
 
 	const usecase = provideEditUserUsecase();
+	const usecaseResponse = await usecase.editCredentials({ userId, password, oldPassword });
 
 	revalidatePath('/account');
 	revalidatePath('/account/password');
 
-	return await usecase.editCredentials({ userId, password, oldPassword });
+	return usecaseResponse;
 };
