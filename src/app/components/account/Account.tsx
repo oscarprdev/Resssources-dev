@@ -35,14 +35,16 @@ const Account = async ({ children }: AccountProps) => {
 			</AccountSection>
 		);
 
-	const { userId, username, profileImage, email } = userResponse.success;
+	const { userId, username, profileImage, email, description } = userResponse.success;
 
 	return (
 		<AccountSection>
 			<AccountHeader username={username} profileImage={profileImage} />
 			<div className="flex items-start gap-2 w-full max-w-[800px]">
 				<AccountAside />
-				<AccountProvider accountProps={{ userId, email }}>{children}</AccountProvider>
+				<AccountProvider accountProps={{ userId, email, username, description, profileImage }}>
+					{children}
+				</AccountProvider>
 			</div>
 		</AccountSection>
 	);

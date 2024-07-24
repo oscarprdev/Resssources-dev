@@ -13,3 +13,7 @@ export type UploadImageInput = {
 export type UploadImageOutput = {
 	imgUrl: string;
 };
+
+export type RemoveImageInput = {
+	id: string;
+};

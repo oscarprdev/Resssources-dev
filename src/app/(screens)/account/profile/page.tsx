@@ -1,3 +1,5 @@
+import AccountProfile from '@/app/components/account/sections/AccountProfile';
+
 export default function AccountProfilePage() {
-	return <>Profile</>;
+	return <AccountProfile />;
 }

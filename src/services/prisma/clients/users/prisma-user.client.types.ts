@@ -37,3 +37,9 @@ export type EditUserCredentialsClientInput = {
 export type GetUserSocialMediaClientInput = {
 	userId: string;
 };
+
+export type EditProfileClientInput = {
+	userId: string;
+	description: string;
+	profileImage: string;
+};

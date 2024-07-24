@@ -14,3 +14,12 @@ export const editUserCredentialsInput = z.object({
 });
 
 export type EditUserCredentialsInput = z.infer<typeof editUserCredentialsInput>;
+
+export const editUserProfileInput = z.object({
+	userId: z.string(),
+	username: z.string(),
+	description: z.string(),
+	image: z.instanceof(File),
+});
+
+export type EditUserProfileInput = z.infer<typeof editUserProfileInput>;

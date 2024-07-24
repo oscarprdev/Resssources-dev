@@ -5,6 +5,9 @@ import { ReactNode, createContext } from 'react';
 type AccountContext = {
 	userId: string;
 	email: string;
+	username: string;
+	description: string;
+	profileImage: string;
 };
 
 export const accountContext = createContext<AccountContext | undefined>(undefined);

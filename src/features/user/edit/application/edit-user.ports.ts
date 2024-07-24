@@ -1,10 +1,15 @@
+import { IMAGE_TYPE } from '@/services/bucket/bucket.client.types';
+
 export interface EditUserPorts {
 	editInfo(input: EditUserInfoPortsInput): Promise<void>;
 	editCredentials(input: EditUserCredentialsPortsInput): Promise<void>;
+	editUserProfile(input: EditUseProfilePortsInput): Promise<void>;
+
+	uploadImage(input: UploadImagePortsInput): Promise<string>;
 
 	getCurrentPasswordByUserId(
-		input: GetCurrentPasswordByUserIdInput
-	): Promise<GetCurrentPasswordByUserIdOutput | null>;
+		input: GetCurrentPasswordByUserIdPortsInput
+	): Promise<GetCurrentPasswordByUserIdPortsOutput | null>;
 }
 
 export type EditUserInfoPortsInput = {
@@ -17,10 +22,22 @@ export type EditUserCredentialsPortsInput = {
 	password: string;
 };
 
-export type GetCurrentPasswordByUserIdInput = {
+export type GetCurrentPasswordByUserIdPortsInput = {
 	userId: string;
 };
 
-export type GetCurrentPasswordByUserIdOutput = {
+export type GetCurrentPasswordByUserIdPortsOutput = {
 	password: string;
+};
+
+export type UploadImagePortsInput = {
+	id: string;
+	image: Buffer;
+	type: IMAGE_TYPE;
+};
+
+export type EditUseProfilePortsInput = {
+	userId: string;
+	imgUrl: string;
+	description: string;
 };

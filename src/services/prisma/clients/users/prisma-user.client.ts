@@ -2,6 +2,7 @@ import {
 	CreateUserInput,
 	EditUserCredentialsClientInput as EditCredentialsClientInput,
 	EditUserInfoClientInput as EditInfoClientInput,
+	EditProfileClientInput,
 	GetUserByCredentialsInput,
 	GetUserByIdInput,
 	GetUserByResourceCreatedInput,
@@ -25,6 +26,7 @@ export interface UserClient {
 	createUser(input: CreateUserInput): Promise<User>;
 
 	editInfo(input: EditInfoClientInput): Promise<User>;
+	editProfile(input: EditProfileClientInput): Promise<User>;
 	editCredentials(input: EditCredentialsClientInput): Promise<User>;
 }
 
@@ -102,6 +104,18 @@ export class PrismaUserClient implements UserClient {
 			},
 			data: {
 				email,
+			},
+		});
+	}
+
+	async editProfile({ userId, description, profileImage }: EditProfileClientInput) {
+		return await prisma.users.update({
+			where: {
+				id: userId,
+			},
+			data: {
+				description,
+				profileImage,
 			},
 		});
 	}

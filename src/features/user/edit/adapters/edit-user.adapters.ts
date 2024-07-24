@@ -1,9 +1,11 @@
 import {
+	EditUseProfilePortsInput,
 	EditUserCredentialsPortsInput,
 	EditUserInfoPortsInput,
 	EditUserPorts,
-	GetCurrentPasswordByUserIdInput,
-	GetCurrentPasswordByUserIdOutput,
+	GetCurrentPasswordByUserIdPortsInput,
+	GetCurrentPasswordByUserIdPortsOutput,
+	UploadImagePortsInput,
 } from '../application/edit-user.ports';
 import { EditUserInfra } from '../infrastructure/edit-user.infra';
 
@@ -18,12 +20,20 @@ export class EditUserAdapters implements EditUserPorts {
 		await this.infra.editCredentials({ userId, password });
 	}
 
-	async getCurrentPasswordByUserId({ userId }: GetCurrentPasswordByUserIdInput) {
+	async getCurrentPasswordByUserId({ userId }: GetCurrentPasswordByUserIdPortsInput) {
 		const userResponse = await this.infra.getUserByUserId({ userId });
 		if (!userResponse) return null;
 
 		return {
 			password: userResponse.password,
 		};
+	}
+
+	async editUserProfile({ userId, description, imgUrl }: EditUseProfilePortsInput) {
+		await this.infra.editUserProfile({ userId, description, profileImage: imgUrl });
+	}
+
+	async uploadImage(input: UploadImagePortsInput) {
+		return await this.infra.uploadImage(input);
 	}
 }
