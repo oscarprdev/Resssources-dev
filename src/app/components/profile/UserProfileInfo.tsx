@@ -30,7 +30,7 @@ const UserProfileInfo = ({
 	return (
 		<div className="flex flex-col items-center gap-4 py-2 w-[85%] mb-auto mt-5">
 			<div className="flex items-center gap-5">
-				<picture className="overflow-hidden w-[80px] rounded-full border-2 border-zinc-200">
+				<picture className="overflow-hidden size-[80px] rounded-full border-2 border-zinc-200">
 					<Image
 						src={profileImage}
 						alt="User profile image"

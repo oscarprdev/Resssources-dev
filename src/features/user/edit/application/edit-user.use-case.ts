@@ -75,7 +75,7 @@ export class DefaultEditUserUsecase extends FeatureUsecase implements EditUserUs
 	}
 
 	private async uploadImage(username: string, image: File) {
-		const imageId = `${username}/profile-image`;
+		const imageId = `${username}/profile-image-${crypto.randomUUID().toString()}`;
 		const buffer = (await image.arrayBuffer()) as Buffer;
 
 		return await this.ports.uploadImage({ id: imageId, image: buffer, type: image.type as IMAGE_TYPE });

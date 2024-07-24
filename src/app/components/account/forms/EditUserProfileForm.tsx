@@ -3,6 +3,7 @@
 import FormAction from '../../core/forms/FormAction';
 import { Textarea } from '../../ui/textarea';
 import { toast } from '../../ui/use-toast';
+import ProfileImageInput from './ProfileImageInput';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/components/ui/form';
 import { EditUserProfileInput } from '@/features/user/edit/application/edit-user.dto';
 import { Either, isError } from '@/lib/either';
@@ -16,6 +17,7 @@ type EditUserProfileFormProps = {
 	defaultValues: {
 		description: string;
 		defaultImage: string;
+		image?: File;
 	};
 };
 
@@ -25,6 +27,7 @@ const FORM_MESSAGES = {
 
 const editUserProfileFormSchema = z.object({
 	description: z.string().max(200, { message: FORM_MESSAGES.DESCRIPTION_MAX_LENGTH }),
+	image: z.instanceof(File),
 });
 
 const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFormProps) => {
@@ -39,8 +42,6 @@ const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFor
 			return form.setValue('error', response.error);
 		}
 
-		form.reset();
-
 		toast({
 			description: response.success,
 		});
@@ -48,7 +49,8 @@ const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFor
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full">
+				<ProfileImageInput form={form} />
 				<FormField
 					control={form.control}
 					name="description"

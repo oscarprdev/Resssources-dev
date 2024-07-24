@@ -8,7 +8,7 @@ type AccountHeaderProps = {
 const AccountHeader = ({ username, profileImage }: AccountHeaderProps) => {
 	return (
 		<header className="flex items-center gap-5 mt-5 w-full max-w-[800px] pl-4">
-			<picture className="overflow-hidden w-12">
+			<picture className="overflow-hidden size-12">
 				<Image
 					src={profileImage}
 					alt="User image"

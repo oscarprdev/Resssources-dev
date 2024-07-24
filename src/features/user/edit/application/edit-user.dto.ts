@@ -19,7 +19,7 @@ export const editUserProfileInput = z.object({
 	userId: z.string(),
 	username: z.string(),
 	description: z.string(),
-	image: z.instanceof(File),
+	image: z.any().refine(img => 'type' in img && 'name' in img && 'size' in img),
 });
 
 export type EditUserProfileInput = z.infer<typeof editUserProfileInput>;
