@@ -2,7 +2,16 @@
 
 import FormAction from '../../core/forms/FormAction';
 import { Input } from '../../ui/input';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/components/ui/form';
+import { toast } from '../../ui/use-toast';
+import {
+	Form,
+	FormControl,
+	FormDescription,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/app/components/ui/form';
 import { EditUserCredentialsInput } from '@/features/user/edit/application/edit-user.dto';
 import { Either, isError } from '@/lib/either';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,12 +24,12 @@ export type EditUserCredentialsFormValues = EditUserCredentialsInput & {
 };
 type EditUserCredentialsFormProps = {
 	handleSubmit(values: EditUserCredentialsFormValues): Promise<Either<string, string>>;
-	afterEditUserCredentialsFormSubmit(successMessage: string): void;
 };
 
 const editUserCredentialsFormSchema = z
 	.object({
 		password: z.string(),
+		oldPassword: z.string(),
 		passwordRepeated: z.string(),
 	})
 	.refine(data => data.password === data.passwordRepeated, {
@@ -28,14 +37,13 @@ const editUserCredentialsFormSchema = z
 		path: ['passwordRepeated'],
 	});
 
-const EditUserCredentialsForm = ({
-	handleSubmit,
-	afterEditUserCredentialsFormSubmit,
-}: EditUserCredentialsFormProps) => {
+const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps) => {
 	const form = useForm<EditUserCredentialsFormValues>({
 		resolver: zodResolver(editUserCredentialsFormSchema),
 		defaultValues: {
+			oldPassword: '',
 			password: '',
+			passwordRepeated: '',
 		},
 	});
 
@@ -45,18 +53,22 @@ const EditUserCredentialsForm = ({
 			return form.setValue('error', response.error);
 		}
 
-		afterEditUserCredentialsFormSubmit(response?.success);
+		form.reset();
+
+		toast({
+			description: response.success,
+		});
 	};
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full">
 				<FormField
 					control={form.control}
-					name="password"
+					name="oldPassword"
 					render={({ field }) => (
 						<FormItem className="animate-fade-up">
-							<FormLabel className="text-zinc-700 font-normal">Password</FormLabel>
+							<FormLabel className="text-zinc-700 font-bold">Old Password</FormLabel>
 							<FormControl>
 								<Input
 									type="password"
@@ -66,6 +78,22 @@ const EditUserCredentialsForm = ({
 									{...field}
 								/>
 							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="password"
+					render={({ field }) => (
+						<FormItem className="animate-fade-up">
+							<FormLabel className="text-zinc-700 font-bold">New Password</FormLabel>
+							<FormControl>
+								<Input type="password" placeholder="New Password" required {...field} />
+							</FormControl>
+							<FormDescription className="text-zinc-400 text-xs mt-2">
+								Minimum 6 characters.
+							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -75,12 +103,13 @@ const EditUserCredentialsForm = ({
 					name="passwordRepeated"
 					render={({ field }) => (
 						<FormItem className="animate-fade-up">
-							<FormLabel className="text-zinc-700 font-normal">Repeat Password</FormLabel>
+							<FormLabel className="text-zinc-700 font-bold">Repeat Password</FormLabel>
 							<FormControl>
 								<Input
 									type="password"
 									placeholder="Password"
 									autoComplete="current-password"
+									minLength={6}
 									required
 									{...field}
 								/>
@@ -89,7 +118,9 @@ const EditUserCredentialsForm = ({
 						</FormItem>
 					)}
 				/>
-				<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				<div className="ml-auto min-w-[200px]">
+					<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				</div>
 			</form>
 		</Form>
 	);

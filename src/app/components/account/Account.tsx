@@ -1,5 +1,6 @@
 import AccountAside from './AccountAside';
 import AccountHeader from './AccountHeader';
+import { AccountProvider } from './AccountProvider';
 import { auth } from '@/auth';
 import { provideDescribeUserUsecase } from '@/features/user/describe';
 import { isError } from '@/lib/either';
@@ -34,14 +35,14 @@ const Account = async ({ children }: AccountProps) => {
 			</AccountSection>
 		);
 
-	const { username, profileImage } = userResponse.success;
+	const { userId, username, profileImage, email } = userResponse.success;
 
 	return (
 		<AccountSection>
 			<AccountHeader username={username} profileImage={profileImage} />
 			<div className="flex items-start gap-2 w-full max-w-[800px]">
 				<AccountAside />
-				{children}
+				<AccountProvider accountProps={{ userId, email }}>{children}</AccountProvider>
 			</div>
 		</AccountSection>
 	);

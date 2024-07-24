@@ -30,7 +30,7 @@ const UserConfigDropdown = ({ user, children }: UserConfigDropdownProps) => {
 		{
 			label: 'Account',
 			isAllowed: true,
-			action: async () => router.push(`/account/${user.id}`),
+			action: async () => router.push(`/account`),
 			icon: <IconNotebook size={20} className="text-zinc-500 mr-2" />,
 		},
 		{

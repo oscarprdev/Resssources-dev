@@ -1,6 +1,5 @@
 import AccountAsideLink from './AccountAsideLink';
 import { LinkPath } from './types';
-import Link from 'next/link';
 
 const AccountAside = () => {
 	return (

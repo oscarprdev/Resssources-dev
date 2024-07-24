@@ -9,6 +9,7 @@ export type EditUserInfoInput = z.infer<typeof editUserInfoInput>;
 
 export const editUserCredentialsInput = z.object({
 	userId: z.string(),
+	oldPassword: z.string(),
 	password: z.string(),
 });
 

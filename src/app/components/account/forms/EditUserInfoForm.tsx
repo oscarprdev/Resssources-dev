@@ -2,6 +2,7 @@
 
 import FormAction from '../../core/forms/FormAction';
 import { Input } from '../../ui/input';
+import { toast } from '../../ui/use-toast';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/components/ui/form';
 import { EditUserInfoInput } from '@/features/user/edit/application/edit-user.dto';
 import { Either, isError } from '@/lib/either';
@@ -12,7 +13,6 @@ import { z } from 'zod';
 export type EditUserInfoFormValues = EditUserInfoInput & { error: string | null };
 type EditUserInfoFormProps = {
 	handleSubmit(values: EditUserInfoFormValues): Promise<Either<string, string>>;
-	afterEditUserInfoFormSubmit(successMessage: string): void;
 	defaultValues: {
 		email: string;
 	};
@@ -22,7 +22,7 @@ const editUserInfoFormSchema = z.object({
 	email: z.string().email(),
 });
 
-const EditUserInfoForm = ({ handleSubmit, afterEditUserInfoFormSubmit, defaultValues }: EditUserInfoFormProps) => {
+const EditUserInfoForm = ({ handleSubmit, defaultValues }: EditUserInfoFormProps) => {
 	const form = useForm<EditUserInfoFormValues>({
 		resolver: zodResolver(editUserInfoFormSchema),
 		defaultValues,
@@ -34,7 +34,11 @@ const EditUserInfoForm = ({ handleSubmit, afterEditUserInfoFormSubmit, defaultVa
 			return form.setValue('error', response.error);
 		}
 
-		afterEditUserInfoFormSubmit(response?.success);
+		form.reset();
+
+		toast({
+			description: response.success,
+		});
 	};
 
 	return (
@@ -45,7 +49,7 @@ const EditUserInfoForm = ({ handleSubmit, afterEditUserInfoFormSubmit, defaultVa
 					name="email"
 					render={({ field }) => (
 						<FormItem className="animate-fade-up">
-							<FormLabel className="text-zinc-700 font-normal">Email</FormLabel>
+							<FormLabel className="text-zinc-700 font-bold">Email</FormLabel>
 							<FormControl>
 								<Input placeholder="Email" autoComplete="email" required {...field} />
 							</FormControl>
@@ -53,7 +57,9 @@ const EditUserInfoForm = ({ handleSubmit, afterEditUserInfoFormSubmit, defaultVa
 						</FormItem>
 					)}
 				/>
-				<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				<div className="ml-auto min-w-[200px]">
+					<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				</div>
 			</form>
 		</Form>
 	);

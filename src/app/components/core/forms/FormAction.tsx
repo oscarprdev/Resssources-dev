@@ -10,7 +10,7 @@ type FormActionProps = {
 const FormAction = ({ error, isSubmitting }: FormActionProps) => {
 	return (
 		<div className="relative  flex flex-col items-center w-full gap-2 mt-6">
-			{error && <FormMessage className="absolute -top-5">{error}</FormMessage>}
+			{error && <FormMessage className="absolute -top-5 w-[200%] text-center">{error}</FormMessage>}
 			<Button disabled={isSubmitting} type="submit">
 				{isSubmitting ? <IconDots className="animate-pulse text-zinc-300" /> : 'Submit'}
 			</Button>

@@ -36,10 +36,13 @@ export class DefaultEditUserUsecase extends FeatureUsecase implements EditUserUs
 
 	async editCredentials(input: EditUserCredentialsInput) {
 		try {
-			const { userId, password } = editUserCredentialsInput.parse(input);
+			const { userId, password, oldPassword } = editUserCredentialsInput.parse(input);
 
 			const currentPasswordResponse = await this.ports.getCurrentPasswordByUserId({ userId });
 			if (!currentPasswordResponse) throw new Error('Error: Password not found for current user');
+
+			const isCurrentPasswordValid = await bcrypt.compare(oldPassword, currentPasswordResponse.password);
+			if (!isCurrentPasswordValid) throw new Error('Error: Old password not valid');
 
 			const isSamePassword = await bcrypt.compare(password, currentPasswordResponse.password);
 			if (isSamePassword) throw new Error('Error: New password cannot be equal as current password');
