@@ -26,11 +26,22 @@ type EditUserCredentialsFormProps = {
 	handleSubmit(values: EditUserCredentialsFormValues): Promise<Either<string, string>>;
 };
 
+const FORM_MESSAGES = {
+	MIN_LENGTH: 'Password must contain at least 6 character(s)',
+	MAX_LENGTH: 'Password must contain at most 12 character(s)',
+};
+
 const editUserCredentialsFormSchema = z
 	.object({
-		password: z.string(),
+		password: z
+			.string()
+			.max(12, { message: FORM_MESSAGES.MAX_LENGTH })
+			.min(6, { message: FORM_MESSAGES.MIN_LENGTH }),
 		oldPassword: z.string(),
-		passwordRepeated: z.string(),
+		passwordRepeated: z
+			.string()
+			.max(12, { message: FORM_MESSAGES.MAX_LENGTH })
+			.min(6, { message: FORM_MESSAGES.MIN_LENGTH }),
 	})
 	.refine(data => data.password === data.passwordRepeated, {
 		message: "Passwords don't match",
@@ -109,7 +120,6 @@ const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps)
 									type="password"
 									placeholder="Password"
 									autoComplete="current-password"
-									minLength={6}
 									required
 									{...field}
 								/>
