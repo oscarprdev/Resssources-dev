@@ -1,3 +1,4 @@
+import AddResourceModal from '../core/modals/AddResourceModal';
 import ProfileResources from './ProfileResources';
 import UserProfileInfo from './UserProfileInfo';
 import { auth } from '@/auth';
@@ -15,7 +16,7 @@ type ProfileProps = {
 
 const ProfileSection = ({ children }: { children: ReactNode }) => {
 	return (
-		<section className="w-screen bg-white min-h-screen gap-7 grid place-items-center rounded-2xl shadow-md">
+		<section className="w-screen bg-white min-h-screen gap-3 grid place-items-center rounded-2xl shadow-md">
 			{children}
 		</section>
 	);
@@ -51,11 +52,18 @@ const Profile = async ({ username, kinds }: ProfileProps) => {
 				description={description}
 				socialMedia={socialMedia}>
 				{isUserAuthorized && (
-					<Link
-						href="/account"
-						className="text-sm px-5 py-[0.3rem] rounded-full font-semibold border border-zinc-300 hover:bg-zinc-50 duration-300">
-						Edit profile
-					</Link>
+					<div className="flex items-center gap-2">
+						<Link
+							href="/account"
+							className="text-sm px-5 py-[0.3rem] rounded-full font-semibold border border-zinc-300 hover:bg-zinc-50 duration-300">
+							Edit profile
+						</Link>
+						<AddResourceModal username={username}>
+							<div className="text-sm px-5 py-[0.3rem] rounded-full font-semibold border border-zinc-300 hover:bg-zinc-50 duration-300">
+								Add resource
+							</div>
+						</AddResourceModal>
+					</div>
 				)}
 			</UserProfileInfo>
 			<span className="bg-zinc-200 w-[70%] h-[1px]"></span>
