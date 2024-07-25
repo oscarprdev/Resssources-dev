@@ -36,7 +36,8 @@ const EditResourceImage = ({ form, updateFormImageValue }: EditResourceImageProp
 		<div className="flex items-center gap-4 w-full">
 			<picture className="relative rounded-full size-[90px]">
 				{loading && (
-					<div className={cn('absolute size-[140px] rounded-lg opacity-60 bg-black grid place-items-center')}>
+					<div
+						className={cn('absolute size-[90px] rounded-full opacity-60 bg-black grid place-items-center')}>
 						<span className="text-blue-300 animate-spin">
 							<IconLoader2 size={20} />
 						</span>
@@ -58,7 +59,12 @@ const EditResourceImage = ({ form, updateFormImageValue }: EditResourceImageProp
 				hidden
 				onChange={handleInputFileChange}
 			/>
-			<Button type="button" variant={'secondary'} size={'sm'} onClick={() => handleBrowseImageClick()}>
+			<Button
+				className='className="text-sm px-5 py-[0.3rem] rounded-full font-semibold border border-zinc-300 hover:bg-zinc-50 duration-300"'
+				type="button"
+				variant={'secondary'}
+				size={'sm'}
+				onClick={() => handleBrowseImageClick()}>
 				Browse image
 			</Button>
 		</div>

@@ -20,6 +20,7 @@ export class ListResourcesAdapters implements IListResourcesPorts {
 	async listResourcesImages({ kinds }: ListResourcesImagesInput) {
 		const infraResources = await this.infra.listResources({
 			withUserData: false,
+			published: true,
 			kinds,
 		});
 

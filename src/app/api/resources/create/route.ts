@@ -1,6 +1,7 @@
 import { provideCreateResourceUsecase } from '@/features/resources/create';
 import { isError } from '@/lib/either';
 import { $Enums } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export interface CreateResourceInput {
@@ -23,6 +24,8 @@ export async function POST(request: NextRequest) {
 		if (isError(response)) {
 			throw new Error(response.error);
 		}
+
+		revalidatePath('/dashboard');
 
 		return NextResponse.json(response.success, { status: 201 });
 	} catch (error) {

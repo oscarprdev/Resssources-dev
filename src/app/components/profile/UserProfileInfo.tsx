@@ -45,7 +45,7 @@ const UserProfileInfo = ({
 						<Badge className="capitalize">Shared: {createdCount}</Badge>
 						<Badge className="capitalize">Fav: {favCount}</Badge>
 					</div>
-					<p className="text-xs text-zinc-500 max-w-[100ch]">{description}</p>
+					<p className="text-xs text-zinc-500 max-w-[50ch]">{description}</p>
 					<div className="flex items-center gap-5">
 						{socialMedia && (
 							<div className="flex items-center gap-2">
