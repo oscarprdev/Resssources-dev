@@ -34,8 +34,6 @@ const EditUserInfoForm = ({ handleSubmit, defaultValues }: EditUserInfoFormProps
 			return form.setValue('error', response.error);
 		}
 
-		form.reset();
-
 		toast({
 			description: response.success,
 		});

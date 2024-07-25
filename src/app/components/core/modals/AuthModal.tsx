@@ -39,7 +39,9 @@ const AuthModal = ({ children }: AuthModalProps) => {
 			<DialogTrigger ref={triggerDialog}>{children}</DialogTrigger>
 			<DialogContent className="flex flex-col items-center px-10 w-full max-w-[380px]">
 				<DialogHeader>
-					<DialogTitle className="text-2xl font-normal">{isLoginModal ? 'Log In' : 'Sign up'}</DialogTitle>
+					<DialogTitle className="text-xl font-bold">
+						{isLoginModal ? 'Good to see you again!' : 'Hello! Sign up to start sharing.'}
+					</DialogTitle>
 				</DialogHeader>
 				{isLoginModal ? (
 					<LoginForm handleSubmit={handleLoginSubmit} afterLoginFormSubmit={afterLoginFormSubmit} />

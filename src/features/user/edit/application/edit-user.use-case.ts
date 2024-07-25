@@ -45,7 +45,7 @@ export class DefaultEditUserUsecase extends FeatureUsecase implements EditUserUs
 		try {
 			const { userId, username, description, image } = editUserProfileInput.parse(input);
 
-			const imgUrl = await this.uploadImage(username, image);
+			const imgUrl = image !== 'undefined' ? await this.uploadImage(username, image) : undefined;
 			await this.ports.editUserProfile({ userId, description, imgUrl });
 
 			return successResponse(EDIT_USER_SUCCESS.PROFILE);

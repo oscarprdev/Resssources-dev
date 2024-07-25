@@ -62,7 +62,7 @@ const ProfileImageInput = ({ form }: ProfileImageInputProps) => {
 				hidden
 				onChange={handleInputFileChange}
 			/>
-			<div className="flex items-center w-[400px] gap-2">
+			<div className="flex items-center w-[200px] gap-2">
 				<Button type="button" size={'sm'} variant={'outline'} onClick={() => handleBrowseImageClick()}>
 					Upload new image
 				</Button>

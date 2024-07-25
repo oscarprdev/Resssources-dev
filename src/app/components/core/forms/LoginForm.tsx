@@ -78,7 +78,7 @@ const LoginForm = ({ handleSubmit, afterLoginFormSubmit }: LoginFormProps) => {
 						</FormItem>
 					)}
 				/>
-				<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				<FormAction error={form.getValues('error')} text="Log in" isSubmitting={form.formState.isSubmitting} />
 			</form>
 		</Form>
 	);

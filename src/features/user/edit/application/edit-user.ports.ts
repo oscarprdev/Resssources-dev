@@ -39,7 +39,7 @@ export type UploadImagePortsInput = {
 
 export type EditUseProfilePortsInput = {
 	userId: string;
-	imgUrl: string;
+	imgUrl?: string;
 	description: string;
 };
 

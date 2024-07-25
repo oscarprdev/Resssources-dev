@@ -27,7 +27,7 @@ const FORM_MESSAGES = {
 
 const editUserProfileFormSchema = z.object({
 	description: z.string().max(200, { message: FORM_MESSAGES.DESCRIPTION_MAX_LENGTH }),
-	image: z.instanceof(File),
+	image: z.instanceof(File).optional(),
 });
 
 const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFormProps) => {

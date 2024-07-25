@@ -19,7 +19,18 @@ export const editUserProfileInput = z.object({
 	userId: z.string(),
 	username: z.string(),
 	description: z.string(),
-	image: z.any().refine(img => 'type' in img && 'name' in img && 'size' in img),
+	image: z
+		.any()
+		.optional()
+		.refine(
+			img => {
+				
+				return img === 'undefined' || (img && 'type' in img && 'name' in img && 'size' in img);
+			},
+			{
+				message: 'Image must have type, name, and size if provided',
+			}
+		),
 });
 
 export type EditUserProfileInput = z.infer<typeof editUserProfileInput>;

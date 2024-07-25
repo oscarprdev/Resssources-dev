@@ -17,7 +17,7 @@ export type GetUserByUserIdInfraInput = {
 export type EditUserProfileInfraInput = {
 	userId: string;
 	description: string;
-	profileImage: string;
+	profileImage?: string;
 };
 
 export type UploadImageInfraInput = {

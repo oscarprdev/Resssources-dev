@@ -97,7 +97,11 @@ const RegisterForm = ({ handleSubmit, afterRegisterFormSubmit }: RegisterFormPro
 						</FormItem>
 					)}
 				/>
-				<FormAction error={form.getValues('error')} isSubmitting={form.formState.isSubmitting} />
+				<FormAction
+					error={form.getValues('error')}
+					text="Create account"
+					isSubmitting={form.formState.isSubmitting}
+				/>
 			</form>
 		</Form>
 	);

@@ -41,7 +41,7 @@ export type GetUserSocialMediaClientInput = {
 export type EditProfileClientInput = {
 	userId: string;
 	description: string;
-	profileImage: string;
+	profileImage?: string;
 };
 
 export type EditSocialLinksClientInput = {
