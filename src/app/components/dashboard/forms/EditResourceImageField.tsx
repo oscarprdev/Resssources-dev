@@ -33,8 +33,8 @@ const EditResourceImage = ({ form, updateFormImageValue }: EditResourceImageProp
 	};
 
 	return (
-		<div className="flex flex-col space-y-4 w-[140px]">
-			<picture className="relative rounded-lg w-full h-[140px]">
+		<div className="flex items-center gap-4 w-full">
+			<picture className="relative rounded-full size-[90px]">
 				{loading && (
 					<div className={cn('absolute size-[140px] rounded-lg opacity-60 bg-black grid place-items-center')}>
 						<span className="text-blue-300 animate-spin">
@@ -47,7 +47,7 @@ const EditResourceImage = ({ form, updateFormImageValue }: EditResourceImageProp
 					alt="Resource image"
 					width={600}
 					height={600}
-					className="rounded-lg w-full h-full object-cover "
+					className="rounded-full w-full h-full object-cover "
 				/>
 			</picture>
 

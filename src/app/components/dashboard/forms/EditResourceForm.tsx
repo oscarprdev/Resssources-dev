@@ -93,7 +93,7 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 					name="title"
 					render={({ field }) => (
 						<FormItem className="animate-fade-up w-full">
-							<FormLabel className="text-zinc-700 font-normal">Title</FormLabel>
+							<FormLabel className="text-zinc-700 font-bold">Title</FormLabel>
 							<FormControl>
 								<Input
 									placeholder="Title"
@@ -112,7 +112,7 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 					name="url"
 					render={({ field }) => (
 						<FormItem className="animate-fade-up w-full">
-							<FormLabel className="text-zinc-700 font-normal">URL</FormLabel>
+							<FormLabel className="text-zinc-700 font-bold">URL</FormLabel>
 							<FormControl>
 								<Input
 									type="url"
@@ -131,7 +131,7 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 					name="description"
 					render={({ field }) => (
 						<FormItem className="animate-fade-up w-full">
-							<FormLabel className="text-zinc-700 font-normal">Description</FormLabel>
+							<FormLabel className="text-zinc-700 font-bold">Description</FormLabel>
 							<FormControl>
 								<Textarea
 									placeholder="Description"
@@ -144,16 +144,16 @@ const EditResourceForm = ({ resource, toggleModal }: EditResourceFormProps) => {
 						</FormItem>
 					)}
 				/>
-				<div className="relative flex items-center space-x-2 w-full mt-6">
+				<div className="relative flex items-center justify-center space-x-2 w-full mt-6">
 					{form.getValues('error') && (
 						<FormMessage className="absolute -top-6 w-full flex items-center justify-center">
 							{form.getValues('error')}
 						</FormMessage>
 					)}
-					<Button disabled={form.formState.isSubmitting || !form.formState.isDirty}>
+					<Button size={'lg'} disabled={form.formState.isSubmitting || !form.formState.isDirty}>
 						{form.formState.isSubmitting ? <IconDots className="animate-pulse text-zinc-300" /> : 'Update'}
 					</Button>
-					<Button type="button" variant={'secondary'} onClick={() => toggleModal(false)}>
+					<Button size={'lg'} type="button" variant={'clear'} onClick={() => toggleModal(false)}>
 						Cancel
 					</Button>
 				</div>

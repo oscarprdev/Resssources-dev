@@ -15,7 +15,7 @@ const DashboardModal = ({ isOpened, size, toggleModal, title, children }: Dashbo
 		<Dialog open={isOpened} onOpenChange={toggleModal}>
 			<DialogContent
 				className={cn(
-					'flex flex-col items-center px-5 w-full',
+					'flex flex-col items-center px-10 w-full',
 					size === 'md' ? 'max-w-[400px]' : 'max-w-[600px]'
 				)}>
 				<DialogHeader>
