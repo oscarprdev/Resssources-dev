@@ -101,3 +101,10 @@ export type UpdateResourceOwnerInput = {
 	oldOwnerId: string;
 	newOwnerId: string;
 };
+
+export type GetResourcesListBySearchInput = {
+	cursor?: string;
+	itemsPerRequest: number;
+	kinds: $Enums.Kind[];
+	value: string;
+};

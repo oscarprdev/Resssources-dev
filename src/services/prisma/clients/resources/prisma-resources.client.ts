@@ -9,6 +9,7 @@ import {
 	GetResourcesListByFavInput,
 	GetResourcesListByKindInput,
 	GetResourcesListByOwnerInput,
+	GetResourcesListBySearchInput,
 	GetResourcesListInput,
 	RemoveResourceInput,
 	ResourceWithRelations,
@@ -33,6 +34,7 @@ export interface ResourcesClient {
 	getResourcesListByOwner(input: GetResourcesListByOwnerInput): Promise<Resource[]>;
 	getResourcesListByFav(input: GetResourcesListByFavInput): Promise<Resource[]>;
 	getResourcesListByKind(input: GetResourcesListByKindInput): Promise<Resource[]>;
+	getResourcesListBySearch(input: GetResourcesListBySearchInput): Promise<Resource[]>;
 
 	createResource(input: CreateResourceInput): Promise<Resource>;
 
@@ -176,6 +178,46 @@ export class PrismaResourcesClient implements ResourcesClient {
 					hasSome: kind,
 				},
 			},
+			orderBy: {
+				createdAt: 'desc',
+			},
+		});
+	}
+
+	async getResourcesListBySearch({ value, cursor, itemsPerRequest, kinds }: GetResourcesListBySearchInput) {
+		console.log(value, cursor, itemsPerRequest, kinds);
+		return await prisma.resources.findMany({
+			skip: cursor ? 1 : 0,
+			where: {
+				AND: [
+					{
+						OR: [
+							{
+								title: {
+									contains: value,
+									mode: 'insensitive',
+								},
+							},
+							{
+								description: {
+									contains: value,
+									mode: 'insensitive',
+								},
+							},
+						],
+					},
+					{
+						published: true,
+					},
+					{
+						kind: {
+							hasSome: kinds,
+						},
+					},
+				],
+			},
+			take: itemsPerRequest,
+			cursor: cursor ? { id: cursor } : undefined,
 			orderBy: {
 				createdAt: 'desc',
 			},

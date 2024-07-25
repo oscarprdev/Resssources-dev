@@ -1,4 +1,4 @@
-import { Kinds, ResourceWithUserInfo } from '../../shared/resources.types';
+import { Kinds, ResourceApplication, ResourceWithUserInfo } from '../../shared/resources.types';
 
 export type ResourceImage = {
 	id: string;
@@ -19,7 +19,7 @@ export type ListResourcesInput = {
 };
 
 export type ListResourcesOutput = {
-	items: ResourceWithUserInfo[];
+	items: ResourceWithUserInfo[] | ResourceApplication[];
 	moreItems: boolean;
 	cursor?: string;
 	totalItems?: number;
@@ -31,3 +31,19 @@ export type GetResourcesCountInput = {
 	userId?: string;
 	kinds: Kinds;
 };
+
+export type ListResourcesBySearchInput = {
+	cursor?: string;
+	kinds: Kinds;
+	value: string;
+};
+
+export type ResourceSearched = {
+	id: string;
+	faviconUrl: string;
+	title: string;
+	description: string;
+	url: string;
+};
+
+export type ListResourcesBySearchOutput = ResourceSearched[];

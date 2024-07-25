@@ -1,5 +1,9 @@
 import { Kinds, ResourceApplication } from '../../shared/resources.types';
-import { GetUserByIdPortsInput, IListResourcesPorts } from '../application/list-resources.ports';
+import {
+	GetUserByIdPortsInput,
+	IListResourcesPorts,
+	ListResourcesBySearchPortsInput,
+} from '../application/list-resources.ports';
 import {
 	GetResourcesCountInput,
 	ListResourcesImagesInput,
@@ -44,6 +48,18 @@ export class ListResourcesAdapters implements IListResourcesPorts {
 			...resource,
 			createdAt: formatDistanceTime(resource.createdAt),
 			updatedAt: formatDistanceTime(resource.updatedAt),
+		}));
+	}
+
+	async listResourcesBySearch({ cursor, itemsPerRequest, value, kinds }: ListResourcesBySearchPortsInput) {
+		const resourceInfra = await this.infra.listResourcesBySearch({ cursor, itemsPerRequest, value, kinds });
+
+		return resourceInfra.map(res => ({
+			id: res.id,
+			title: res.title,
+			description: res.description,
+			faviconUrl: res.faviconUrl,
+			url: res.resourceUrl,
 		}));
 	}
 

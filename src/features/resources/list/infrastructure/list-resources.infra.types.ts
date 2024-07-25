@@ -23,3 +23,10 @@ export type GetResourcesCountInfraInput = {
 		kinds: Kinds;
 	};
 };
+
+export type ListResourcesBySearchInfraInput = {
+	cursor?: string;
+	itemsPerRequest: number;
+	kinds: Kinds;
+	value: string;
+};

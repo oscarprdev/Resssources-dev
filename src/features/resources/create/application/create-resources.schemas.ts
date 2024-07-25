@@ -1,7 +1,7 @@
 import { $Enums } from '@prisma/client';
 import { z } from 'zod';
 
-export const RESOURCE_KIND_VALUES = [
+export const RESOURCE_KIND_VALUES: $Enums.Kind[] = [
 	$Enums.Kind.FRONTEND,
 	$Enums.Kind.BACKEND,
 	$Enums.Kind.UI,

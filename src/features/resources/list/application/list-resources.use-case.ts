@@ -2,7 +2,13 @@ import { RESOURCE_KIND_VALUES } from '../../create/application/create-resources.
 import { RESOURCES_ERRORS } from '../../shared/resources.constants';
 import { Kinds, ResourceApplication, ResourceWithUserInfo } from '../../shared/resources.types';
 import { IListResourcesPorts } from './list-resources.ports';
-import { ListResourcesInput, ListResourcesOutput, ResourceImage } from './list-resources.use-case.types';
+import {
+	ListResourcesBySearchInput,
+	ListResourcesBySearchOutput,
+	ListResourcesInput,
+	ListResourcesOutput,
+	ResourceImage,
+} from './list-resources.use-case.types';
 import { UsecaseResponse } from '@/features/shared/features.types';
 import { FeatureUsecase } from '@/features/shared/features.use-case';
 import { successResponse } from '@/lib/either';
@@ -10,6 +16,7 @@ import { successResponse } from '@/lib/either';
 export interface IListResourcesUsecase {
 	listResourcesImages(): UsecaseResponse<ResourceImage[]>;
 	listResources(input: ListResourcesInput): UsecaseResponse<ListResourcesOutput>;
+	listResourcesBySearch(input: ListResourcesBySearchInput): UsecaseResponse<ListResourcesBySearchOutput>;
 }
 
 export class ListResourcesUsecase extends FeatureUsecase implements IListResourcesUsecase {
@@ -45,17 +52,30 @@ export class ListResourcesUsecase extends FeatureUsecase implements IListResourc
 					kinds: kinds || RESOURCE_KIND_VALUES,
 				}),
 			]);
-			const resourcesWithUserInfo = await Promise.all(
-				resources.map(resource => this.addUserInfoToResource(resource))
-			);
+
+			let items: ResourceWithUserInfo[] | ResourceApplication[] = resources;
+
+			if (withUserData) {
+				items = await Promise.all(resources.map(resource => this.addUserInfoToResource(resource)));
+			}
 
 			return successResponse({
-				items: resourcesWithUserInfo,
+				items,
 				moreItems: itemsPerRequest ? count - 1 > itemsPerRequest : false,
 				cursor: resources.length > 0 ? resources[resources.length - 1].id : undefined,
 			});
 		} catch (error) {
 			return this.errorUsecaseResponse(error, RESOURCES_ERRORS.LISTING);
+		}
+	}
+
+	async listResourcesBySearch({ cursor, value, kinds }: ListResourcesBySearchInput) {
+		try {
+			const resources = await this.ports.listResourcesBySearch({ cursor, value, kinds, itemsPerRequest: 8 });
+
+			return successResponse(resources);
+		} catch (error) {
+			return this.errorUsecaseResponse(error, RESOURCES_ERRORS.SEARCH);
 		}
 	}
 

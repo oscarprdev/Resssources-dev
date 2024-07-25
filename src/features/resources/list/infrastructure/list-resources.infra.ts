@@ -2,15 +2,18 @@ import { RESOURCES_INFRA_ERRORS } from '../../shared/resources.constants';
 import {
 	GetResourcesCountInfraInput,
 	GetUserByIdInfraInput,
+	ListResourcesBySearchInfraInput,
 	ListResourcesInfraInput,
 } from './list-resources.infra.types';
-import { UserStored } from '@/features/shared/types/global.types';
+import { ResourceStored, UserStored } from '@/features/shared/types/global.types';
 import { ResourcesClient } from '@/services/prisma/clients/resources/prisma-resources.client';
 import { ResourceWithRelations } from '@/services/prisma/clients/resources/prisma-resources.types';
 import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 
 export interface IListResourcesInfra {
 	listResources(input: ListResourcesInfraInput): Promise<ResourceWithRelations[]>;
+	listResourcesBySearch(input: ListResourcesBySearchInfraInput): Promise<ResourceStored[]>;
+
 	getUserById(input: GetUserByIdInfraInput): Promise<UserStored | null>;
 	getResourcesCount(input: GetResourcesCountInfraInput): Promise<number>;
 }
@@ -37,9 +40,17 @@ export class ListResourcesInfra implements IListResourcesInfra {
 		}
 	}
 
+	async listResourcesBySearch({ cursor, itemsPerRequest, value, kinds }: ListResourcesBySearchInfraInput) {
+		try {
+			return await this.resourceClient.getResourcesListBySearch({ cursor, itemsPerRequest, value, kinds });
+		} catch (error) {
+			throw new Error(RESOURCES_INFRA_ERRORS.SEARCHING);
+		}
+	}
+
 	async getUserById({ userId }: GetUserByIdInfraInput) {
 		try {
-			return this.usersClient.getUserById({ userId });
+			return await this.usersClient.getUserById({ userId });
 		} catch (error) {
 			throw new Error(RESOURCES_INFRA_ERRORS.USER_BY_ID);
 		}
@@ -47,7 +58,7 @@ export class ListResourcesInfra implements IListResourcesInfra {
 
 	async getResourcesCount(input: GetResourcesCountInfraInput) {
 		try {
-			return this.resourceClient.getResourcesCount(input);
+			return await this.resourceClient.getResourcesCount(input);
 		} catch (error) {
 			throw new Error(RESOURCES_INFRA_ERRORS.COUNTING);
 		}
