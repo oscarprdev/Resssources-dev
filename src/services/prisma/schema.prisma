@@ -32,7 +32,7 @@ enum Kind {
 }
 
 model Resources {
-  id                String              @id @default(uuid())
+  id                String              @id @default(uuid()) @unique
   title             String              @unique
   description       String
   imgUrl            String
@@ -47,7 +47,7 @@ model Resources {
 }
 
 model Users {
-  id                  String              @id @default(uuid())
+  id                  String              @id @default(uuid()) @unique
   username            String              @unique
   password            String
   email               String              @unique
@@ -81,8 +81,8 @@ model FavouriteResource {
 }
 
 model ResourcesCreated {
-  userId              String
-  resourceId          String
+  userId              String               
+  resourceId          String              
   user                Users                @relation(fields: [userId], references: [id], onDelete: Cascade)
   resource            Resources            @relation(fields: [resourceId], references: [id], onDelete: Cascade)
   createdAt           DateTime             @default(now())

@@ -41,7 +41,7 @@ const Account = async ({ children }: AccountProps) => {
 		<AccountSection>
 			<AccountHeader username={username} profileImage={profileImage} />
 			<div className="flex items-start gap-2 w-full max-w-[800px]">
-				<AccountAside />
+				<AccountAside userId={userId} />
 				<AccountProvider accountProps={{ userId, email, username, description, profileImage, socialMedia }}>
 					{children}
 				</AccountProvider>

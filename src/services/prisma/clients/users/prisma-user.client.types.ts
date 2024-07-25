@@ -50,3 +50,7 @@ export type EditSocialLinksClientInput = {
 	linkedin: string;
 	github: string;
 };
+
+export type RemoveUserClientInput = {
+	userId: string;
+};

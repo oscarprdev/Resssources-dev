@@ -14,10 +14,11 @@ import {
 	ResourceWithRelations,
 	UpdateResourceFavInput,
 	UpdateResourceInput,
+	UpdateResourceOwnerInput,
 	UpdateResourcePublishedInput,
 } from './prisma-resources.types';
 import prisma from '@/services/prisma/db';
-import { $Enums, Resources as Resource } from '@prisma/client';
+import { Resources as Resource } from '@prisma/client';
 
 export interface ResourcesClient {
 	getResourceById(input: GetResourceByIdInput): Promise<Resource | null>;
@@ -37,6 +38,7 @@ export interface ResourcesClient {
 
 	updateResource(input: UpdateResourceInput): Promise<Resource>;
 	updateResourcePublished(input: UpdateResourcePublishedInput): Promise<Resource>;
+	updateResourceOwner(input: UpdateResourceOwnerInput): Promise<void>;
 
 	addResourceFav(input: UpdateResourceFavInput): Promise<void>;
 	removeResourceFav(input: UpdateResourceFavInput): Promise<void>;
@@ -229,6 +231,20 @@ export class PrismaResourcesClient implements ResourcesClient {
 			where: { id: resourceId },
 			data: {
 				published,
+			},
+		});
+	}
+
+	async updateResourceOwner({ resourceId, oldOwnerId, newOwnerId }: UpdateResourceOwnerInput) {
+		await prisma.resourcesCreated.update({
+			where: {
+				userId_resourceId: {
+					userId: oldOwnerId,
+					resourceId: resourceId,
+				},
+			},
+			data: {
+				userId: newOwnerId,
 			},
 		});
 	}

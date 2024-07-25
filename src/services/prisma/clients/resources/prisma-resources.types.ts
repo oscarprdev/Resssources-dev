@@ -95,3 +95,9 @@ export type UpdateResourceFavInput = {
 	resourceId: string;
 	userId: string;
 };
+
+export type UpdateResourceOwnerInput = {
+	resourceId: string;
+	oldOwnerId: string;
+	newOwnerId: string;
+};

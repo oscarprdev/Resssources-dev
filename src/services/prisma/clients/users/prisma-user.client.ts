@@ -10,15 +10,18 @@ import {
 	GetUserByUsernameInput,
 	GetUserSocialMediaClientInput,
 	GetUsersListByResourceFavInput,
+	RemoveUserClientInput,
 } from './prisma-user.client.types';
 import prisma from '@/services/prisma/db';
-import { SocialMedia, Users as User } from '@prisma/client';
+import { $Enums, SocialMedia, Users as User } from '@prisma/client';
 
 export interface UserClient {
 	getUserById(input: GetUserByIdInput): Promise<User | null>;
 	getUserByResourceCreated(input: GetUserByResourceCreatedInput): Promise<User | null>;
 	getUserByCredentials(input: GetUserByCredentialsInput): Promise<User | null>;
 	getUserByUsername(input: GetUserByUsernameInput): Promise<User | null>;
+
+	getUserAdmin(): Promise<User | null>;
 
 	getUserSocialMedia(input: GetUserSocialMediaClientInput): Promise<SocialMedia | null>;
 
@@ -30,6 +33,8 @@ export interface UserClient {
 	editProfile(input: EditProfileClientInput): Promise<User>;
 	editCredentials(input: EditCredentialsClientInput): Promise<User>;
 	editSocialLinks(input: EditSocialLinksClientInput): Promise<SocialMedia>;
+
+	removeUser(input: RemoveUserClientInput): Promise<void>;
 }
 
 export class PrismaUserClient implements UserClient {
@@ -72,6 +77,14 @@ export class PrismaUserClient implements UserClient {
 		return await prisma.socialMedia.findUnique({
 			where: {
 				userId,
+			},
+		});
+	}
+
+	async getUserAdmin() {
+		return await prisma.users.findFirst({
+			where: {
+				role: $Enums.Role.ADMIN,
 			},
 		});
 	}
@@ -142,6 +155,14 @@ export class PrismaUserClient implements UserClient {
 			},
 			data: {
 				password,
+			},
+		});
+	}
+
+	async removeUser({ userId }: RemoveUserClientInput) {
+		await prisma.users.delete({
+			where: {
+				id: userId,
 			},
 		});
 	}
