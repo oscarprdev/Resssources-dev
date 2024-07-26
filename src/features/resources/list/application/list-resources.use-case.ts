@@ -69,11 +69,22 @@ export class ListResourcesUsecase extends FeatureUsecase implements IListResourc
 		}
 	}
 
-	async listResourcesBySearch({ cursor, value, kinds }: ListResourcesBySearchInput) {
+	async listResourcesBySearch({ cursor, value, kinds, itemsPerRequest }: ListResourcesBySearchInput) {
 		try {
-			const resources = await this.ports.listResourcesBySearch({ cursor, value, kinds, itemsPerRequest: 8 });
+			const [resources, count] = await Promise.all([
+				this.ports.listResourcesBySearch({ cursor, value, kinds, itemsPerRequest }),
+				this.ports.getResourcesCount({
+					published: true,
+					cursor,
+					kinds,
+				}),
+			]);
 
-			return successResponse(resources);
+			return successResponse({
+				items: resources,
+				moreItems: itemsPerRequest && resources.length !== 0 ? count - 1 > itemsPerRequest : false,
+				cursor: resources.length > 0 ? resources[resources.length - 1].id : undefined,
+			});
 		} catch (error) {
 			return this.errorUsecaseResponse(error, RESOURCES_ERRORS.SEARCH);
 		}

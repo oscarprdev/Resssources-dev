@@ -16,7 +16,7 @@ const SearchResourcesInput = () => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const [kindSelected, setKindSelected] = useState<KindSelected>();
 
-	const { resources } = useListResourcesBySearch({ inputValue, kindSelected });
+	const { resources, moreItems, loadMoreItems } = useListResourcesBySearch({ inputValue, kindSelected });
 
 	const handleKindSelectChange = (kind: string) => {
 		const kindSelected = kind as Kind;
@@ -62,7 +62,9 @@ const SearchResourcesInput = () => {
 					))}
 				</SelectContent>
 			</Select>
-			{inputValue.length > 0 && <SearchResourcesFounded resources={resources} />}
+			{inputValue.length > 0 && (
+				<SearchResourcesFounded resources={resources} moreItems={moreItems} loadMoreItems={loadMoreItems} />
+			)}
 		</div>
 	);
 };

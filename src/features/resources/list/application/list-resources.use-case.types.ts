@@ -37,6 +37,11 @@ export type ListResourcesBySearchInput = {
 	cursor?: string;
 	kinds: Kinds;
 	value: string;
+	itemsPerRequest: number;
 };
 
-export type ListResourcesBySearchOutput = ResourceSearched[];
+export type ListResourcesBySearchOutput = {
+	items: ResourceSearched[];
+	moreItems: boolean;
+	cursor?: string;
+};
