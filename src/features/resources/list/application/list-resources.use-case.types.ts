@@ -4,6 +4,7 @@ import { ResourceSearched, ResourceType } from '@/features/shared/types/global.t
 export type ResourceImage = {
 	id: string;
 	imgUrl: string;
+	title: string;
 };
 
 export type ListResourcesImagesInput = {

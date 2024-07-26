@@ -32,6 +32,7 @@ export class ListResourcesAdapters implements IListResourcesPorts {
 		return infraResources.map(resources => ({
 			id: resources.id,
 			imgUrl: resources.imgUrl,
+			title: resources.title,
 		})) satisfies ResourceImage[];
 	}
 
