@@ -34,20 +34,20 @@ export interface ResourceWithUserInfo extends ResourceApplication {
 	}[];
 }
 
-export const Kind = {
-	FRONTEND: 'FRONTEND' as Kind,
-	BACKEND: 'BACKEND' as Kind,
-	UI: 'UI' as Kind,
-	DATABASES: 'DATABASES' as Kind,
-	STYLES: 'STYLES' as Kind,
-	ALGORITHMS: 'ALGORITHMS' as Kind,
-	ARCHITECTURE: 'ARCHITECTURE' as Kind,
-	TOOLS: 'TOOLS' as Kind,
-	FRAMEWORKS: 'FRAMEWORKS' as Kind,
-	TESTING: 'TESTING' as Kind,
-	DEVOPS: 'DEVOPS' as Kind,
-	SECURITY: 'SECURITY' as Kind,
-	AI: 'AI' as Kind,
+export const Kind: { [key in Kind]: key } = {
+	FRONTEND: 'FRONTEND',
+	BACKEND: 'BACKEND',
+	UI: 'UI',
+	DATABASES: 'DATABASES',
+	STYLES: 'STYLES',
+	ALGORITHMS: 'ALGORITHMS',
+	ARCHITECTURE: 'ARCHITECTURE',
+	TOOLS: 'TOOLS',
+	FRAMEWORKS: 'FRAMEWORKS',
+	TESTING: 'TESTING',
+	DEVOPS: 'DEVOPS',
+	SECURITY: 'SECURITY',
+	AI: 'AI',
 };
 
 export type ResourceSearched = {
