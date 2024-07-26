@@ -3,8 +3,8 @@
 import { Badge } from '../ui/badge';
 import { columns } from './resourcesTable/Columns/columns';
 import ResourceTable from './resourcesTable/ResourceTable';
-import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
 import { provideListResourceUsecase } from '@/features/resources/list';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
 import { isError, successResponse } from '@/lib/either';
 
 const Dashboard = async () => {

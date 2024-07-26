@@ -2,7 +2,7 @@ import AddResourceModal from '../core/modals/AddResourceModal';
 import ProfileResources from './ProfileResources';
 import UserProfileInfo from './UserProfileInfo';
 import { auth } from '@/auth';
-import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
 import { Kinds } from '@/features/shared/types/global.types';
 import { provideDescribeUserUsecase } from '@/features/user/describe';
 import { isError } from '@/lib/either';

@@ -1,7 +1,7 @@
 import { listResourcesAction } from '../actions/resources/list-resources.action';
 import { useInfiniteScrollPagination } from './useInfiniteScrollPagination';
-import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
 import { ListResourcesOutput } from '@/features/resources/list/application/list-resources.use-case.types';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
 import { Kinds } from '@/features/shared/types/global.types';
 import { useEffect } from 'react';
 

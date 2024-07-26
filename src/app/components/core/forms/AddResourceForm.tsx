@@ -14,7 +14,7 @@ import {
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { CREATE_RESOURCES_SUCCESS } from '@/features/resources/create/application/create-resources.constants';
-import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
 import { Either, isError } from '@/lib/either';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';

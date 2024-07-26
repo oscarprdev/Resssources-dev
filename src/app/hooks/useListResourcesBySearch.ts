@@ -1,14 +1,15 @@
-import { listResourcesBySearchAction } from '../actions/resources/list-resources-by-search';
+'use client';
+
+import { listResourcesBySearchAction } from '../actions/resources/list-resources-by-search.action';
 import { toast } from '../components/ui/use-toast';
-import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
-import { ResourceSearched } from '@/features/resources/list/application/list-resources.use-case.types';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
+import { Kind, ResourceSearched } from '@/features/shared/types/global.types';
 import { isError } from '@/lib/either';
-import { $Enums } from '@prisma/client';
 import { useEffect, useState } from 'react';
 
 type UseListResourcesBySearchInput = {
 	inputValue: string;
-	kindSelected?: $Enums.Kind;
+	kindSelected?: Kind;
 };
 
 export const useListResourcesBySearch = ({ inputValue, kindSelected }: UseListResourcesBySearchInput) => {

@@ -1,7 +1,7 @@
 import Section from '../../core/containers/Section';
 import ArrivalsCard from './ArrivalsCard';
-import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
 import { provideListResourceUsecase } from '@/features/resources/list';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
 import { isError } from '@/lib/either';
 
 const ArrivalsSection = async () => {

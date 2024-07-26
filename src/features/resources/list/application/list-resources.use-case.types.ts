@@ -1,4 +1,5 @@
 import { Kinds, ResourceApplication, ResourceWithUserInfo } from '../../shared/resources.types';
+import { ResourceSearched } from '@/features/shared/types/global.types';
 
 export type ResourceImage = {
 	id: string;
@@ -36,14 +37,6 @@ export type ListResourcesBySearchInput = {
 	cursor?: string;
 	kinds: Kinds;
 	value: string;
-};
-
-export type ResourceSearched = {
-	id: string;
-	faviconUrl: string;
-	title: string;
-	description: string;
-	url: string;
 };
 
 export type ListResourcesBySearchOutput = ResourceSearched[];

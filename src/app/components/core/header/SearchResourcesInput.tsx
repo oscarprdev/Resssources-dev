@@ -4,20 +4,20 @@ import { Input } from '../../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import SearchResourcesFounded from './SearchResourcesFounded';
 import { useListResourcesBySearch } from '@/app/hooks/useListResourcesBySearch';
-import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
-import { $Enums } from '@prisma/client';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
+import { Kind } from '@/features/shared/types/global.types';
 import { IconSearch } from '@tabler/icons-react';
 import { ChangeEvent, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 const SearchResourcesInput = () => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const [kindSelected, setKindSelected] = useState<$Enums.Kind>();
+	const [kindSelected, setKindSelected] = useState<Kind>();
 
 	const { resources } = useListResourcesBySearch({ inputValue, kindSelected });
 
 	const handleKindSelectChange = (kind: string) => {
-		const kindSelected = kind as $Enums.Kind;
+		const kindSelected = kind as Kind;
 		if (RESOURCE_KIND_VALUES.includes(kindSelected)) {
 			setKindSelected(kindSelected);
 		}

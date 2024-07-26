@@ -1,5 +1,6 @@
 import { $Enums, SocialMedia as PrismaSocialMedia, Resources as Resource, Users as User } from '@prisma/client';
 
+export type Kind = $Enums.Kind;
 export type Kinds = $Enums.Kind[];
 export type ResourceStored = Resource;
 export type UserStored = User;
@@ -32,3 +33,27 @@ export interface ResourceWithUserInfo extends ResourceApplication {
 		username: string;
 	}[];
 }
+
+export const Kind = {
+	FRONTEND: 'FRONTEND' as Kind,
+	BACKEND: 'BACKEND' as Kind,
+	UI: 'UI' as Kind,
+	DATABASES: 'DATABASES' as Kind,
+	STYLES: 'STYLES' as Kind,
+	ALGORITHMS: 'ALGORITHMS' as Kind,
+	ARCHITECTURE: 'ARCHITECTURE' as Kind,
+	TOOLS: 'TOOLS' as Kind,
+	FRAMEWORKS: 'FRAMEWORKS' as Kind,
+	TESTING: 'TESTING' as Kind,
+	DEVOPS: 'DEVOPS' as Kind,
+	SECURITY: 'SECURITY' as Kind,
+	AI: 'AI' as Kind,
+};
+
+export type ResourceSearched = {
+	id: string;
+	faviconUrl: string;
+	title: string;
+	description: string;
+	url: string;
+};

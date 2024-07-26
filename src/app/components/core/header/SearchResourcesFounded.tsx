@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from '../../ui/button';
-import { DEFAULT_IMAGE } from '@/features/resources/create/application/create-resources.use-case';
-import { ResourceSearched } from '@/features/resources/list/application/list-resources.use-case.types';
+import { DEFAULT_IMAGE } from '@/features/shared/constants/global-constants';
+import { ResourceSearched } from '@/features/shared/types/global.types';
 import Link from 'next/link';
 
 type SearchResourcesFoundedProps = {

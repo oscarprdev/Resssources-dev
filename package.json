@@ -10,6 +10,9 @@
 		"format": "prettier --write . --config ./.prettierrc",
 		"postinstall": "prisma generate"
 	},
+	"prisma": {
+		"schema": "./src/services/prisma/schema.prisma"
+	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
 		"@neondatabase/serverless": "^0.9.4",

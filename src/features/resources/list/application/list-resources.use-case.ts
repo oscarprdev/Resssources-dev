@@ -1,6 +1,5 @@
-import { RESOURCE_KIND_VALUES } from '../../create/application/create-resources.schemas';
 import { RESOURCES_ERRORS } from '../../shared/resources.constants';
-import { Kinds, ResourceApplication, ResourceWithUserInfo } from '../../shared/resources.types';
+import { ResourceApplication, ResourceWithUserInfo } from '../../shared/resources.types';
 import { IListResourcesPorts } from './list-resources.ports';
 import {
 	ListResourcesBySearchInput,
@@ -9,6 +8,7 @@ import {
 	ListResourcesOutput,
 	ResourceImage,
 } from './list-resources.use-case.types';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
 import { UsecaseResponse } from '@/features/shared/features.types';
 import { FeatureUsecase } from '@/features/shared/features.use-case';
 import { successResponse } from '@/lib/either';

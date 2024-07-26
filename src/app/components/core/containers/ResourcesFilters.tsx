@@ -1,8 +1,8 @@
 'use client';
 
 import { Badge } from '../../ui/badge';
-import { RESOURCE_KIND_VALUES } from '@/features/resources/create/application/create-resources.schemas';
 import { ResourceKind } from '@/features/resources/shared/resources.types';
+import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
 import { cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 

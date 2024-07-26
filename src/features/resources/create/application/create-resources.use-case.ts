@@ -2,6 +2,7 @@ import { CREATE_RESOURCES_ERRORS, CREATE_RESOURCES_SUCCESS } from './create-reso
 import { CreateResourcesPorts } from './create-resources.ports';
 import { createResourceInputSchema } from './create-resources.schemas';
 import { CreateResourceInput } from './create-resources.types';
+import { DEFAULT_IMAGE } from '@/features/shared/constants/global-constants';
 import { FeatureUsecase } from '@/features/shared/features.use-case';
 import { Either, errorResponse, successResponse } from '@/lib/either';
 import { JSDOM } from 'jsdom';
@@ -9,8 +10,6 @@ import { JSDOM } from 'jsdom';
 export interface ICreateResourcesUsecase {
 	createResource(input: CreateResourceInput): Promise<Either<string, string>>;
 }
-
-export const DEFAULT_IMAGE = 'https://pub-dd6ab2097287461d82afdef8be7ad9a4.r2.dev/default.webp';
 
 export class CreateResourceUsecase extends FeatureUsecase implements ICreateResourcesUsecase {
 	constructor(private readonly ports: CreateResourcesPorts) {
