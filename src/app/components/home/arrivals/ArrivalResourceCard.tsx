@@ -1,7 +1,7 @@
 import DetailButton from '../../core/buttons/DetailButton';
 import LikeButton from '../../core/buttons/LikeButton';
 import UserButton from '../../core/buttons/UserButton';
-import ResourceDescription from '../../core/containers/ResourceDescription';
+import ResourceDescriptionTooltip from '../../core/tooltips/ResourceDescriptionTooltip';
 import { Badge } from '../../ui/badge';
 import { $Enums } from '@prisma/client';
 import Image from 'next/image';
@@ -41,7 +41,7 @@ const ArrivalResourceCard = ({
 			<div className="w-full flex flex-col items-start gap-1 pl-5 border border-transparent border-l-zinc-100">
 				<UserButton username={owner} />
 				<h4 className="text-2xl uppercase -mt-1 truncate max-w-[90%]">{title}</h4>
-				<ResourceDescription
+				<ResourceDescriptionTooltip
 					description={description}
 					triggerClass="text-zinc-500 max-w-[300px] truncate text-sm hover:text-zinc-300"
 				/>

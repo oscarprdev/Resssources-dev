@@ -2,12 +2,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/
 import { cn } from '@/lib/utils';
 import { ReactNode } from 'react';
 
-type ResourceDescriptionProps = {
+type ResourceDescriptionTooltipProps = {
 	description: string;
 	triggerClass: ReactNode;
 };
 
-const ResourceDescription = ({ description, triggerClass }: ResourceDescriptionProps) => {
+const ResourceDescriptionTooltip = ({ description, triggerClass }: ResourceDescriptionTooltipProps) => {
 	return (
 		<TooltipProvider delayDuration={100}>
 			<Tooltip>
@@ -20,4 +20,4 @@ const ResourceDescription = ({ description, triggerClass }: ResourceDescriptionP
 	);
 };
 
-export default ResourceDescription;
+export default ResourceDescriptionTooltip;

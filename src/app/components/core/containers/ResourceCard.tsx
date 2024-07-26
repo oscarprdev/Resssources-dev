@@ -3,7 +3,7 @@ import DetailButton from '../buttons/DetailButton';
 import FavCountButton from '../buttons/FavCountButton';
 import LikeButton from '../buttons/LikeButton';
 import UserButton from '../buttons/UserButton';
-import ResourceDescription from './ResourceDescription';
+import ResourceDescriptionTooltip from '../tooltips/ResourceDescriptionTooltip';
 import { Kinds } from '@/features/resources/shared/resources.types';
 import Image from 'next/image';
 import { ReactNode, createContext, useContext } from 'react';
@@ -109,7 +109,7 @@ ResourceCard.Description = function ResourceCardDescription() {
 	const { description } = useResourceCardContext();
 
 	return (
-		<ResourceDescription
+		<ResourceDescriptionTooltip
 			description={description}
 			triggerClass="text-sm truncate text-zinc-500 hover:text-zinc-300"
 		/>
