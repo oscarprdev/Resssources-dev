@@ -3,9 +3,11 @@
 import ResourceCard from '../core/containers/ResourceCard';
 import ResourcesFilters from '../core/containers/ResourcesFilters';
 import ResourceCardSkeleton from '../core/skeletons/ResourceCardSkeleton';
-import { useResourcesListWithPagination } from '@/app/hooks/useResourcesListPagination';
+import ProfileResourcesTabs from './ProfileResourcesTabs';
+import { useResourcesProfileListWithPagination } from '@/app/hooks/useResourcesProfileListPagination';
 import { ResourceWithUserInfo } from '@/features/resources/shared/resources.types';
-import { Kinds } from '@/features/shared/types/global.types';
+import { Kinds, ResourceType } from '@/features/shared/types/global.types';
+import { useState } from 'react';
 
 export type ProfileResourcesProps = {
 	userId: string;
@@ -13,10 +15,14 @@ export type ProfileResourcesProps = {
 };
 
 const ProfileResources = ({ userId, kindsFilters }: ProfileResourcesProps) => {
-	const { loading, resources } = useResourcesListWithPagination(kindsFilters, userId);
+	const [tabSelected, setTabSelected] = useState<ResourceType>(ResourceType.SHARED);
+	const { loading, resources } = useResourcesProfileListWithPagination(kindsFilters, tabSelected, userId);
+
+	const handleTabSelect = (value: ResourceType) => setTabSelected(value);
 
 	return (
 		<section className="w-full flex flex-col gap-5 items-center">
+			<ProfileResourcesTabs handleTabSelect={handleTabSelect} />
 			<ResourcesFilters />
 			<div className="relative grid w-full max-w-viewport grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 px-24 min-h-screen">
 				{loading ? (

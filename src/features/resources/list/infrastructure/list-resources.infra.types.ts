@@ -9,6 +9,15 @@ export type ListResourcesInfraInput = {
 	withUserData: boolean;
 };
 
+export type ListFavResourcesInfraInput = {
+	published?: boolean;
+	itemsPerRequest?: number;
+	cursor?: string;
+	userId: string;
+	kinds: Kinds;
+	withUserData: boolean;
+};
+
 export type GetUserByIdInfraInput = {
 	userId: string;
 };

@@ -50,6 +50,15 @@ export type GetResourcesFavCountInput = {
 
 export type GetResourcesListByFavInput = {
 	userId: string;
+	withUserData: boolean;
+	published?: boolean;
+	pagination: {
+		cursor?: string;
+		pageSize?: number;
+	};
+	filters: {
+		kinds: $Enums.Kind[];
+	};
 };
 
 export type GetResourcesListByKindInput = {

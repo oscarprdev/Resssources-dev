@@ -6,6 +6,7 @@ import {
 } from '../application/list-resources.ports';
 import {
 	GetResourcesCountInput,
+	ListFavResourcesInput,
 	ListResourcesImagesInput,
 	ListResourcesInput,
 	ResourceImage,
@@ -36,6 +37,23 @@ export class ListResourcesAdapters implements IListResourcesPorts {
 
 	async listResources({ userId, published, itemsPerRequest, cursor, withUserData, kinds }: ListResourcesInput) {
 		const infraResources = await this.infra.listResources({
+			userId,
+			published,
+			itemsPerRequest,
+			cursor,
+			withUserData,
+			kinds,
+		});
+
+		return infraResources.map(resource => ({
+			...resource,
+			createdAt: formatDistanceTime(resource.createdAt),
+			updatedAt: formatDistanceTime(resource.updatedAt),
+		}));
+	}
+
+	async listFavResources({ userId, published, itemsPerRequest, cursor, withUserData, kinds }: ListFavResourcesInput) {
+		const infraResources = await this.infra.listFavResources({
 			userId,
 			published,
 			itemsPerRequest,

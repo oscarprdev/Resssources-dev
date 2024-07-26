@@ -57,3 +57,9 @@ export type ResourceSearched = {
 	description: string;
 	url: string;
 };
+
+export type ResourceType = 'shared' | 'favourites';
+export const ResourceType = {
+	SHARED: 'shared' as ResourceType,
+	FAVOURITES: 'favourites' as ResourceType,
+};

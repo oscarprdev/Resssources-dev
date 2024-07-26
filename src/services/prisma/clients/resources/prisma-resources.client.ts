@@ -32,7 +32,7 @@ export interface ResourcesClient {
 
 	getResourcesList(input: GetResourcesListInput): Promise<ResourceWithRelations[]>;
 	getResourcesListByOwner(input: GetResourcesListByOwnerInput): Promise<Resource[]>;
-	getResourcesListByFav(input: GetResourcesListByFavInput): Promise<Resource[]>;
+	getResourcesListByFav(input: GetResourcesListByFavInput): Promise<ResourceWithRelations[]>;
 	getResourcesListByKind(input: GetResourcesListByKindInput): Promise<Resource[]>;
 	getResourcesListBySearch(input: GetResourcesListBySearchInput): Promise<Resource[]>;
 
@@ -158,12 +158,31 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async getResourcesListByFav({ userId }: GetResourcesListByFavInput) {
+	async getResourcesListByFav({ userId, published, withUserData, pagination, filters }: GetResourcesListByFavInput) {
 		return await prisma.resources.findMany({
+			skip: pagination && pagination.cursor ? 1 : 0,
 			where: {
-				favouritedBy: {
-					some: { userId },
-				},
+				AND: [
+					{
+						favouritedBy: {
+							some: { userId },
+						},
+					},
+					{
+						published,
+					},
+					{
+						kind: {
+							hasSome: filters.kinds,
+						},
+					},
+				],
+			},
+			take: pagination.pageSize,
+			cursor: pagination && pagination.cursor ? { id: pagination.cursor } : undefined,
+			include: {
+				favouritedBy: withUserData,
+				resourceCreatedBy: withUserData,
 			},
 			orderBy: {
 				createdAt: 'desc',

@@ -1,7 +1,7 @@
 import { Kinds, ResourceApplication } from '../../shared/resources.types';
 import {
 	GetResourcesCountInput,
-	ListResourcesBySearchOutput,
+	ListFavResourcesInput,
 	ListResourcesImagesInput,
 	ListResourcesInput,
 	ResourceImage,
@@ -11,6 +11,7 @@ import { ResourceSearched, UserStored } from '@/features/shared/types/global.typ
 export interface IListResourcesPorts {
 	listResourcesImages(input: ListResourcesImagesInput): Promise<ResourceImage[]>;
 	listResources(input: ListResourcesInput): Promise<ResourceApplication[]>;
+	listFavResources(input: ListFavResourcesInput): Promise<ResourceApplication[]>;
 
 	listResourcesBySearch(input: ListResourcesBySearchPortsInput): Promise<ResourceSearched[]>;
 

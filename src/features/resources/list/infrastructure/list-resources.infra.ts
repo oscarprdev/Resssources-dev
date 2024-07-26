@@ -2,6 +2,7 @@ import { RESOURCES_INFRA_ERRORS } from '../../shared/resources.constants';
 import {
 	GetResourcesCountInfraInput,
 	GetUserByIdInfraInput,
+	ListFavResourcesInfraInput,
 	ListResourcesBySearchInfraInput,
 	ListResourcesInfraInput,
 } from './list-resources.infra.types';
@@ -12,6 +13,7 @@ import { UserClient } from '@/services/prisma/clients/users/prisma-user.client';
 
 export interface IListResourcesInfra {
 	listResources(input: ListResourcesInfraInput): Promise<ResourceWithRelations[]>;
+	listFavResources(input: ListFavResourcesInfraInput): Promise<ResourceWithRelations[]>;
 	listResourcesBySearch(input: ListResourcesBySearchInfraInput): Promise<ResourceStored[]>;
 
 	getUserById(input: GetUserByIdInfraInput): Promise<UserStored | null>;
@@ -27,6 +29,29 @@ export class ListResourcesInfra implements IListResourcesInfra {
 	async listResources({ userId, published, itemsPerRequest, cursor, kinds, withUserData }: ListResourcesInfraInput) {
 		try {
 			return await this.resourceClient.getResourcesList({
+				userId,
+				published,
+				withUserData,
+				pagination: { pageSize: itemsPerRequest, cursor },
+				filters: {
+					kinds,
+				},
+			});
+		} catch (error) {
+			throw new Error(RESOURCES_INFRA_ERRORS.LISTING);
+		}
+	}
+
+	async listFavResources({
+		userId,
+		published,
+		itemsPerRequest,
+		cursor,
+		kinds,
+		withUserData,
+	}: ListFavResourcesInfraInput) {
+		try {
+			return await this.resourceClient.getResourcesListByFav({
 				userId,
 				published,
 				withUserData,
