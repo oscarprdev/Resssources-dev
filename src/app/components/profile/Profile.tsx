@@ -1,3 +1,4 @@
+import CustomLink from '../core/buttons/CustomLink';
 import AddResourceModal from '../core/modals/AddResourceModal';
 import ProfileResources from './ProfileResources';
 import UserProfileInfo from './UserProfileInfo';
@@ -53,11 +54,7 @@ const Profile = async ({ username, kinds }: ProfileProps) => {
 				socialMedia={socialMedia}>
 				{isUserAuthorized && (
 					<div className="flex items-center gap-2">
-						<Link
-							href="/account"
-							className="text-sm px-5 py-[0.3rem] rounded-full font-semibold border border-zinc-300 hover:bg-zinc-50 duration-300">
-							Edit profile
-						</Link>
+						<CustomLink href={`/account`} label="Edit profile" />
 						<AddResourceModal username={username}>
 							<div className="text-sm px-5 py-[0.3rem] rounded-full font-semibold border border-zinc-300 hover:bg-zinc-50 duration-300">
 								Add resource

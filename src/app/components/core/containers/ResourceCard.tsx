@@ -2,8 +2,8 @@ import { Badge } from '../../ui/badge';
 import DetailButton from '../buttons/DetailButton';
 import FavCountButton from '../buttons/FavCountButton';
 import LikeButton from '../buttons/LikeButton';
-import UserButton from '../buttons/UserButton';
 import ResourceDescriptionTooltip from '../tooltips/ResourceDescriptionTooltip';
+import UserNameTooltip from '../tooltips/UserNameTooltip';
 import { Kinds } from '@/features/resources/shared/resources.types';
 import Image from 'next/image';
 import { ReactNode, createContext, useContext } from 'react';
@@ -96,7 +96,7 @@ ResourceCard.Image = function ResourceCardImage() {
 ResourceCard.Owner = function ResourceCardOwner() {
 	const { owner } = useResourceCardContext();
 
-	return <UserButton username={owner} />;
+	return <UserNameTooltip username={owner} />;
 };
 
 ResourceCard.Title = function ResourceCardTitle() {
