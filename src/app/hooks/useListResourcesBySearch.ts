@@ -18,11 +18,7 @@ export const useListResourcesBySearch = ({ inputValue, kindSelected }: UseListRe
 
 	useEffect(() => {
 		const getResourcesBySearch = async () => {
-			const lastResourceFounded =
-				Array.isArray(resources) && resources.length > 0 ? resources[resources.length - 1] : undefined;
-
 			const resourcesResponse = await listResourcesBySearchAction({
-				cursor: lastResourceFounded?.id,
 				kinds: kindSelected && kindSelected !== 'all' ? [kindSelected] : RESOURCE_KIND_VALUES,
 				value: inputValue,
 			});
