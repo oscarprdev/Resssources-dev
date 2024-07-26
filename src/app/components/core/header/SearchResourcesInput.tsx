@@ -10,16 +10,21 @@ import { IconSearch } from '@tabler/icons-react';
 import { ChangeEvent, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
+export type KindSelected = Kind | 'all';
+
 const SearchResourcesInput = () => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const [kindSelected, setKindSelected] = useState<Kind>();
+	const [kindSelected, setKindSelected] = useState<KindSelected>();
 
 	const { resources } = useListResourcesBySearch({ inputValue, kindSelected });
 
 	const handleKindSelectChange = (kind: string) => {
 		const kindSelected = kind as Kind;
+
 		if (RESOURCE_KIND_VALUES.includes(kindSelected)) {
 			setKindSelected(kindSelected);
+		} else {
+			setKindSelected('all');
 		}
 	};
 
@@ -44,6 +49,9 @@ const SearchResourcesInput = () => {
 					<SelectValue placeholder="All kinds" />
 				</SelectTrigger>
 				<SelectContent className="bg-white max-h-[200px]" side="bottom">
+					<SelectItem value={'all'} className="capitalize text-xs text-zinc-400 hover:text-zinc-600">
+						All kinds
+					</SelectItem>
 					{RESOURCE_KIND_VALUES.map(kind => (
 						<SelectItem
 							key={kind}
