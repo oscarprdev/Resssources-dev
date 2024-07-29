@@ -136,14 +136,16 @@ export class PrismaUserClient implements UserClient {
 	}
 
 	async editSocialLinks({ userId, twitter, linkedin, github }: EditSocialLinksClientInput) {
-		return await prisma.socialMedia.update({
+		const upsertData = { twitter, linkedin, github };
+
+		return await prisma.socialMedia.upsert({
 			where: {
 				userId,
 			},
-			data: {
-				twitter,
-				linkedin,
-				github,
+			update: upsertData,
+			create: {
+				userId: userId,
+				...upsertData,
 			},
 		});
 	}
