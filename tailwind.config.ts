@@ -13,6 +13,9 @@ const config = {
 			},
 		},
 		extend: {
+			colors: {
+				primary: 'var(--primary)',
+			},
 			borderRadius: {
 				'4xl': '1.75rem',
 				'5xl': '2rem',
