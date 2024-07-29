@@ -130,8 +130,6 @@ export class ListResourcesUsecase extends FeatureUsecase implements IListResourc
 				}),
 			]);
 
-			console.log(resources, count);
-
 			return successResponse({
 				items: resources,
 				moreItems: itemsPerRequest && resources.length !== 0 ? count - 1 > itemsPerRequest : false,

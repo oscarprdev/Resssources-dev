@@ -5,6 +5,7 @@ import { columns } from './resourcesTable/Columns/columns';
 import ResourceTable from './resourcesTable/ResourceTable';
 import { provideListResourceUsecase } from '@/features/resources/list';
 import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
+import { ResourceWithUserInfo } from '@/features/shared/types/global.types';
 import { isError } from '@/lib/either';
 
 const Dashboard = async () => {
@@ -24,7 +25,10 @@ const Dashboard = async () => {
 				</div>
 				<p className="text-zinc-500 text-xs font-light">See all resources created by users</p>
 			</div>
-			<ResourceTable columns={columns} data={isError(response) ? [] : response.success.items} />
+			<ResourceTable
+				columns={columns}
+				data={isError(response) ? [] : (response.success.items as ResourceWithUserInfo[])}
+			/>
 		</section>
 	);
 };
