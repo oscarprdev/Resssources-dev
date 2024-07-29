@@ -1,4 +1,5 @@
 import Main from './components/core/containers/Main';
+import Footer from './components/core/footer/Footer';
 import Header from './components/core/header/Header';
 import './globals.css';
 import { Toaster } from '@/app/components/ui/toaster';
@@ -22,6 +23,7 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<Header />
 				<Main>{children}</Main>
+				<Footer />
 				<Toaster />
 			</body>
 		</html>

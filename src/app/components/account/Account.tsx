@@ -13,7 +13,7 @@ type AccountProps = {
 
 const AccountSection = ({ children }: { children: ReactNode }) => {
 	return (
-		<section className="w-screen bg-white min-h-screen gap-7 flex flex-col items-center rounded-2xl shadow-md px-32">
+		<section className="w-screen bg-white min-h-screen gap-7 flex flex-col items-center rounded-2xl px-32">
 			{children}
 		</section>
 	);

@@ -5,7 +5,7 @@ import { columns } from './resourcesTable/Columns/columns';
 import ResourceTable from './resourcesTable/ResourceTable';
 import { provideListResourceUsecase } from '@/features/resources/list';
 import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
-import { isError, successResponse } from '@/lib/either';
+import { isError } from '@/lib/either';
 
 const Dashboard = async () => {
 	const listResourcesUsecase = provideListResourceUsecase();
@@ -16,7 +16,7 @@ const Dashboard = async () => {
 	});
 
 	return (
-		<section className="container mx-auto -mt-14 flex flex-col space-y-5">
+		<section className="container mx-auto -mt-14 flex flex-col space-y-5 pb-20">
 			<div className="flex flex-col space-y-1">
 				<div className="flex itesm-center space-x-2">
 					<h2 className="text-zinc-800 text-lg">Resources</h2>

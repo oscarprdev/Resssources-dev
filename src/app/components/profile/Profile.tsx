@@ -17,7 +17,7 @@ type ProfileProps = {
 
 const ProfileSection = ({ children }: { children: ReactNode }) => {
 	return (
-		<section className="w-screen bg-white min-h-screen gap-3 grid place-items-center rounded-2xl shadow-md">
+		<section className="w-screen bg-white min-h-screen gap-3 grid place-items-center rounded-2xl pb-20">
 			{children}
 		</section>
 	);
