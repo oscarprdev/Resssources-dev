@@ -9,6 +9,7 @@ import {
 	IconAffiliate,
 	IconBubble,
 	IconBuilding,
+	IconCode,
 	IconDatabase,
 	IconFlask,
 	IconFrame,
@@ -24,7 +25,7 @@ import { ReactNode } from 'react';
 
 const KINDS_ICONS: Record<Kind, ReactNode> = {
 	[Kind.FRONTEND]: <IconPaint size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
-	[Kind.BACKEND]: <IconPalette size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
+	[Kind.BACKEND]: <IconCode size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
 	[Kind.UI]: <IconPolaroid size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
 	[Kind.DATABASES]: <IconDatabase size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
 	[Kind.STYLES]: <IconPalette size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
