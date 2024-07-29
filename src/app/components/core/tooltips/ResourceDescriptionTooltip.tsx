@@ -5,14 +5,20 @@ import { ReactNode } from 'react';
 type ResourceDescriptionTooltipProps = {
 	description: string;
 	triggerClass: ReactNode;
+	side?: 'top' | 'bottom' | 'right';
 };
 
-const ResourceDescriptionTooltip = ({ description, triggerClass }: ResourceDescriptionTooltipProps) => {
+const ResourceDescriptionTooltip = ({ description, triggerClass, side }: ResourceDescriptionTooltipProps) => {
 	return (
 		<TooltipProvider delayDuration={100}>
 			<Tooltip>
 				<TooltipTrigger className={cn(triggerClass)}>{description}</TooltipTrigger>
-				<TooltipContent className="z-20 grid place-items-center bg-white w-[230px]">
+				<TooltipContent
+					side={side}
+					className={cn(
+						'z-50 grid place-items-center bg-white w-[230px]',
+						side === 'bottom' && 'absolute -top-20 -left-10'
+					)}>
 					<p>{description}</p>
 				</TooltipContent>
 			</Tooltip>

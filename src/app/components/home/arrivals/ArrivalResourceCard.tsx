@@ -39,11 +39,12 @@ const ArrivalResourceCard = ({
 				/>
 			</picture>
 			<div className="w-full flex flex-col items-start gap-1 pl-5 border border-transparent border-l-zinc-100">
-				<UserNameTooltip username={owner} />
+				<UserNameTooltip username={owner} side="right" />
 				<h4 className="text-2xl uppercase -mt-1 truncate max-w-[90%]">{title}</h4>
 				<ResourceDescriptionTooltip
 					description={description}
 					triggerClass="text-zinc-500 max-w-[300px] truncate text-sm hover:text-zinc-300"
+					side="bottom"
 				/>
 				<div className="flex items-center space-x-2 mt-2">
 					{kinds.map(kind => (

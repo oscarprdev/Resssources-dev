@@ -8,21 +8,29 @@ import { getUserInfoByUsernameAction } from '@/app/actions/users/get-user-info-b
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
 import { GetUserInfoOutputDto } from '@/features/user/describe/application/describe-user.dto';
 import { isError } from '@/lib/either';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { startTransition, useEffect, useState } from 'react';
 
 type UserNameTooltipProps = {
 	username: string;
+	side?: 'top' | 'bottom' | 'right';
 };
 
-const UserNameTooltip = ({ username }: UserNameTooltipProps) => {
+const UserNameTooltip = ({ username, side = 'top' }: UserNameTooltipProps) => {
 	return (
 		<TooltipProvider delayDuration={100}>
 			<Tooltip>
 				<TooltipTrigger className="text-xs text-zinc-400 hover:underline hover:text-zinc-700 mr-auto">
 					@{username}
 				</TooltipTrigger>
-				<TooltipContent className="relative z-50 flex flex-col bg-white w-[230px] gap-3 rounded-2xl">
+				<TooltipContent
+					side={side}
+					className={cn(
+						'relative z-50 flex flex-col bg-white w-[230px] gap-3 rounded-2xl',
+						side === 'right' && 'top-12 left-3',
+						side === 'top' && 'left-20'
+					)}>
 					<UserNameTooltipContent username={username} />
 				</TooltipContent>
 			</Tooltip>
