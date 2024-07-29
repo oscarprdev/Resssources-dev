@@ -3,13 +3,18 @@ import { useInfiniteScrollPagination } from './useInfiniteScrollPagination';
 import { ListResourcesOutput } from '@/features/resources/list/application/list-resources.use-case.types';
 import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constants';
 import { Kinds, ResourceType } from '@/features/shared/types/global.types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+let currentFilters: Kinds = [];
+let currentResourceType: ResourceType;
 
 export const useResourcesProfileListWithPagination = (
-	kindsFilter: Kinds | null,
+	kindsFilter: Kinds,
 	resourceType: ResourceType,
 	userId: string
 ) => {
+	const [loadingSkeletonShouldShow, setLoadingSkeletonShouldShow] = useState(false);
+
 	const {
 		loading,
 		paginationState: { items },
@@ -32,13 +37,27 @@ export const useResourcesProfileListWithPagination = (
 	});
 
 	useEffect(() => {
-		if (Array.isArray(kindsFilter) && kindsFilter.length > 0 && resourceType) {
+		const isValidArrayKindsFilter = Array.isArray(kindsFilter) && kindsFilter.length > 0;
+		const loadingSkeletonShouldShow =
+			!currentFilters.includes(kindsFilter[kindsFilter.length - 1]) ||
+			currentFilters.length !== kindsFilter.length ||
+			currentResourceType !== resourceType;
+
+		if (isValidArrayKindsFilter && loadingSkeletonShouldShow) {
+			setLoadingSkeletonShouldShow(true);
+		} else {
+			setLoadingSkeletonShouldShow(false);
+		}
+
+		if (isValidArrayKindsFilter && resourceType) {
 			handleFetchAction({
 				values: {
 					kinds: kindsFilter,
 					resourceType,
 				},
-			});
+			}).then(() => setLoadingSkeletonShouldShow(false));
+			currentFilters = kindsFilter;
+			currentResourceType = resourceType;
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,6 +65,6 @@ export const useResourcesProfileListWithPagination = (
 
 	return {
 		resources: items,
-		loading,
+		loading: loading && loadingSkeletonShouldShow,
 	};
 };

@@ -7,7 +7,6 @@ import { RESOURCE_KIND_VALUES } from '@/features/shared/constants/global-constan
 import { Kinds } from '@/features/shared/types/global.types';
 import { provideDescribeUserUsecase } from '@/features/user/describe';
 import { isError } from '@/lib/either';
-import Link from 'next/link';
 import { ReactNode } from 'react';
 
 type ProfileProps = {

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ResourceCardSkeleton = () => {
 	return (
-		<article className="animate-pulse relative flex min-w-[320px] flex-col items-center gap-5 rounded-5xl border border-zinc-100 bg-white p-2 shadow-sm">
+		<article className="animate-pulse h-fit relative flex min-w-[320px] flex-col items-center gap-5 rounded-5xl border border-zinc-100 bg-white p-2 shadow-sm">
 			<div id="like-button" className="place-items  absolute left-4 top-4 grid">
 				<div className="size-8 rounded-full bg-zinc-200"></div>
 			</div>
