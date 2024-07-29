@@ -33,6 +33,7 @@ export class ListResourcesAdapters implements IListResourcesPorts {
 			id: resources.id,
 			imgUrl: resources.imgUrl,
 			title: resources.title,
+			url: resources.resourceUrl,
 		})) satisfies ResourceImage[];
 	}
 

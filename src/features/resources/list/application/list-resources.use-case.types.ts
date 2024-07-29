@@ -5,6 +5,7 @@ export type ResourceImage = {
 	id: string;
 	imgUrl: string;
 	title: string;
+	url: string;
 };
 
 export type ListResourcesImagesInput = {
