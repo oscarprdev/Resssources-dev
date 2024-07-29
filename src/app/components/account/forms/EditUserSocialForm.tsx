@@ -37,6 +37,8 @@ const EditUserSocialForm = ({ handleSubmit, defaultValues }: EditUserSocialFormP
 			return form.setValue('error', response.error);
 		}
 
+		form.setValue('error', null);
+
 		toast({
 			description: response.success,
 		});

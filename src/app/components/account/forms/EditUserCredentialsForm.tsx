@@ -64,6 +64,8 @@ const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps)
 			return form.setValue('error', response.error);
 		}
 
+		form.reset();
+
 		toast({
 			description: response.success,
 		});

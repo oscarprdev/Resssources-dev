@@ -42,6 +42,8 @@ const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFor
 			return form.setValue('error', response.error);
 		}
 
+		form.setValue('error', null);
+
 		toast({
 			description: response.success,
 		});
