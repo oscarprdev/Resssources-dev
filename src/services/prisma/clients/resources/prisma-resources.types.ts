@@ -15,6 +15,7 @@ export type GetResourceByUrlInput = {
 export type GetResourcesCountInput = {
 	userId?: string;
 	published?: boolean;
+	value?: string;
 	pagination: {
 		cursor?: string;
 	};

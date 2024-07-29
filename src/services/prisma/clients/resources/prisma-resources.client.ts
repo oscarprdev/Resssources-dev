@@ -75,16 +75,40 @@ export class PrismaResourcesClient implements ResourcesClient {
 		});
 	}
 
-	async getResourcesCount({ userId, published, filters, pagination }: GetResourcesCountInput) {
+	async getResourcesCount({ userId, published, value, filters, pagination }: GetResourcesCountInput) {
 		return await prisma.resources.count({
 			where: {
-				published: published || undefined,
-				kind: {
-					hasSome: filters.kinds,
-				},
-				resourceCreatedBy: {
-					some: { userId },
-				},
+				AND: [
+					{
+						OR: [
+							{
+								title: {
+									contains: value,
+									mode: 'insensitive',
+								},
+							},
+							{
+								description: {
+									contains: value,
+									mode: 'insensitive',
+								},
+							},
+						],
+					},
+					{
+						published,
+					},
+					{
+						kind: {
+							hasSome: filters.kinds,
+						},
+					},
+					{
+						resourceCreatedBy: {
+							some: { userId },
+						},
+					},
+				],
 			},
 			cursor: pagination && pagination.cursor ? { id: pagination.cursor } : undefined,
 			orderBy: {

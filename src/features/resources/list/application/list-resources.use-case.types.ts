@@ -51,6 +51,7 @@ export type GetResourcesCountInput = {
 	published?: boolean;
 	cursor?: string;
 	userId?: string;
+	value?: string;
 	kinds: Kinds;
 };
 

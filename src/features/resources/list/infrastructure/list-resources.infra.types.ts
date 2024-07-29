@@ -25,6 +25,7 @@ export type GetUserByIdInfraInput = {
 export type GetResourcesCountInfraInput = {
 	published?: boolean;
 	userId?: string;
+	value?: string;
 	pagination: {
 		cursor?: string;
 	};

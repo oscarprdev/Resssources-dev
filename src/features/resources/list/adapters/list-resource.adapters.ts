@@ -18,8 +18,8 @@ import { formatDistanceTime } from '@/lib/dates';
 export class ListResourcesAdapters implements IListResourcesPorts {
 	constructor(private readonly infra: ListResourcesInfra) {}
 
-	async getResourcesCount({ published, cursor, kinds }: GetResourcesCountInput): Promise<number> {
-		return await this.infra.getResourcesCount({ published, pagination: { cursor }, filters: { kinds } });
+	async getResourcesCount({ published, cursor, kinds, value }: GetResourcesCountInput): Promise<number> {
+		return await this.infra.getResourcesCount({ published, value, pagination: { cursor }, filters: { kinds } });
 	}
 
 	async listResourcesImages({ kinds }: ListResourcesImagesInput) {

@@ -126,8 +126,11 @@ export class ListResourcesUsecase extends FeatureUsecase implements IListResourc
 					published: true,
 					cursor,
 					kinds,
+					value,
 				}),
 			]);
+
+			console.log(resources, count);
 
 			return successResponse({
 				items: resources,
