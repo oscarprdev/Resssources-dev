@@ -34,7 +34,7 @@ const ResourceTable = <TData, TValue>({ columns, data }: DataTableProps<TData, T
 			sorting,
 			pagination: {
 				pageIndex,
-				pageSize: 10,
+				pageSize: 5,
 			},
 		},
 	});
