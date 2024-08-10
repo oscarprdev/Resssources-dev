@@ -9,7 +9,8 @@
 
 Store, find and share your favourite dev ressources in one place. List your favourites ressources to find them in a fast way.
 
-Features:
+## Features
+
 -  Create your own user.
 -  Create your ressources (will be included on the app after a revision by the ADMIN).
 -  See the new ressources arrivals to be up to date.
