@@ -13,7 +13,7 @@ export const ResourcesListController = ({ kindsFilter }: ResourcesListController
 	const { loading, resources } = useResourcesListWithPagination(kindsFilter);
 
 	return (
-		<div className="show-container relative grid w-full max-w-viewport grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 px-24 min-h-screen">
+		<div className="show-container relative grid w-full max-w-viewport grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 sm:px-24 min-h-screen">
 			{loading ? (
 				<ResourceListLoading />
 			) : resources.length === 0 ? (

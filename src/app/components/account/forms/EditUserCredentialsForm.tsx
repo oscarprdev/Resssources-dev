@@ -73,7 +73,9 @@ const EditUserCredentialsForm = ({ handleSubmit }: EditUserCredentialsFormProps)
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full animate-fade-up">
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="flex flex-col gap-5 w-full animate-fade-up py-3 sm:py-0 ">
 				<FormField
 					control={form.control}
 					name="oldPassword"

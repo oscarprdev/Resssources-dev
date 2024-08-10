@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Footer = () => {
 	return (
-		<footer className="w-screen py-10 px-32 flex items-center justify-between mt-auto border border-transparent border-t-2 border-zinc-100">
+		<footer className="w-screen py-10 px-10 sm:px-32 flex items-center justify-between mt-auto border border-transparent border-t-2 border-zinc-100">
 			<p className="text-zinc-500 text-sm">
 				Created with ♥ by <span className="font-bold">Oscar Perez</span>
 			</p>

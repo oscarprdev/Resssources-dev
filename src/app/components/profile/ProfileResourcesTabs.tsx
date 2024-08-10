@@ -7,7 +7,10 @@ type ProfileResourcesTabsProps = {
 
 const ProfileResourcesTabs = ({ handleTabSelect }: ProfileResourcesTabsProps) => {
 	return (
-		<Tabs defaultValue="shared" className="w-[400px]" onValueChange={e => handleTabSelect(e as ResourceType)}>
+		<Tabs
+			defaultValue="shared"
+			className="w-screen sm:w-[400px]"
+			onValueChange={e => handleTabSelect(e as ResourceType)}>
 			<TabsList className="grid w-full grid-cols-2 gap-2">
 				<TabsTrigger value={ResourceType.SHARED}>Shared</TabsTrigger>
 				<TabsTrigger value={ResourceType.FAVOURITES}>Favourites</TabsTrigger>

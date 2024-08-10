@@ -51,7 +51,9 @@ const EditUserProfileForm = ({ handleSubmit, defaultValues }: EditUserProfileFor
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full animate-fade-up">
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="py-3 sm:py-0  flex flex-col gap-5 w-full animate-fade-up">
 				<ProfileImageInput form={form} />
 				<FormField
 					control={form.control}

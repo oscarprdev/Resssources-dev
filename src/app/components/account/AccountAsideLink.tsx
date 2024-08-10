@@ -26,7 +26,7 @@ const AccountAsideLink = ({ href, label, kind }: AccountAsideLinkProps) => {
 		<Link
 			href={href}
 			className={cn(
-				'px-7 py-2 pl-4 rounded-md hover:bg-zinc-50 text-sm hover:text-zinc-800 duration-300',
+				'px-2 sm:px-7 py-2 pl-4 rounded-md hover:bg-zinc-50 text-sm hover:text-zinc-800 duration-300',
 				isSelected ? 'text-zinc-800 font-semibold' : 'text-zinc-500'
 			)}>
 			{label}

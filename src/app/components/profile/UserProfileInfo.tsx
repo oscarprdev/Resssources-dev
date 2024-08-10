@@ -28,8 +28,8 @@ const UserProfileInfo = ({
 	children,
 }: UserProfileInfoProps) => {
 	return (
-		<div className="flex flex-col items-center gap-4 py-2 w-[85%] mb-auto mt-5">
-			<div className="flex items-center gap-5">
+		<div className="flex flex-col items-center gap-4 py-2 w-[90vw] sm:w-[85%] mb-auto mt-5">
+			<div className="flex flex-col sm:flex-row items-center gap-5">
 				<picture className="overflow-hidden size-[80px] rounded-full border-2 border-zinc-200">
 					<Image
 						src={profileImage}
@@ -39,14 +39,14 @@ const UserProfileInfo = ({
 						className="object-cover w-full h-full rounded-full"
 					/>
 				</picture>
-				<div className="flex flex-col items-start gap-2">
+				<div className="flex flex-col items-center sm:items-start gap-2 w-[90vw] sm:w-full ">
 					<div className="flex items-center gap-2">
 						<h2 className="text-zinc-600 text-sm tracking-wide">@{username}</h2>
 						<Badge className="capitalize">Shared: {createdCount}</Badge>
 						<Badge className="capitalize">Fav: {favCount}</Badge>
 					</div>
 					<p className="text-xs text-zinc-500 max-w-[50ch]">{description}</p>
-					<div className="flex items-center gap-5">
+					<div className="flex items-center gap-2 sm:gap-5">
 						{socialMedia && (
 							<div className="flex items-center gap-2">
 								{socialMedia.github && (

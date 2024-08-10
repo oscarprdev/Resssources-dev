@@ -10,7 +10,7 @@ const UserBadge = ({ user }: UserBadge) => {
 	return (
 		<div
 			className={cn(
-				'flex items-center gap-2 p-1 rounded-full border border-zinc-200 group hover:bg-zinc-50',
+				'absolute top-2 right-5 sm:relative sm:right-0 sm:top-0 flex items-center gap-2 p-1 rounded-full border border-zinc-200 group hover:bg-zinc-50',
 				user ? 'py-1 pr-1 pl-3' : 'p-1'
 			)}>
 			{user && <p className="text-sm text-zinc-600 group-hover:text-zinc-900 duration-200">Hi {user.name}!</p>}

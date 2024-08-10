@@ -13,7 +13,7 @@ const HeroResourceItem = ({ resourceUrl, imgUrl, title }: HeroResourceItemProps)
 			<Link
 				href={resourceUrl}
 				target="_blank"
-				className="relative block w-[220px] h-[220px] rounded-3xl overflow-hidden shadow-md group">
+				className="relative block size-[150px]  sm:size-[220px] rounded-3xl overflow-hidden shadow-md group">
 				<Image
 					src={imgUrl}
 					alt="Resource hero image"

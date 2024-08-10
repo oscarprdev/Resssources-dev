@@ -13,7 +13,7 @@ type AccountProps = {
 
 const AccountSection = ({ children }: { children: ReactNode }) => {
 	return (
-		<section className="w-screen bg-white min-h-screen gap-7 flex flex-col items-center rounded-2xl px-32">
+		<section className="w-screen bg-white h-fit sm:min-h-screen gap-7 flex flex-col items-center rounded-2xl px-5 sm:px-32">
 			{children}
 		</section>
 	);
@@ -40,7 +40,7 @@ const Account = async ({ children }: AccountProps) => {
 	return (
 		<AccountSection>
 			<AccountHeader username={username} profileImage={profileImage} />
-			<div className="flex items-start gap-2 w-full max-w-[800px]">
+			<div className="flex flex-col sm:flex-row items-start gap-2 w-full max-w-[800px]">
 				<AccountAside userId={userId} />
 				<AccountProvider accountProps={{ userId, email, username, description, profileImage, socialMedia }}>
 					{children}

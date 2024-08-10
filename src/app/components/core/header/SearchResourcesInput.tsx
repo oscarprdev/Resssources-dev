@@ -36,7 +36,7 @@ const SearchResourcesInput = () => {
 	}, 500);
 
 	return (
-		<div className="relative group w-[500px] py-2 px-5 flex items-center justify-between rounded-full border border-zinc-200 ring-4 ring-transparent duration-300 hover:ring-blue-200/50 hover:border-blue-300">
+		<div className="relative group w-full sm:w-[500px] py-2 px-5 flex items-center justify-between rounded-full border border-zinc-200 ring-4 ring-transparent duration-300 hover:ring-blue-200/50 hover:border-blue-300">
 			<IconSearch size={35} className="text-zinc-400 group-hover:text-zinc-600 duration-300" />
 			<Input
 				type="search"

@@ -13,7 +13,7 @@ type SearchResourcesFoundedProps = {
 
 const SearchResourcesFounded = ({ resources, moreItems, loadMoreItems }: SearchResourcesFoundedProps) => {
 	return (
-		<div className="absolute top-16 max-h-[280px] overflow-y-scroll flex flex-col items-center bg-white p-5 rounded-2xl w-[500px] left-0 border border-zinc-100 shadow-md animate-fade-up">
+		<div className="absolute top-16 max-h-[280px] overflow-y-scroll flex flex-col items-center bg-white p-5 rounded-2xl w-full left-0 border border-zinc-100 shadow-md animate-fade-up">
 			<p className="text-xs mr-auto text-zinc-400 mb-5">Results: {resources.length}</p>
 			<ul className="w-full flex flex-col gap-1">
 				{resources.length > 0 ? (

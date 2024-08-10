@@ -30,7 +30,8 @@ const AddResourceModal = ({ username, children }: AddResourceModalProps) => {
 	return (
 		<Dialog>
 			<DialogTrigger ref={triggerDialog}>{children}</DialogTrigger>
-			<DialogContent className={cn('flex flex-col items-center px-10 w-full max-w-[420px] animate-fade-up')}>
+			<DialogContent
+				className={cn('flex flex-col items-center px-10 w-[90vw] sm:w-full max-w-[420px] animate-fade-up')}>
 				<DialogHeader>
 					<DialogTitle className="text-xl font-bold">Let&apos;s create new resource </DialogTitle>
 				</DialogHeader>

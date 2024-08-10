@@ -55,7 +55,7 @@ const Profile = async ({ username, kinds }: ProfileProps) => {
 					<div className="flex items-center gap-2">
 						<CustomLink href={`/account`} label="Edit profile" />
 						<AddResourceModal username={username}>
-							<div className="text-sm px-5 py-[0.3rem] rounded-full font-semibold border border-zinc-300 hover:bg-zinc-50 duration-300">
+							<div className="text-xs sm:text-sm px-5 py-[0.3rem] rounded-full font-semibold border border-zinc-300 hover:bg-zinc-50 duration-300">
 								Add resource
 							</div>
 						</AddResourceModal>

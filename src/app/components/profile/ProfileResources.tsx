@@ -21,10 +21,10 @@ const ProfileResources = ({ userId, kindsFilters }: ProfileResourcesProps) => {
 	const handleTabSelect = (value: ResourceType) => setTabSelected(value);
 
 	return (
-		<section className="w-full flex flex-col gap-5 items-center">
+		<section className="w-[90vw] sm:w-full flex flex-col gap-5 items-center">
 			<ProfileResourcesTabs handleTabSelect={handleTabSelect} />
 			<ResourcesFilters />
-			<div className="relative grid w-full max-w-viewport grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 px-24 min-h-screen">
+			<div className="relative grid w-full max-w-viewport grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 sm:px-24 min-h-screen">
 				{loading ? (
 					<ResourceListLoading />
 				) : resources.length === 0 ? (

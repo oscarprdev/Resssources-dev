@@ -43,7 +43,7 @@ const ResourceCard = ({ props, children }: { props: ResourceCardProps; children:
 		<ResourceCardContext.Provider value={{ ...props }}>
 			<article
 				id={`resource-card-${props.resourceId}`}
-				className="show-card relative flex flex-col min-w-[320px] h-fit gap-5 items-center p-2 bg-white border border-zinc-100 shadow-sm rounded-5xl">
+				className="sm:show-card relative flex flex-col min-w-[320px] h-fit gap-5 items-center p-2 bg-white border border-zinc-100 shadow-sm rounded-5xl">
 				{children}
 			</article>
 		</ResourceCardContext.Provider>

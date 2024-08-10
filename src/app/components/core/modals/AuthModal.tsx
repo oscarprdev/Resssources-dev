@@ -37,7 +37,7 @@ const AuthModal = ({ children }: AuthModalProps) => {
 	return (
 		<Dialog>
 			<DialogTrigger ref={triggerDialog}>{children}</DialogTrigger>
-			<DialogContent className="flex flex-col items-center px-10 w-full max-w-[380px]">
+			<DialogContent className="flex flex-col items-center px-10 w-[90vw] sm:w-full max-w-[380px] animate-fade-up">
 				<DialogHeader>
 					<DialogTitle className="text-xl font-bold">
 						{isLoginModal ? 'Good to see you again!' : 'Hello! Sign up to start sharing.'}

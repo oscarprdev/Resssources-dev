@@ -43,7 +43,9 @@ const EditUserInfoForm = ({ handleSubmit, defaultValues }: EditUserInfoFormProps
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full animate-fade-up">
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="flex flex-col gap-3 w-full animate-fade-up py-3 sm:py-0 h-[350px]">
 				<FormField
 					control={form.control}
 					name="email"

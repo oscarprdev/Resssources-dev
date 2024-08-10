@@ -44,7 +44,7 @@ const ProfileImageInput = ({ form }: ProfileImageInputProps) => {
 	};
 
 	return (
-		<div className="flex items-center gap-5">
+		<div className="flex items-center gap-5 py-3 sm:py-0 ">
 			<picture className="relative rounded-md size-[80px]">
 				<Image
 					src={previewImage}
