@@ -13,7 +13,6 @@ const Dashboard = async () => {
 	const response = await listResourcesUsecase.listResources({
 		kinds: RESOURCE_KIND_VALUES,
 		withUserData: true,
-		itemsPerRequest: 10,
 	});
 
 	return (
