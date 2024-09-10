@@ -13,6 +13,7 @@ export const useAddResource = () => {
 	const addResource = async ({ url, kinds, username }: AddResourceInput): Promise<Either<string, string>> => {
 		try {
 			const body = JSON.stringify({ username, url, kinds });
+
 			const response = await fetch(`${API_URL}/api/resources/create`, {
 				method: 'POST',
 				body,

@@ -29,6 +29,7 @@ enum Kind {
   DEVOPS
   SECURITY
   AI
+  REPOS
 }
 
 model Resources {

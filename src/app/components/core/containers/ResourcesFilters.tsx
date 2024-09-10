@@ -7,6 +7,7 @@ import { Kind } from '@/features/shared/types/global.types';
 import { cn } from '@/lib/utils';
 import {
 	IconAffiliate,
+	IconBrandGithub,
 	IconBubble,
 	IconBuilding,
 	IconCode,
@@ -37,6 +38,7 @@ const KINDS_ICONS: Record<Kind, ReactNode> = {
 	[Kind.DEVOPS]: <IconBubble size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
 	[Kind.SECURITY]: <IconLockOpen size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
 	[Kind.AI]: <IconAffiliate size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
+	[Kind.REPOS]: <IconBrandGithub size={18} className="text-zinc-500 group-hover:text-white duration-200" />,
 };
 
 const ResourcesFilters = () => {

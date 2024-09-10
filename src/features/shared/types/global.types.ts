@@ -48,6 +48,7 @@ export const Kind: { [key in Kind]: key } = {
 	DEVOPS: 'DEVOPS',
 	SECURITY: 'SECURITY',
 	AI: 'AI',
+	REPOS: 'REPOS',
 };
 
 export type ResourceSearched = {

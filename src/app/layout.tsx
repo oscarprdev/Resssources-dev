@@ -3,8 +3,6 @@ import Footer from './components/core/footer/Footer';
 import Header from './components/core/header/Header';
 import './globals.css';
 import { Toaster } from '@/app/components/ui/toaster';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -34,8 +32,6 @@ export default function RootLayout({
 				<Main>{children}</Main>
 				<Footer />
 				<Toaster />
-				<SpeedInsights />
-				<Analytics />
 			</body>
 		</html>
 	);
